@@ -5,7 +5,7 @@
 
 <ol> 
 	<li>Draženie rôznych predmetov </li>
-	<li>Zorazovanie základných informácií ku každej dražbe: 
+	<li>Zobrazovanie základných informácií ku každej dražbe: 
 		<ul>
 			<li> užívateľ, ktorý predmet predáva </li>
 			<li> zobrazenie snímkov draženého predmetu </li>
@@ -25,6 +25,6 @@
 	<li> Predávajúci bude dostávať upozornenie, keď sa prihodí k aktuálnej cene (napr. emailom)</li>
 	<li> Kupujúci, ktorý sa účastnia dražy budú dostávať upozornenie ak iný záujemca prihodí (napr. emailom)</li>
 	<li> Hodnotenie jednotlivých predávajúcich, zoradenie predávajúcich podľa týchto hodnotení</li>
-	<li> Možnosť zorazovať aktuálne ceny v rôznych menách, kurzy by sa mohli updatnuť samé skrz API nejakej inej stránky</li>
+	<li> Možnosť zobrazovať aktuálne ceny v rôznych menách, kurzy by sa mohli updatnuť samé skrz API nejakej inej stránky</li>
 	<li> Dražba bude mať veľký chat-room, záujemca má možnosť napísať priamo predávajúcemu</li>
 </ol>
