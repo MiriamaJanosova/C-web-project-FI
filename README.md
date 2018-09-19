@@ -1,4 +1,4 @@
-<h1>Dražobný portál</h1> 
+﻿<h1>Dražobný portál</h1> 
 ---
 
 <h3>User stories: </h3>
@@ -21,10 +21,10 @@
 	<li> Cez verejné API získať detaily ku každej dražbe </li>
 	<li> Administrátor bude mať možnosť spravovať kategórie jednotlivých predmetov</li>
 	<li> Administrátor má možnosť mazať nevhodné dražené predmety</li>
-	<li> Kupujúci aj predávajúci maju možnosť sledovať aktuálny stav svojich dražených predmetov </li>
+	<li> Kupujúci aj predávajúci majú možnosť sledovať aktuálny stav svojich dražených predmetov </li>
 	<li> Predávajúci bude dostávať upozornenie, keď sa prihodí k aktuálnej cene (napr. emailom)</li>
 	<li> Kupujúci, ktorý sa účastnia dražy budú dostávať upozornenie ak iný záujemca prihodí (napr. emailom)</li>
 	<li> Hodnotenie jednotlivých predávajúcich, zoradenie predávajúcich podľa týchto hodnotení</li>
-	<li> Možnosť zorazovať aktuálne ceny v rôznych menách, kurzy by sa mohli raz za deň updatnuť samé </li>
+	<li> Možnosť zorazovať aktuálne ceny v rôznych menách, kurzy by sa mohli updatnuť samé skrz API nejakej inej stránky</li>
 	<li> Dražba bude mať veľký chat-room, záujemca má možnosť napísať priamo predávajúcemu</li>
 </ol>
