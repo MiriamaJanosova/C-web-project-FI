@@ -1,7 +1,7 @@
-# Dražobný portál 
+<h1>Dražobný portál</h1> 
 ---
 
-###User stories:
+<h3>User stories: </h3>
 
 <ol> 
 	<li>Draženie rôznych predmetov </li>
