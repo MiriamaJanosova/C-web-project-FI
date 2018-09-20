@@ -1,11 +1,18 @@
 ﻿<h1>Dražobný portál</h1> 
 ---
 
+<h3>Team members:</h3>
+<ul>
+	<li> Bc. Miriama Sasaráková</li>
+	<li> Marek Fridrich</li>
+	<li> Marek Chocholáček</li>
+</ul>
+
 <h3>User stories: </h3>
 
 <ol> 
-	<li>Draženie rôznych predmetov </li>
-	<li>Zobrazovanie základných informácií ku každej dražbe: 
+	<li> Draženie rôznych predmetov </li>
+	<li> Zobrazovanie základných informácií ku každej dražbe: 
 		<ul>
 			<li> užívateľ, ktorý predmet predáva </li>
 			<li> zobrazenie snímkov draženého predmetu </li>
