@@ -21,8 +21,11 @@ namespace DAL
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public static string ConnectionString { get; } =
+            "Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=pv179db;Persist Security Info=False;User ID=marekch;Password=pv179CB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-        public AuctionSiteDbContext() : base("nejakeMenoNaDB")
+        public AuctionSiteDbContext() 
+            : base(ConnectionString)
         {
             Database.SetInitializer(new AuctionSiteDbInitializer());
             
