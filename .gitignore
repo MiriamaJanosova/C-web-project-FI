@@ -35,6 +35,8 @@ bld/
 *.VisualState.xml
 TestResult.xml
 
+*.dll
+*.cache
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
