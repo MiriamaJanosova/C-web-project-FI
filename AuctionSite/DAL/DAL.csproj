@@ -54,10 +54,12 @@
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\EmailTemplate.cs" />
     <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\ItemCategoryType.cs" />
     <Compile Include="Entities\Raise.cs" />
     <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserRoleType.cs" />
     <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
