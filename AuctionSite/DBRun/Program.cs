@@ -1,26 +1,29 @@
 ﻿using DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Entities;
 
 namespace DBRun
 {
     class Program
     {
+
         static void Main(string[] args)
         {
             using (var db = new AuctionSiteDbContext())
             {
+                db.Users.Add(new User()
+                {
+                    Name = "marekch"
+                });
                 db.SaveChanges();
             }
 
-            using (var db = new AuctionSiteDbContext())
-            {
-                Console.WriteLine(db.Users.First());
-            }
-
+            Console.WriteLine("press enter to end...");
             Console.ReadLine();
         }
     }
