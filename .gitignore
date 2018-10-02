@@ -263,8 +263,3 @@ paket-files/
 __pycache__/
 *.pyc
 
-*.dll
-*.cache
-
-AuctionSite/*/bin/
-
