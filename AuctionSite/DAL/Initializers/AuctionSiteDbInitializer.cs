@@ -26,12 +26,12 @@ namespace DAL.Initializers
 
             context.Roles.Add(new Role
             {
-                Name = "Admin"
+                RoleType = UserRoleType.Admin
             });
 
             context.Roles.Add(new Role
             {
-                Name = "User"
+                RoleType = UserRoleType.Admin
             });
 
             context.Users.Add(new User
