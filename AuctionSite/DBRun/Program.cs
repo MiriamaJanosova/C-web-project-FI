@@ -13,8 +13,15 @@ namespace DBRun
         {
             using (var db = new AuctionSiteDbContext())
             {
-
+                db.SaveChanges();
             }
+
+            using (var db = new AuctionSiteDbContext())
+            {
+                Console.WriteLine(db.Users.First());
+            }
+
+            Console.ReadLine();
         }
     }
 }
