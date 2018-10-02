@@ -35,6 +35,7 @@ bld/
 *.VisualState.xml
 TestResult.xml
 
+*.cache
 *.dll
 *.cache
 # Build Results of an ATL Project
@@ -261,3 +262,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+*.dll
+*.cache
