@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D7ED9E95-4D6A-4D5B-96C8-A9DFF5F47458}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL</RootNamespace>
-    <AssemblyName>DAL</AssemblyName>
+    <ProjectGuid>{E2B383F6-C56B-4109-AF23-1792D0B37EF0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>DBRun</RootNamespace>
+    <AssemblyName>DBRun</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -48,24 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Auction.cs" />
-    <Compile Include="AuctionSiteDbContext.cs" />
-    <Compile Include="Entities\Category.cs" />
-    <Compile Include="Entities\Currency.cs" />
-    <Compile Include="Entities\EmailTemplate.cs" />
-    <Compile Include="Entities\Item.cs" />
-    <Compile Include="Entities\ItemCategoryType.cs" />
-    <Compile Include="Entities\Raise.cs" />
-    <Compile Include="Entities\Review.cs" />
-    <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserRoleType.cs" />
-    <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{D7ED9E95-4D6A-4D5B-96C8-A9DFF5F47458}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
