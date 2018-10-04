@@ -16,13 +16,16 @@ namespace DBRun
         {
             using (var db = new AuctionSiteDbContext())
             {
-                db.Users.Add(new User()
-                {
-                    Name = "marekch"
-                });
+                //db.Users.Add(new User()
+                //{
+                //    Name = "marekch"
+                //});
+                var users = db.Users.AsEnumerable();
+                Console.WriteLine(users.Last().Name);
                 db.SaveChanges();
             }
 
+            
             Console.WriteLine("press enter to end...");
             Console.ReadLine();
         }
