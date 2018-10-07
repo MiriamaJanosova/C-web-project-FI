@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,12 +11,14 @@ namespace DAL.Entities
     public class User
     {
         public int ID { get; set; }
+        [Required, MaxLength(50)]
         public string Name { get; set; }
+        [Required, MaxLength(50)]
         public string Surname { get; set; }
         public List<Raise> UserRaisesForAuction { get; set; }
-        public List<Role> HasRoles { get; set; }
+        public List<UserRole> UserRoles { get; set; }
         public List<Item> Invenory { get; set; }
         public List<Review> Reviews { get; set; }
-
+        public List<Auction> AuctionsCreated { get; set; }
     }
 }

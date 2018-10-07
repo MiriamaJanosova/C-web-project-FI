@@ -21,8 +21,11 @@ namespace DBRun
                 //    Name = "marekch"
                 //});
                 var users = db.Users.AsEnumerable();
-                Console.WriteLine(users.Last().Name);
-                db.SaveChanges();
+                foreach (var user in users)
+                {
+                    Console.WriteLine(user.Name);
+                }
+                //db.SaveChanges();
             }
 
             

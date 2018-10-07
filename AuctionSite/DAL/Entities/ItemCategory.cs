@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class Review
+    public class ItemCategory
     {
         public int ID { get; set; }
-        [Required, Range(0, 10)]
-        public int Evaluation { get; set; }
-        public string Description { get; set; }
-        public User ReviewedUser { get; set; }
+        public Item Item { get; set; }
         [Required]
-        public int ReviewedUserId { get; set; }
+        public int ItemID { get; set; }
+        public Category Category { get; set; }
+        [Required]
+        public int CategoryID { get; set; }
     }
 }

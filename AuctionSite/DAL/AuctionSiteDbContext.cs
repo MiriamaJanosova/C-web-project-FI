@@ -16,10 +16,12 @@ namespace DAL
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<EmailTemplate> EmailTemplates { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<ItemCategory> ItemCategories { get; set; }
         public DbSet<Raise> Raises { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
 
         public static string ConnectionString { get; } =
             "Server=tcp:pv178db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User ID=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
@@ -29,6 +31,14 @@ namespace DAL
         {
             Database.SetInitializer(new AuctionSiteDbInitializer());
             Database.CommandTimeout = 300;
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Auction>().HasMany(t => t.AuctionedItems).WithRequired(a => a.InAuction).WillCascadeOnDelete(false); //add this line code
+            modelBuilder.Entity<Auction>().HasMany(t => t.RaisesForAuction).WithRequired(a => a.RaiseForAuction).WillCascadeOnDelete(false);
+            //modelBuilder.Entity<User>().HasMany(t => t.AuctionsCreated).WithRequired(a => a.Auctioner).WillCascadeOnDelete(false);
         }
 
     }
