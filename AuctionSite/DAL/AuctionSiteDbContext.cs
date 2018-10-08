@@ -24,7 +24,7 @@ namespace DAL
         public DbSet<UserRole> UserRoles { get; set; }
 
         public static string ConnectionString { get; } =
-            "Server=tcp:pv178db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User ID=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
+            "Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User ID=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
 
         public AuctionSiteDbContext() 
             : base(ConnectionString)
@@ -36,9 +36,15 @@ namespace DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Auction>().HasMany(t => t.AuctionedItems).WithRequired(a => a.InAuction).WillCascadeOnDelete(false); //add this line code
-            modelBuilder.Entity<Auction>().HasMany(t => t.RaisesForAuction).WithRequired(a => a.RaiseForAuction).WillCascadeOnDelete(false);
-            //modelBuilder.Entity<User>().HasMany(t => t.AuctionsCreated).WithRequired(a => a.Auctioner).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Auction>()
+                .HasMany(t => t.AuctionedItems)
+                .WithRequired(a => a.InAuction)
+                .WillCascadeOnDelete(false); 
+            modelBuilder.Entity<User>()
+                .HasMany(t => t.UserRaisesForAuction)
+                .WithRequired(a => a.UserWhoRaised)
+                .WillCascadeOnDelete(false);
+            
         }
 
     }
