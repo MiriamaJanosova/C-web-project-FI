@@ -1,14 +1,12 @@
-﻿using DAL.Entities;
-using DAL.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using DAL.Entities;
+using DAL.Repository;
+using Infrastructure.EntityFramework.UnitOfWork;
+using Infrastructure.UnitOfWork;
 
-namespace DAL.Repository
+namespace Infrastructure.Repository
 {
     public class EntityFrameworkRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {

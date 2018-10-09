@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using Infrastructure.UnitOfWork;
 
-namespace DAL.UnitOfWork
+namespace Infrastructure.EntityFramework.UnitOfWork
 {
     public class EntityFrameworkUnitOfWorkProvider : IUnitOfWorkProvider
     {

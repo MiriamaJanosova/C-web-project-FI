@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DAL;
+using Infrastructure.UnitOfWork;
 
-namespace DAL.UnitOfWork
+namespace Infrastructure.EntityFramework.UnitOfWork
 {
     public static class EntityFrameworkUnitOfWorkProviderFactory
     {

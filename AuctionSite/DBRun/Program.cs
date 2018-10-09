@@ -11,7 +11,6 @@ namespace DBRun
 {
     class Program
     {
-
         static void Main(string[] args)
         {
             using (var db = new AuctionSiteDbContext())
@@ -25,10 +24,11 @@ namespace DBRun
                 {
                     Console.WriteLine(user.Name);
                 }
+
                 //db.SaveChanges();
             }
 
-            
+
             Console.WriteLine("press enter to end...");
             Console.ReadLine();
         }

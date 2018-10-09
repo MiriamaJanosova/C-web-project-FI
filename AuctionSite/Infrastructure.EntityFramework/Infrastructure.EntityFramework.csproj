@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5245993A-238B-46C1-972C-DAFA75AB2D6E}</ProjectGuid>
+    <ProjectGuid>{198A47A1-5F73-4B4E-B973-93A729C805C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Infrastructure</RootNamespace>
-    <AssemblyName>Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Infrastructure.EntityFramework</RootNamespace>
+    <AssemblyName>Infrastructure.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,15 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IEntity.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="EntityFrameworkRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\IQuery.cs" />
-    <Compile Include="Query\Predicates\IPredicate.cs" />
-    <Compile Include="Query\Predicates\Operators\LogicalOperator.cs" />
-    <Compile Include="Query\Predicates\Operators\ValueComparingOperator.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWorkProvider.cs" />
+    <Compile Include="UnitOfWork\EntityFrameworkUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\EntityFrameworkUnitOfWorkProvider.cs" />
+    <Compile Include="UnitOfWork\EntityFrameworkUnitOfWorkProviderFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{D7ED9E95-4D6A-4D5B-96C8-A9DFF5F47458}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{5245993A-238B-46C1-972C-DAFA75AB2D6E}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
