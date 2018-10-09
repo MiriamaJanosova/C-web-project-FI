@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class User
+    public class User : IEntity
     {
         public int ID { get; set; }
         [Required, MaxLength(50)]

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class Currency
+    public class Currency : IEntity
     {
         public int ID { get; set; }
         [MaxLength(5)]

@@ -10,7 +10,7 @@ using Microsoft.Win32;
 namespace DAL.Entities
 
 {
-    public class Auction
+    public class Auction : IEntity
     {
         public int ID { get; set; }
         [Required]

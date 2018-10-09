@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class Review
+    public class Review : IEntity
     {
         public int ID { get; set; }
         [Required, Range(0, 10)]

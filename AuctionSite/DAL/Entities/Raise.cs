@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class Raise
+    public class Raise : IEntity
     {
         public int ID { get; set; }
         [Required]

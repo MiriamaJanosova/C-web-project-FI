@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class EmailTemplate : IEntity
+    public interface IEntity
     {
-        public int ID  { get; set; }
-        public string Message { get; set; }
+        int ID { get; set; }
     }
 }

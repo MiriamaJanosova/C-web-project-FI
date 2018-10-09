@@ -53,6 +53,7 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\EmailTemplate.cs" />
+    <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemCategory.cs" />
     <Compile Include="Entities\ItemCategoryType.cs" />
@@ -64,6 +65,13 @@
     <Compile Include="Entities\UserRoleType.cs" />
     <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\EntityFrameworkRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="UnitOfWork\EntityFrameworkUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\EntityFrameworkUnitOfWorkProvider.cs" />
+    <Compile Include="UnitOfWork\EntityFrameworkUnitOfWorkProviderFactory.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWorkProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
