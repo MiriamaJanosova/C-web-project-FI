@@ -13,6 +13,9 @@ namespace DAL.Entities
     public class Auction : IEntity
     {
         public int ID { get; set; }
+
+        [NotMapped] public string TableName { get; } = "auctions";
+
         [Required]
         public DateTime StartDate { get; set; }
         [Required]
@@ -24,6 +27,8 @@ namespace DAL.Entities
         public int AuctionerID { get; set; }
         public List<Item> AuctionedItems { get; set; }
         public List<Raise> RaisesForAuction { get; set; }
+        
+        
     }
 
 }
