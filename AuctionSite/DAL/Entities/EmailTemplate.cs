@@ -11,7 +11,9 @@ namespace DAL.Entities
     {
         public int ID  { get; set; }
 
-        [NotMapped] public string TableName { get; } = "email_templates";
+        [NotMapped] 
+        public string TableName { get; } = "email_templates";
+        
         public string Message { get; set; }
     }
 }

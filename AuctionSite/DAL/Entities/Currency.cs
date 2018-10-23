@@ -12,10 +12,12 @@ namespace DAL.Entities
     {
         public int ID { get; set; }
 
-        [NotMapped] public string TableName { get; } = "currencies";
+        [NotMapped] 
+        public string TableName { get; } = "currencies";
 
         [MaxLength(5)]
         public string Code  { get; set; }
+        
         public double ExchangeRate { get; set; }
     }
 }

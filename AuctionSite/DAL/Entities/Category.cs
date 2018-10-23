@@ -12,12 +12,15 @@ namespace DAL.Entities
     {
         public int ID { get; set; }
 
-        [NotMapped] public string TableName { get; } = "categories";
+        [NotMapped] 
+        public string TableName { get; } = "categories";
 
         [Required]
         public ItemCategoryType CategoryType { get; set; }
+        
         [MaxLength(100)]
         public string Description { get; set; }
+        
         public List<ItemCategory> ItemsWithCategory { get; set; }
     }
 }

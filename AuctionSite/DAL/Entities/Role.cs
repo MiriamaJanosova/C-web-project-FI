@@ -12,10 +12,12 @@ namespace DAL.Entities
     {
         public int ID { get; set; }
 
-        [NotMapped] public string TableName { get; } = "roles";
+        [NotMapped] 
+        public string TableName { get; } = "roles";
 
         [Required]
         public UserRoleType RoleType { get; set; }
+        
         public List<UserRole> UsersOfRole { get; set; }
     }
 }

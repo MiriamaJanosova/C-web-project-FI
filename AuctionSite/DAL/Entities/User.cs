@@ -13,16 +13,23 @@ namespace DAL.Entities
     {
         public int ID { get; set; }
 
-        [NotMapped] public string TableName { get; } = "users";
+        [NotMapped] 
+        public string TableName { get; } = "users";
 
         [Required, MaxLength(50)]
         public string Name { get; set; }
+        
         [Required, MaxLength(50)]
         public string Surname { get; set; }
+        
         public List<Raise> UserRaisesForAuction { get; set; }
+        
         public List<UserRole> UserRoles { get; set; }
-        public List<Item> Invenory { get; set; }
+        
+        public List<Item> Inventory { get; set; }
+        
         public List<Review> Reviews { get; set; }
+        
         public List<Auction> AuctionsCreated { get; set; }
     }
 }

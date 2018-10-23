@@ -14,7 +14,8 @@ namespace DAL.Entities
     {
         public int ID { get; set; }
 
-        [NotMapped] public string TableName { get; } = "auctions";
+        [NotMapped] 
+        public string TableName { get; } = "auctions";
 
         [Required]
         public DateTime StartDate { get; set; }
