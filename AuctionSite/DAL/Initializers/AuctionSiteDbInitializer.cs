@@ -31,9 +31,9 @@ namespace DAL.Initializers
 
             var roles = new List<Role>
             {
-                new Role {RoleType = UserRoleType.Admin},
-                new Role {RoleType = UserRoleType.RegisteredUser},
-                new Role {RoleType = UserRoleType.User}
+                new Role { RoleType = UserRoleType.Admin },
+                new Role { RoleType = UserRoleType.RegisteredUser },
+                new Role { RoleType = UserRoleType.User }
             };
 
             context.Roles.AddRange(roles);
@@ -41,19 +41,20 @@ namespace DAL.Initializers
 
             var users = new List<User>
             {
-                new User {Name = "Peter", Surname = "Novotný"},
-                new User {Name = "Jaroslav", Surname = "Dlouhý"},
-                new User {Name = "Ladislav", Surname = "Krátky"},
-                new User {Name = "Karolína", Surname = "Milová"}
-            };
+                new User { Name = "Peter", Surname = "Novotný", Email = "prvni@email.com" },
+                new User { Name = "Jaroslav", Surname = "Dlouhý", Email = "druhy@email.com" },
+                new User { Name = "Ladislav", Surname = "Krátky", Email = "treti@email.com" },
+                new User { Name = "Karolína", Surname = "Milová", Email = "ctvrty@email.com" }
+            }; 
 
             context.Users.AddRange(users);
             context.SaveChanges();
 
             var reviews = new List<Review>
             {
-                new Review {Evaluation = 6, Description = "Celkom v OK, viem si ale predstaviť lepšiu komunikáciu.", ReviewedUserId = 1},
-                new Review {Evaluation = 0, Description = "Naneštastie mi poslal úplne inú vec, žiadal so vrátenie peňazí, nikdy som ich nedostal späť.", ReviewedUserId = 1}
+                new Review { Evaluation = 6, Description = "Celkom v OK, viem si ale predstaviť lepšiu komunikáciu.", ReviewedUserId = 1 },
+                new Review { Evaluation = 0, Description = "Naneštastie mi poslal úplne inú vec, žiadal so vrátenie peňazí, nikdy som ich nedostal späť.", ReviewedUserId = 1 },
+                new Review { Evaluation = 1, Description = "Spodne pradlo bylo zjavne pouzite a docela zapachalo", ReviewedUserId = 2 }
             };
 
             context.Reviews.AddRange(reviews);

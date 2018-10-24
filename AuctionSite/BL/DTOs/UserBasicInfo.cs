@@ -1,9 +1,9 @@
 namespace BL.DTOs
+
+
 {
-    public class UserCreateDto
+    public class UserBasicInfo
     {
         public string Name { get; set; }
-        
-        
     }
 }

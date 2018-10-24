@@ -22,6 +22,9 @@ namespace DAL.Entities
         [Required, MaxLength(50)]
         public string Surname { get; set; }
         
+        [Required]
+        public string Email { get; set; }
+        
         public List<Raise> UserRaisesForAuction { get; set; }
         
         public List<UserRole> UserRoles { get; set; }

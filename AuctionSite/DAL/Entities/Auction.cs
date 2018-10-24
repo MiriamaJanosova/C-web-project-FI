@@ -19,14 +19,26 @@ namespace DAL.Entities
 
         [Required]
         public DateTime StartDate { get; set; }
+        
+        [Required]
+        public string Name { get; set; }
+        
+        [Required]
+        public string Description { get; set; }
+        
         [Required]
         public DateTime EndDate { get; set; }
+        
         [Required, Range(0, double.MaxValue)]
         public double ActualPrice { get; set; }
+        
         public User Auctioner { get; set; }
+        
         [Required, ForeignKey("Auctioner")]
         public int AuctionerID { get; set; }
+        
         public List<Item> AuctionedItems { get; set; }
+        
         public List<Raise> RaisesForAuction { get; set; }
         
         
