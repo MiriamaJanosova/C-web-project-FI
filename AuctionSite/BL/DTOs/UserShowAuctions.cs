@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BL.DTOs.Base;
 
 ///////////////////////////////////////////
 /// Pri zobrazeni vsech userovych aukci ///

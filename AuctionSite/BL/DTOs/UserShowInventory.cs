@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BL.DTOs.Base;
 
 ///////////////////////////////////////
 /// Kdyz user zobrazi svuj inventar ///

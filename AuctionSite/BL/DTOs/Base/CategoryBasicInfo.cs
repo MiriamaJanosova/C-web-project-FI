@@ -1,4 +1,4 @@
-namespace BL.DTOs
+namespace BL.DTOs.Base
 
 ///////////////////////////////////////////////////
 /// Informace o kategoriich pri pridavani itemu ///

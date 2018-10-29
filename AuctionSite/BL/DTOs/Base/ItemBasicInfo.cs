@@ -4,7 +4,7 @@ using System.Collections.Generic;
 // Class pri zobrazovani inventory usera//
 //////////////////////////////////////////
 
-namespace BL.DTOs
+namespace BL.DTOs.Base
 {
     public class ItemBasicInfo
     {

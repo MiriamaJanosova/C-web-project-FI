@@ -6,7 +6,7 @@ using DAL.Repository;
 using Infrastructure.EntityFramework.UnitOfWork;
 using Infrastructure.UnitOfWork;
 
-namespace Infrastructure.Repository
+namespace Infrastructure.EntityFramework
 {
     public class EntityFrameworkRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Infrastructure.Query.Predicates.Operators;
 
 namespace Infrastructure.Query.Predicates

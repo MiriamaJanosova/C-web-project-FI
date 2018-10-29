@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Infrastructure.Query.Predicates.Operators;
 
@@ -19,8 +19,8 @@ namespace Infrastructure.Query.Predicates
         protected bool Equals(CompositePredicate other)
         {
             return new HashSet<IPredicate>(Predicates.Where(predicate => predicate is SimplePredicate))
-                       .SetEquals(new HashSet<IPredicate>(other.Predicates.Where(predicate => predicate is SimplePredicate))) 
-                   && Operator == other.Operator;
+                        .SetEquals(new HashSet<IPredicate>(other.Predicates.Where(predicate => predicate is SimplePredicate))) 
+                    && Operator == other.Operator;
         }
 
         public override bool Equals(object obj)

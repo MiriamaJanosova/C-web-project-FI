@@ -1,6 +1,6 @@
 using System;
 
-namespace BL.DTOs
+namespace BL.DTOs.Base
 {
     public class AuctionBasicInfo
     {
