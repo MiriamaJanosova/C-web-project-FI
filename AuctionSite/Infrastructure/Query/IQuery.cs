@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using DAL.Entities;
 using Infrastructure.Query.Predicates;
 
 namespace Infrastructure.Query

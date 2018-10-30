@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using DAL.Entities;
@@ -20,6 +21,7 @@ namespace Infrastructure.EntityFramework
 
         public void Create(TEntity entity)
         {
+            //get new ID missing
             Context.Set<TEntity>().Add(entity);
         }
 

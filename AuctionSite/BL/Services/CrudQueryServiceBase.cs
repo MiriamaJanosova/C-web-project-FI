@@ -2,6 +2,7 @@ using AutoMapper;
 using BL.DTOs.Common;
 using DAL.Entities;
 using DAL.Repository;
+using Infrastructure;
 using Infrastructure.Query;
 
 namespace BL.Services
