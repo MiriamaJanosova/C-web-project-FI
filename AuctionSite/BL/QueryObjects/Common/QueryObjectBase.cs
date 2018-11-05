@@ -12,13 +12,13 @@ namespace BL.QueryObjects.Common
         where TQuery : IQuery<TEntity> 
         where TEntity : class, IEntity, new()
     {
-        private readonly IMapper mapper;
+        private readonly IMapper fapper;
 
         protected readonly IQuery<TEntity> Query;
 
-        protected QueryObjectBase(IMapper mapper, TQuery query)
+        protected QueryObjectBase(IMapper fapper, TQuery query)
         {
-            this.mapper = mapper;
+            this.fapper = fapper;
             this.Query = query;
         }
 
@@ -37,7 +37,7 @@ namespace BL.QueryObjects.Common
             }
             var queryResult = await query.ExecuteAsync();
 
-            var queryResultDto = mapper.Map<QueryResultDto<TDto, TFilter>>(queryResult);
+            var queryResultDto = fapper.Map<QueryResultDto<TDto, TFilter>>(queryResult);
             queryResultDto.Filter = filter;
             return queryResultDto;
         }

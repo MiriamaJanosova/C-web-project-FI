@@ -21,7 +21,6 @@ namespace Infrastructure.EntityFramework
 
         public void Create(TEntity entity)
         {
-            //get new ID missing
             Context.Set<TEntity>().Add(entity);
         }
 
