@@ -1,3 +1,5 @@
+using BL.DTOs.Common;
+
 namespace BL.DTOs.Base
 
 ///////////////////////////////////////////////////
@@ -5,7 +7,7 @@ namespace BL.DTOs.Base
 ///////////////////////////////////////////////////
 
 {
-    public class CategoryBasicInfo
+    public class CategoryBasicInfo : DtoBase
     {
         public string Name { get; set; }
         

@@ -1,8 +1,9 @@
 using System;
+using BL.DTOs.Common;
 
 namespace BL.DTOs.Base
 {
-    public class AuctionBasicInfo
+    public class AuctionInfoDto : DtoBase
     {
         public string Name { get; set; }
         

@@ -4,10 +4,10 @@ using BL.DTOs.Common;
 
 namespace BL.QueryObjects.Common
 {
-    public class QueryResultDto<TDto, TFilter> where TFilter : FilterDtoBase
+    public class QueryŠtokResultDto<TDto, TFilter> where TFilter : FilterŠtokDtoBase
     {
         /// <summary>
-        /// Total number of items for the query
+        /// Total number of items for the queryŠtok
         /// </summary>
         public long TotalItemsCount { get; set; }
 
@@ -22,12 +22,12 @@ namespace BL.QueryObjects.Common
         public int PageSize { get; set; }
 
         /// <summary>
-        /// The query results page
+        /// The queryŠtok results page
         /// </summary>
         public IEnumerable<TDto> Items { get; set; }
 
         /// <summary>
-        /// Applied filter for this query
+        /// Applied filter for this queryŠtok
         /// </summary>
         public TFilter Filter { get; set; }
 

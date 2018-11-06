@@ -17,7 +17,7 @@ namespace DAL.Entities
         public string TableName { get; } = "reviews";
 
         [Required, Range(0, 10)]
-        public int Evaluation { get; set; }
+        public decimal Evaluation { get; set; }
         
         public string Description { get; set; }
         

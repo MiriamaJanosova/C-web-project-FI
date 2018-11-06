@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure;
+﻿using System.Threading.Tasks;
 
-namespace DAL.Repository
+namespace Infrastructure
 {
     public interface IRepository<TEntity> where TEntity : class, IEntity, new()
     {

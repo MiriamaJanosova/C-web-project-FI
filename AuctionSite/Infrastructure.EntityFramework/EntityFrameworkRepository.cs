@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using DAL.Entities;
-using DAL.Repository;
 using Infrastructure.EntityFramework.UnitOfWork;
 using Infrastructure.UnitOfWork;
 

@@ -1,8 +1,9 @@
 using System;
+using BL.DTOs.Common;
 
 namespace BL.DTOs.Base
 {
-    public class RaiseBasicInfo
+    public class RaiseBasicInfo : DtoBase
     {
         public double Amount { get; set; }
         

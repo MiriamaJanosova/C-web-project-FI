@@ -7,8 +7,8 @@ using Infrastructure.Query;
 
 namespace BL.QueryObjects.Common
 {
-    public abstract class QueryObjectBase<TDto, TEntity, TFilter, TQuery> 
-        where TFilter : FilterDtoBase 
+    public abstract class QueryŠtokObjectBase<TDto, TEntity, TFilter, TQuery> 
+        where TFilter : FilterŠtokDtoBase 
         where TQuery : IQuery<TEntity> 
         where TEntity : class, IEntity, new()
     {
@@ -16,7 +16,7 @@ namespace BL.QueryObjects.Common
 
         protected readonly IQuery<TEntity> Query;
 
-        protected QueryObjectBase(IMapper fapper, TQuery query)
+        protected QueryŠtokObjectBase(IMapper fapper, TQuery query)
         {
             this.fapper = fapper;
             this.Query = query;
@@ -24,7 +24,7 @@ namespace BL.QueryObjects.Common
 
         protected abstract IQuery<TEntity> ApplyWhereClause(IQuery<TEntity> query, TFilter filter);
 
-        public virtual async Task<QueryResultDto<TDto, TFilter>> ExecuteQuery(TFilter filter)
+        public virtual async Task<QueryŠtokResultDto<TDto, TFilter>> ExecuteQuery(TFilter filter)
         {
             var query = ApplyWhereClause(Query, filter);
             if (!string.IsNullOrWhiteSpace(filter.SortCriteria))
@@ -37,7 +37,7 @@ namespace BL.QueryObjects.Common
             }
             var queryResult = await query.ExecuteAsync();
 
-            var queryResultDto = fapper.Map<QueryResultDto<TDto, TFilter>>(queryResult);
+            var queryResultDto = fapper.Map<QueryŠtokResultDto<TDto, TFilter>>(queryResult);
             queryResultDto.Filter = filter;
             return queryResultDto;
         }

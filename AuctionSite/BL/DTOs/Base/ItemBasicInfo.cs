@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BL.DTOs.Common;
 
 //////////////////////////////////////////
 // Class pri zobrazovani inventory usera//
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BL.DTOs.Base
 {
-    public class ItemBasicInfo
+    public class ItemBasicInfo : DtoBase
     {
         public string Name { get; set; }
         

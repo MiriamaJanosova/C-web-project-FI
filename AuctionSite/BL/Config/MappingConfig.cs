@@ -10,7 +10,7 @@ namespace BL.Config
     {
         public static void ConfigureMapping(IMapperConfigurationExpression config)
         {
-            config.CreateMap<Auction, AuctionBasicInfo>();
+            config.CreateMap<Auction, AuctionInfoDto>();
 
         }
     }
