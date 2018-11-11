@@ -24,6 +24,6 @@ namespace DAL.Entities
         public User ReviewedUser { get; set; }
         
         [Required]
-        public int ReviewedUserId { get; set; }
+        public int ReviewedUserID { get; set; }
     }
 }

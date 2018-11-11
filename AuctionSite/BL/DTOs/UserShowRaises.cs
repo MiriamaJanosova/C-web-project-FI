@@ -11,6 +11,6 @@ namespace BL.DTOs
     {
         public string Name { get; set; }
         
-        public List<RaiseBasicInfo> Raises { get; set; }
+        public List<RaiseDto> Raises { get; set; }
     }
 }

@@ -4,11 +4,11 @@ namespace BL.Services
 {
     public abstract class ServiceBase
     {
-        protected readonly IMapper Fapper;
+        protected readonly IMapper Mapper;
 
-        protected ServiceBase(IMapper fapper)
+        protected ServiceBase(IMapper mapper)
         {
-            this.Fapper = fapper;
+            this.Mapper = mapper;
         }
     }
 }

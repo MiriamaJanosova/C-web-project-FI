@@ -4,7 +4,7 @@ using BL.DTOs.Common;
 
 namespace BL.QueryObjects.Common
 {
-    public class QueryŠtokResultDto<TDto, TFilter> where TFilter : FilterŠtokDtoBase
+    public class QueryResultDto<TDto, TFilter> where TFilter : FilterDtoBase
     {
         /// <summary>
         /// Total number of items for the queryŠtok

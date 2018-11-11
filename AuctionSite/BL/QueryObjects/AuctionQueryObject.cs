@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
@@ -9,37 +6,39 @@ using DAL.Entities;
 using Infrastructure.Query;
 using Infrastructure.Query.Predicates;
 using Infrastructure.Query.Predicates.Operators;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BL.QueryObjects
 {
-    public class AuctionŠtokQueryObject : QueryŠtokObjectBase<AuctionInfoDto, Auction, AuctionŠtokFilterDto, IQuery<Auction>>
+    public class AuctionQueryObject : QueryObjectBase<AuctionDto, Auction, AuctionFilterDto, IQuery<Auction>>
     {
-        public AuctionŠtokQueryObject(IMapper fapper, IQuery<Auction> query) : base(fapper, query)
+        public AuctionQueryObject(IMapper mapper, IQuery<Auction> query) : base(mapper, query)
         {
         }
 
-        protected override IQuery<Auction> ApplyWhereClause(IQuery<Auction> query, AuctionŠtokFilterDto filter)
+        protected override IQuery<Auction> ApplyWhereClause(IQuery<Auction> query, AuctionFilterDto filter)
         {
-            var definedŠtokPredicates = new List<IPredicate>();
-            AddIfŠtokDefined(FilterŠtokAuctionNames(filter), definedŠtokPredicates);
-            AddIfŠtokDefined(FilterŠtokAuctionPrices(filter), definedŠtokPredicates);
+            var definedPredicates = new List<IPredicate>();
+            AddIfDefined(FilterŠtokAuctionNames(filter), definedPredicates);
+            AddIfDefined(FilterŠtokAuctionPrices(filter), definedPredicates);
 
-            if (definedŠtokPredicates.Count == 0)
+            if (definedPredicates.Count == 0)
             {
                 return query;
             }
 
-            if (definedŠtokPredicates.Count == 1)
+            if (definedPredicates.Count == 1)
             {
-                return query.Where(definedŠtokPredicates.First());
+                return query.Where(definedPredicates.First());
             }
             
-            var whereŠtokPredicate = new CompositePredicate(definedŠtokPredicates);
+            var whereŠtokPredicate = new CompositePredicate(definedPredicates);
             return query.Where(whereŠtokPredicate);
 
         }
 
-        private static void AddIfŠtokDefined(IPredicate predicate, ICollection<IPredicate> collection)
+        private static void AddIfDefined(IPredicate predicate, ICollection<IPredicate> collection)
         {
             if (predicate == null)
             {
@@ -49,7 +48,7 @@ namespace BL.QueryObjects
             collection.Add(predicate);
         }
 
-        private static IPredicate FilterŠtokAuctionPrices(AuctionŠtokFilterDto filter)
+        private static IPredicate FilterŠtokAuctionPrices(AuctionFilterDto filter)
         {
             if (filter.MinimalPrice <= 0 && filter.MaximalPrice == double.MaxValue)
             {
@@ -74,7 +73,7 @@ namespace BL.QueryObjects
                 filter.MaximalPrice);
         }
 
-        private static SimplePredicate FilterŠtokAuctionNames(AuctionŠtokFilterDto filter)
+        private static SimplePredicate FilterŠtokAuctionNames(AuctionFilterDto filter)
         {
             if (string.IsNullOrWhiteSpace(filter.AuctionName))
             {

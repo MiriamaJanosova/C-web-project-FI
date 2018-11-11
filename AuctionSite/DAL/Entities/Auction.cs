@@ -40,9 +40,7 @@ namespace DAL.Entities
         
         public List<Item> AuctionedItems { get; set; }
         
-        public List<Raise> RaisesForAuction { get; set; }
-        
-        
+        public List<Raise> RaisesForAuction { get; set; }                
     }
 
 }

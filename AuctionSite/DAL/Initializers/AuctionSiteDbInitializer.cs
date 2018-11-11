@@ -52,9 +52,9 @@ namespace DAL.Initializers
 
             var reviews = new List<Review>
             {
-                new Review { Evaluation = 6, Description = "Celkom v OK, viem si ale predstaviť lepšiu komunikáciu.", ReviewedUserId = 1 },
-                new Review { Evaluation = 0, Description = "Naneštastie mi poslal úplne inú vec, žiadal so vrátenie peňazí, nikdy som ich nedostal späť.", ReviewedUserId = 1 },
-                new Review { Evaluation = 1, Description = "Spodne pradlo bylo zjavne pouzite a docela zapachalo", ReviewedUserId = 2 }
+                new Review { Evaluation = 6, Description = "Celkom v OK, viem si ale predstaviť lepšiu komunikáciu.", ReviewedUserID = 1 },
+                new Review { Evaluation = 0, Description = "Naneštastie mi poslal úplne inú vec, žiadal so vrátenie peňazí, nikdy som ich nedostal späť.", ReviewedUserID = 1 },
+                new Review { Evaluation = 1, Description = "Spodne pradlo bylo zjavne pouzite a docela zapachalo", ReviewedUserID = 2 }
             };
 
             context.Reviews.AddRange(reviews);

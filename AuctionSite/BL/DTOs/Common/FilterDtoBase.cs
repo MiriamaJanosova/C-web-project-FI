@@ -1,6 +1,6 @@
 namespace BL.DTOs.Common
 {
-    public class FilterŠtokDtoBase
+    public class FilterDtoBase
     {
         public int? RequestedPageNumber { get; set; }
         

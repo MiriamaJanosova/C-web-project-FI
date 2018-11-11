@@ -10,18 +10,18 @@ using Infrastructure.Query;
 namespace BL.Services
 {
     public abstract class CrudQueryServiceBase<TEntity, TDto, TFilterDto> : ServiceBase
-        where TFilterDto : FilterŠtokDtoBase, new()
+        where TFilterDto : FilterDtoBase, new()
         where TEntity : class, IEntity, new()
         where TDto : DtoBase
     
     {
         protected readonly IRepository<TEntity> Repository;
 
-        protected readonly QueryŠtokObjectBase<TDto, TEntity, TFilterDto, IQuery<TEntity>> QueryŠtok;
+        protected readonly QueryObjectBase<TDto, TEntity, TFilterDto, IQuery<TEntity>> Query;
 
-        protected CrudQueryServiceBase(IMapper mapper, IRepository<TEntity> repository, QueryŠtokObjectBase<TDto, TEntity, TFilterDto, IQuery<TEntity>> queryŠtok) : base(mapper)
+        protected CrudQueryServiceBase(IMapper mapper, IRepository<TEntity> repository, QueryObjectBase<TDto, TEntity, TFilterDto, IQuery<TEntity>> query) : base(mapper)
         {
-            this.QueryŠtok = queryŠtok;
+            this.Query = query;
             this.Repository = repository;
         }
         
@@ -36,14 +36,14 @@ namespace BL.Services
             {
                 entity = await Repository.GetAsync(entityId);
             }
-            return entity != null ? Mapper.Map<TDto>(entity) : null;
+            return entity != null ? AutoMapper.Mapper.Map<TDto>(entity) : null;
         }
 
         protected abstract Task<TEntity> GetWithIncludesAsync(int entityId);
 
         public virtual int Create(TDto entityDto)
         {
-            var entity = Mapper.Map<TEntity>(entityDto);
+            var entity = AutoMapper.Mapper.Map<TEntity>(entityDto);
             Repository.Create(entity);
             return entity.ID;
         }
@@ -51,7 +51,7 @@ namespace BL.Services
         public virtual async Task Update(TDto entityDto)
         {
             var entity = await GetWithIncludesAsync(entityDto.ID);
-            Mapper.Map(entityDto, entity);
+            AutoMapper.Mapper.Map(entityDto, entity);
             Repository.Update(entity);
         }
 
@@ -60,9 +60,9 @@ namespace BL.Services
             Repository.Delete(entityId);
         }
 
-        public virtual async Task<QueryŠtokResultDto<TDto, TFilterDto>> ListAllAsync()
+        public virtual async Task<QueryResultDto<TDto, TFilterDto>> ListAllAsync()
         {
-            return await QueryŠtok.ExecuteQuery(new TFilterDto());
+            return await Query.ExecuteQuery(new TFilterDto());
         }
     }
 }

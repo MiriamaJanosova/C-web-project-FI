@@ -6,11 +6,11 @@ using BL.QueryObjects.Common;
 
 namespace BL.Services.Auction
 {
-    public interface IAuctionŠtokService
+    public interface IAuctionService
     {
         Task<int> GetAuctionŠtokIdsByNamesAsync(params string[] names);
 
-        Task<AuctionInfoDto> GetŠtokAsync(int entityId);
+        Task<AuctionDto> GetŠtokAsync(int entityId);
 
         int Create(AuctionŠtokDto entity);
         
@@ -18,6 +18,6 @@ namespace BL.Services.Auction
 
         void Delete(int entityId);
 
-        Task<QueryŠtokResultDto<AuctionŠtokDto, AuctionŠtokFilterDto>> ListAllAsync();
+        Task<QueryResultDto<AuctionŠtokDto, AuctionFilterDto>> ListAllAsync();
     }
 }

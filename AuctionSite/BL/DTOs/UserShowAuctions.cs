@@ -11,6 +11,6 @@ namespace BL.DTOs
     {
         public string Name { get; set; }
         
-        public List<AuctionInfoDto> Auctions { get; set; }
+        public List<AuctionDto> Auctions { get; set; }
     }
 }

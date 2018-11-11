@@ -11,6 +11,6 @@ namespace BL.DTOs
     {
         public string Name { get; set; }
         
-        public List<ItemBasicInfo> Items { get; set; }
+        public List<ItemDto> Items { get; set; }
     }
 }
