@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BL.DTOs.Common;
 
 namespace BL.DTOs.Base
@@ -19,6 +20,10 @@ namespace BL.DTOs.Base
 
         public UserDto Auctioner { get; set; }
 
+        public List<ItemDto> AuctionedItems { get; set; }
+
+        public List<RaiseDto> RaisesForAuction { get; set; }
+
         public override string ToString()
         {
             return $"Auction set up by {AuctionerID} at: {StartDate}";
@@ -26,16 +31,7 @@ namespace BL.DTOs.Base
 
         protected bool Equals(AuctionDto other)
         {
-            if (ID == other.ID)
-            {
-                return true;
-            }
-            return AuctionerID == other.AuctionerID &&
-                StartDate.Equals(other.StartDate) &&
-                EndDate.Equals(other.EndDate) &&
-                ActualPrice == other.ActualPrice &&
-                Name.Equals(other.Name) &&
-                Description.Equals(other.Description);
+            return ID == other.ID;
         }
 
         public override bool Equals(object obj)
@@ -54,6 +50,10 @@ namespace BL.DTOs.Base
 
         public override int GetHashCode()
         {
+            if (ID >= 0)
+            {
+                return ID.GetHashCode();
+            }
             unchecked
             {
                 var hashCode = ID.GetHashCode();
@@ -62,7 +62,9 @@ namespace BL.DTOs.Base
                 hashCode = (hashCode * 397) ^ AuctionerID.GetHashCode();
                 hashCode = (hashCode * 397) ^ Description.GetHashCode();
                 hashCode = (hashCode * 397) ^ Name.GetHashCode();
-                hashCode = (hashCode * 397) ^ ActualPrice.GetHashCode();
+                hashCode = (hashCode * 397) ^ Convert.ToInt32(ActualPrice);
+                hashCode = (hashCode * 397) ^ AuctionedItems.GetHashCode();
+                hashCode = (hashCode * 397) ^ RaisesForAuction.GetHashCode();
                 return hashCode;
             }
         }

@@ -5,7 +5,7 @@ namespace BL.DTOs.Filter
 {
     public class AuctionFilterDto : FilterDtoBase
     {
-        public string AuctionName { get; set; }
+        public string AuctionSearchedName { get; set; }
         
         public double MinimalPrice { get; set; } = 0;  
 

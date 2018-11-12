@@ -20,8 +20,8 @@ namespace BL.QueryObjects
         protected override IQuery<Auction> ApplyWhereClause(IQuery<Auction> query, AuctionFilterDto filter)
         {
             var definedPredicates = new List<IPredicate>();
-            AddIfDefined(FilterŠtokAuctionNames(filter), definedPredicates);
-            AddIfDefined(FilterŠtokAuctionPrices(filter), definedPredicates);
+            AddIfDefined(FilterAuctionNames(filter), definedPredicates);
+            AddIfDefined(FilterAuctionPrices(filter), definedPredicates);
 
             if (definedPredicates.Count == 0)
             {
@@ -48,7 +48,7 @@ namespace BL.QueryObjects
             collection.Add(predicate);
         }
 
-        private static IPredicate FilterŠtokAuctionPrices(AuctionFilterDto filter)
+        private static IPredicate FilterAuctionPrices(AuctionFilterDto filter)
         {
             if (filter.MinimalPrice <= 0 && filter.MaximalPrice == double.MaxValue)
             {
@@ -73,14 +73,14 @@ namespace BL.QueryObjects
                 filter.MaximalPrice);
         }
 
-        private static SimplePredicate FilterŠtokAuctionNames(AuctionFilterDto filter)
+        private static SimplePredicate FilterAuctionNames(AuctionFilterDto filter)
         {
-            if (string.IsNullOrWhiteSpace(filter.AuctionName))
+            if (string.IsNullOrWhiteSpace(filter.AuctionSearchedName))
             {
                 return null;
             }
             
-            return new SimplePredicate(nameof(Auction.Name), ValueComparingOperator.StringContains, filter.AuctionName);
+            return new SimplePredicate(nameof(Auction.Name), ValueComparingOperator.StringContains, filter.AuctionSearchedName);
             
         }
         

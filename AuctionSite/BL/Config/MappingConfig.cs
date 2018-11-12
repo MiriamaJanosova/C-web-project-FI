@@ -2,7 +2,10 @@ using System.IO.Compression;
 using AutoMapper;
 using BL.DTOs;
 using BL.DTOs.Base;
+using BL.DTOs.Filter;
+using BL.QueryObjects.Common;
 using DAL.Entities;
+using Infrastructure.Query;
 
 namespace BL.Config
 {
@@ -21,14 +24,12 @@ namespace BL.Config
             config.CreateMap<Role, RoleDto>().ReverseMap();
             config.CreateMap<UserRole, UserRoleDto>().ReverseMap();
             config.CreateMap<User, UserDto>().ReverseMap();
+            config.CreateMap<QueryResult<Item>, QueryResultDto<ItemDto, ItemFilterDto>>();
+            config.CreateMap<QueryResult<Category>, QueryResultDto<CategoryDto, CategoryFilterDto>>();
+            config.CreateMap<QueryResult<Review>, QueryResultDto<ReviewDto, ReviewFilterDto>>();
+            config.CreateMap<QueryResult<User>, QueryResultDto<UserDto, UserFilterDto>>();
+            config.CreateMap<QueryResult<Auction>, QueryResultDto<AuctionDto, AuctionFilterDto>>();
 
         }
     }
 }
-
-/**config.CreateMap<QueryResult<Product>, QueryResultDto<ProductDto, ProductFilterDto>>();
-  *          config.CreateMap<QueryResult<Category>, QueryResultDto<CategoryDto, CategoryFilterDto>>();
-  *         config.CreateMap<QueryResult<Order>, QueryResultDto<OrderDto, OrderFilterDto>>();
-  *          config.CreateMap<QueryResult<OrderItem>, QueryResultDto<OrderItemDto, OrderItemFilterDto>>();
-  *          config.CreateMap<QueryResult<Customer>, QueryResultDto<CustomerDto, CustomerFilterDto>>();
-  */
