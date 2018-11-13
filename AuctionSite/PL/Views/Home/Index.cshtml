@@ -1,0 +1,14 @@
+﻿@model PL.Models.Home.IndexModel
+
+<p>Fucking Index</p>
+<div>
+    <form method="post">
+        @Html.TextBoxFor(m =>m.Search)
+        <p style="color: red">
+            @Html.ValidationMessageFor(m => m.Search)
+        </p>
+        
+        <button type="submit"> Submit this shit</button>
+    </form>
+    
+</div>
