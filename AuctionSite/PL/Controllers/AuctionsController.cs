@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BL.Services.Auctions;
@@ -9,7 +10,7 @@ using BL.Facades;
 
 namespace PL.Controllers
 {
-    public class AuctionController : Controller
+    public class AuctionsController : Controller
     {
         public AuctionFacade AuctionFacade { get; set; }
 
@@ -18,6 +19,17 @@ namespace PL.Controllers
         {
             var all = await AuctionFacade.GetAllAuctions();
             return View(all);
+        }
+
+        public async Task<ActionResult> Auction(int id)
+        {
+            var dto = await AuctionFacade.GetAuctionById(id);
+            if (dto == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "One man’s crappy software is another man’s full time job.");
+            }
+
+            return View(dto);
         }
     }
 }

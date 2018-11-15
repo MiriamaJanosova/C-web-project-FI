@@ -1,0 +1,27 @@
+﻿@model IEnumerable<BL.DTOs.Base.ItemDto>
+
+@if (Model.Any())
+{
+    <table style="width: 100%" title="Items">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <label>None</label>
+}
+

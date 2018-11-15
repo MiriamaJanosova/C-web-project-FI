@@ -1,0 +1,25 @@
+﻿@using BL.DTOs.Base
+@model AuctionDto
+
+<h2>@Model.Name</h2>
+
+
+
+<div class="form-group">
+    <label>Decription: </label>
+    <label>@Model.Description</label>
+</div>
+<div class="form-group">
+    <label>Items: </label>
+    @Html.Partial("ItemList", @Model.AuctionedItems)
+</div>
+<div class="form-group">
+    <label>Price: </label>
+    <label>@Model.ActualPrice</label>
+</div>
+<div class="form-group">
+    <label>Expiration date: </label>
+    <label>@Model.EndDate</label>
+</div>
+
+<a href="https://www.youtube.com/watch?v=DLzxrzFCyOs">Edit</a>

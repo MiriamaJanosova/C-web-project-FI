@@ -18,6 +18,8 @@ namespace PL
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            MappingConfig.Initialize();
+
             BootstrapContainer();
         }
 

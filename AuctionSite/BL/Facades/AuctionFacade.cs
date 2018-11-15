@@ -28,6 +28,14 @@ namespace BL.Facades
             }
         }
 
+        public async Task<AuctionDto> GetAuctionById(int id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _service.GetAsync(id);
+            }
+        }
+
 
     }
 }

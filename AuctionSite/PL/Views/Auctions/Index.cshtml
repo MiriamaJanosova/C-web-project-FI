@@ -1,0 +1,25 @@
+﻿@using BL.DTOs.Base
+@model IEnumerable<AuctionDto>
+
+<p>Auction List</p>
+
+<table style="width: 100%">
+    <thead>
+    <tr>
+        <th>Auction name</th>
+        <th>Items price</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var dto in Model)
+        {
+            <tr>
+                <td>@dto.Name</td>
+                <td>@dto.ActualPrice</td>
+                <td>@Html.ActionLink("Inspect", "Auction", new { id = dto.ID })</td>
+            </tr>
+        }
+        </tbody>
+</table>
