@@ -2,6 +2,7 @@
 using DAL.Initializers;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,12 @@ namespace DAL
         {
             Database.SetInitializer(new AuctionSiteDbInitializer());
             Database.CommandTimeout = 300;
+        }
+
+        public AuctionSiteDbContext(DbConnection connection) :
+            base(connection, true)
+        {
+            Database.CreateIfNotExists();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

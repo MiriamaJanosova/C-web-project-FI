@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using DAL.Entities;
 using Infrastructure.EntityFramework.UnitOfWork;
 using Infrastructure.Query;
 using Infrastructure.Query.Predicates;

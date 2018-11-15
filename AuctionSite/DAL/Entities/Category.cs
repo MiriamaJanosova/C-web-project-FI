@@ -22,6 +22,7 @@ namespace DAL.Entities
         [MaxLength(100)]
         public string Description { get; set; }
         
-        public List<ItemCategory> ItemsWithCategory { get; set; }
+        //Nemusi byt
+        //public List<ItemCategory> ItemsWithCategory { get; set; }
     }
 }
