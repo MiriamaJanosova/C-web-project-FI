@@ -33,7 +33,7 @@ namespace DAL
             Database.SetInitializer(new AuctionSiteDbInitializer());
             Database.CommandTimeout = 300;
         }
-
+        
         public AuctionSiteDbContext(DbConnection connection) :
             base(connection, true)
         {
