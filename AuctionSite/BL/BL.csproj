@@ -7,11 +7,18 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="7.0.1" />
       <PackageReference Include="Castle.Windsor" Version="4.1.1" />
+      <PackageReference Include="EntityFramework" Version="6.2.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\DAL\DAL.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="BL">
+        <HintPath>..\PL\Bin\BL.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

@@ -31,5 +31,12 @@ namespace BL.Config
             config.CreateMap<QueryResult<Auction>, QueryResultDto<AuctionDto, AuctionFilterDto>>();
 
         }
+
+        public static void Initialize()
+        {
+            Mapper.Initialize(config =>
+                config.CreateMap<Auction, AuctionDto>().ReverseMap()
+            );
+        }
     }
 }
