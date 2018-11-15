@@ -1,5 +1,5 @@
 using AutoMapper;
-using BL.Facades;
+using BL.Facades.Base;
 using BL.QueryObjects.Common;
 using BL.Services;
 using Castle.MicroKernel.Registration;

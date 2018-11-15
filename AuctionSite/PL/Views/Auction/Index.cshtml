@@ -1,0 +1,21 @@
+﻿@using BL.DTOs.Base
+@model IEnumerable<AuctionDto>
+
+<p>Auction List</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Auction name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            @foreach (var dto in Model)
+            {
+                <td>@dto.Name</td>
+            }
+        </tr>
+    </tbody>
+</table>

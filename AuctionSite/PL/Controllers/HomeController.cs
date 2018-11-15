@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Infrastructure.UnitOfWork;
 using PL.Models.Home;
 
 namespace PL.Controllers
 {
     public class HomeController : Controller
     {
-        private IActionService _aus;
 
-        public HomeController(IActionService aus)
+        public HomeController()
         {
-            _aus = aus;
+           
         }
 
         [HttpGet]
@@ -30,9 +28,6 @@ namespace PL.Controllers
             {
                 return View(model);
             }
-
-            var res = await _aus.GetAutionByName(model.Search);
-            return RedirectToAction($"Auction/{res.AuctionID}");
 
             throw new NotImplementedException();
             return View();

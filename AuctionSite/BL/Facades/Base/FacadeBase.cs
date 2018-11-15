@@ -1,6 +1,6 @@
 using Infrastructure.UnitOfWork;
 
-namespace BL.Facades
+namespace BL.Facades.Base
 {
     public abstract class FacadeBase
     {
