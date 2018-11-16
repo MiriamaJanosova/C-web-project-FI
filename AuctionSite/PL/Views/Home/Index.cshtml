@@ -7,8 +7,11 @@
         <p style="color: red">
             @Html.ValidationMessageFor(m => m.Search)
         </p>
+        <img src="@TempData["img"]"/>
+        <div>
+            <button type="submit"> Submit this shit</button>
+        </div>
         
-        <button type="submit"> Submit this shit</button>
     </form>
     
 </div>

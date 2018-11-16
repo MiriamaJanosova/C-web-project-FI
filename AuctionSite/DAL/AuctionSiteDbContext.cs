@@ -51,7 +51,6 @@ namespace DAL
                 .HasMany(t => t.UserRaisesForAuction)
                 .WithRequired(a => a.UserWhoRaised)
                 .WillCascadeOnDelete(false);
-            
         }
 
     }

@@ -1,5 +1,6 @@
 using BL.DTOs.Common;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BL.DTOs.Base
 {   
@@ -20,6 +21,18 @@ namespace BL.DTOs.Base
         public List<ReviewDto> Reviews { get; set; }
 
         public List<AuctionDto> AuctionsCreated { get; set; }
+
+        public decimal ReviewAvg
+        {
+            get
+            {
+                var count = Reviews.Count;
+                if (count == 0)
+                    return 0;
+                var total = Reviews.Sum(r => r.Evaluation);
+                return total / count;
+            }
+        }
 
 
         public override string ToString()

@@ -1,13 +1,14 @@
 ﻿@using BL.DTOs.Base
 @model IEnumerable<AuctionDto>
 
-<p>Auction List</p>
+<h2>Auction list</h2>
 
 <table style="width: 100%">
     <thead>
     <tr>
         <th>Auction name</th>
         <th>Items price</th>
+        <th>Actions</th>
     </tr>
     </thead>
 
@@ -18,7 +19,10 @@
             <tr>
                 <td>@dto.Name</td>
                 <td>@dto.ActualPrice</td>
-                <td>@Html.ActionLink("Inspect", "Auction", new { id = dto.ID })</td>
+                <td>
+                    @Html.ActionLink("Inspect", "Auction", new {id = dto.ID})
+                    @Html.ActionLink("Delete", "Delete", new {id = dto.ID})
+                </td>
             </tr>
         }
         </tbody>

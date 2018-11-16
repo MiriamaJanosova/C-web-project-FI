@@ -38,9 +38,9 @@ namespace DAL.Entities
         [Required, ForeignKey("Auctioner")]
         public int AuctionerID { get; set; }
         
-        public List<Item> AuctionedItems { get; set; }
+        public virtual List<Item> AuctionedItems { get; set; }
         
-        public List<Raise> RaisesForAuction { get; set; }                
+        public virtual List<Raise> RaisesForAuction { get; set; }                
     }
 
 }

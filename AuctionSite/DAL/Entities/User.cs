@@ -26,14 +26,14 @@ namespace DAL.Entities
         [Required]
         public string Email { get; set; }
         
-        public List<Raise> UserRaisesForAuction { get; set; }
+        public virtual List<Raise> UserRaisesForAuction { get; set; }
         
-        public List<UserRole> UserRoles { get; set; }
+        public virtual List<UserRole> UserRoles { get; set; }
         
-        public List<Item> Inventory { get; set; }
+        public virtual List<Item> Inventory { get; set; }
         
-        public List<Review> Reviews { get; set; }
+        public virtual List<Review> Reviews { get; set; }
         
-        public List<Auction> AuctionsCreated { get; set; }
+        public virtual List<Auction> AuctionsCreated { get; set; }
     }
 }

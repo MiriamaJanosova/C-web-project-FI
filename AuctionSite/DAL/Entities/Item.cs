@@ -21,7 +21,7 @@ namespace DAL.Entities
         
         public string Description { get; set; }
         
-        public List<ItemCategory> HasCategories { get; set; }
+        public virtual List<ItemCategory> HasCategories { get; set; }
         
         public User Owner { get; set; }
         

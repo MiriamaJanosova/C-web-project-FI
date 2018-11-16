@@ -19,6 +19,6 @@ namespace DAL.Entities
         [Required]
         public UserRoleType RoleType { get; set; }
         
-        public List<UserRole> UsersOfRole { get; set; }
+        public virtual List<UserRole> UsersOfRole { get; set; }
     }
 }
