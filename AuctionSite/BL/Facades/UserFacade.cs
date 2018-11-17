@@ -4,28 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL.DTOs.Base;
+using BL.DTOs.Filter;
 using BL.Facades.Base;
 using BL.Services.Users;
+using DAL.Entities;
 using Infrastructure.UnitOfWork;
 
 namespace BL.Facades
 {
-    public class UserFacade : FacadeBase
+    public class UserFacade : FacadeBase<UserDto, UserFilterDto>
     {
         private IUserService _service;
 
-        public UserFacade(IUnitOfWorkProvider unitOfWorkProvider, IUserService service) : base(unitOfWorkProvider)
+        public UserFacade(IUnitOfWorkProvider unitOfWorkProvider, IUserService service) 
+            : base(unitOfWorkProvider, service)
         {
             _service = service;
-        }
-
-        public async Task<IEnumerable<UserDto>> GetAll()
-        {
-            using (UnitOfWorkProvider.Create())
-            {
-                var l = await _service.ListAllAsync();
-                return l.Items;
-            }
         }
 
         public async Task<UserDto> GetUserById(int id)

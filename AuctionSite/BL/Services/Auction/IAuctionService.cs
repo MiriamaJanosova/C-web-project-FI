@@ -2,10 +2,11 @@ using System.Threading.Tasks;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.QueryObjects.Common;
+using BL.Services.Common;
 
 namespace BL.Services.Auctions
 {
-    public interface IAuctionService
+    public interface IAuctionService : IService<AuctionDto, AuctionFilterDto>
     {
         Task<AuctionDto> GetAuctionByNameAsync(string names);
 

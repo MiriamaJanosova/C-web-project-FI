@@ -4,29 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL.DTOs.Base;
+using BL.DTOs.Filter;
 using BL.Facades.Base;
 using BL.Services.Auctions;
+using DAL.Entities;
 using Infrastructure.UnitOfWork;
 
 namespace BL.Facades
 {
-    public class AuctionFacade : FacadeBase
+    public class AuctionFacade : FacadeBase<AuctionDto, AuctionFilterDto>
     {
         private IAuctionService _service;
 
-        public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService service) : base(unitOfWorkProvider)
+        public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService service) 
+            : base(unitOfWorkProvider, service)
         {
             _service = service;
         }
 
-        public async Task<IEnumerable<AuctionDto>> GetAllAuctions()
-        {
-            using (UnitOfWorkProvider.Create())
-            {
-                var list = await _service.ListAllAsync();
-                return list.Items;
-            }
-        }
 
         public async Task<AuctionDto> GetAuctionById(int id)
         {

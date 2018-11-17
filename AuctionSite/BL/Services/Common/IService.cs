@@ -8,8 +8,10 @@ using BL.QueryObjects.Common;
 
 namespace BL.Services.Common
 {
-    public interface IService<TDto>
+    public interface IService<TDto, TFilterDto>
+        where TFilterDto : FilterDtoBase, new()
+        where TDto : DtoBase
     {
-        Task<IEnumerable<TDto>> GetAll();
+        Task<QueryResultDto<TDto, TFilterDto>> ListAllAsync();
     }
 }

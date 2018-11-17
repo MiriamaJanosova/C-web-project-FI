@@ -1,6 +1,7 @@
 ﻿using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.QueryObjects.Common;
+using BL.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BL.Services.Reviews
 {
-    public interface IReviewService
+    public interface IReviewService : IService<ReviewDto, ReviewFilterDto>
     {// <summary>
         /// Gets ids of the categories with the corresponding names
         /// </summary>
