@@ -167,11 +167,15 @@
     <Compile Include="App_Start\Windsor\PLInstaller.cs" />
     <Compile Include="App_Start\Windsor\WindsorControllerFactory.cs" />
     <Compile Include="Controllers\AuctionsController.cs" />
+    <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Home\IndexModel.cs" />
+    <Compile Include="Models\Users\UserListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +219,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Auctions\Index.cshtml" />
+    <Content Include="Views\Auctions\AuctionList.cshtml" />
     <Content Include="Views\Auctions\Auction.cshtml" />
     <Content Include="Views\Auctions\ItemList.cshtml" />
+    <Content Include="Views\Users\UserList.cshtml" />
+    <Content Include="Views\Review\User.cshtml" />
+    <Content Include="Views\Shared\PermisionDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

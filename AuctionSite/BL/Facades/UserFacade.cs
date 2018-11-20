@@ -6,31 +6,28 @@ using System.Threading.Tasks;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.Facades.Base;
-using BL.Services.Auctions;
+using BL.Services.Users;
 using DAL.Entities;
 using Infrastructure.UnitOfWork;
 
 namespace BL.Facades
 {
-    public class AuctionFacade : FacadeBase<AuctionDto, AuctionFilterDto>
+    public class UserFacade : FacadeBase<UserDto, UserFilterDto>
     {
-        private IAuctionService _service;
+        private IUserService _service;
 
-        public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService service) 
+        public UserFacade(IUnitOfWorkProvider unitOfWorkProvider, IUserService service) 
             : base(unitOfWorkProvider, service)
         {
             _service = service;
         }
 
-
-        public async Task<AuctionDto> GetAuctionById(int id)
+        public async Task<UserDto> GetUserById(int id)
         {
             using (UnitOfWorkProvider.Create())
             {
                 return await _service.GetAsync(id);
             }
         }
-
-
     }
 }

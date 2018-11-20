@@ -1,6 +1,7 @@
 ﻿using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.QueryObjects.Common;
+using BL.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BL.Services.Categories
 {
-    public interface ICategoryService
+    public interface ICategoryService : IService<CategoryDto, CategoryFilterDto>
     {// <summary>
         /// Gets ids of the categories with the corresponding names
         /// </summary>

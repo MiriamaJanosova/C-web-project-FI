@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BL.DTOs.Base.ReviewDto>
+
+<h2>Reviews of @TempData["UserEmail"]</h2>
+
+@if (Model.Any())
+{
+    <table width="100%">
+        <tbody>
+        @foreach (var rev in Model)
+        {
+            <tr>
+                <td>@rev.Description</td>
+                <td>@rev.Evaluation</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <img style="display: block; margin-left: auto; margin-right: auto; width: 50%" src="/Content/img/nothingfound.gif"/>
+}
+
+
