@@ -6,19 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Entities
 {
-    public class Role : IEntity
+    public class Role : IdentityRole<int, UserRole>, IEntity
     {
-        public int ID { get; set; }
 
         [NotMapped] 
         public string TableName { get; } = "roles";
 
-        [Required]
-        public UserRoleType RoleType { get; set; }
+        //[Required]
+        //public UserRoleType RoleType { get; set; }
         
-        public virtual List<UserRole> UsersOfRole { get; set; }
+        //public virtual List<UserRole> UsersOfRole { get; set; }
     }
 }

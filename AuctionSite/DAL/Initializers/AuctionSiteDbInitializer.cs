@@ -31,9 +31,9 @@ namespace DAL.Initializers
 
             var roles = new List<Role>
             {
-                new Role { RoleType = UserRoleType.Admin },
-                new Role { RoleType = UserRoleType.RegisteredUser },
-                new Role { RoleType = UserRoleType.User }
+                //new Role { RoleType = UserRoleType.Admin },
+                //new Role { RoleType = UserRoleType.RegisteredUser },
+                //new Role { RoleType = UserRoleType.User }
             };
 
             context.Roles.AddRange(roles);
@@ -101,16 +101,16 @@ namespace DAL.Initializers
             context.ItemCategories.AddRange(itemCategories);
             context.SaveChanges();
 
-            var userRoles = new List<UserRole>
-            {
-                new UserRole {RoleID = 1, UserID = 1},
-                new UserRole {RoleID = 2, UserID = 2},
-                new UserRole {RoleID = 2, UserID = 3},
-                new UserRole {RoleID = 2, UserID = 4}
-            };
+            //var userRoles = new List<UserRole>
+            //{
+            //    new UserRole {RoleID = 1, UserID = 1},
+            //    new UserRole {RoleID = 2, UserID = 2},
+            //    new UserRole {RoleID = 2, UserID = 3},
+            //    new UserRole {RoleID = 2, UserID = 4}
+            //};
 
-            context.UserRoles.AddRange(userRoles);
-            context.SaveChanges();
+            //context.UserRoles.AddRange(userRoles);
+            //context.SaveChanges();
 
             var raises = new List<Raise>
             {

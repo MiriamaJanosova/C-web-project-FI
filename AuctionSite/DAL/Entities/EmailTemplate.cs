@@ -10,7 +10,7 @@ namespace DAL.Entities
 {
     public class EmailTemplate : IEntity
     {
-        public int ID  { get; set; }
+        public int Id  { get; set; }
 
         [NotMapped] 
         public string TableName { get; } = "email_templates";

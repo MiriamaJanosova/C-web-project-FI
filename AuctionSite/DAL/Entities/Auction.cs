@@ -13,7 +13,7 @@ namespace DAL.Entities
 {
     public class Auction : IEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [NotMapped] 
         public string TableName { get; } = "auctions";

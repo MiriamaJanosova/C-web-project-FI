@@ -81,7 +81,7 @@ namespace EFTests.Config
                     
                 },
                 Owner = user1,
-                OwnerID = user1.ID
+                OwnerID = user1.Id
                     
             };
 

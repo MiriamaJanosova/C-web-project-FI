@@ -33,7 +33,7 @@ namespace Infrastructure.EntityFramework
 
         public void Update(TEntity entity)
         {
-            var foundEntity = Context.Set<TEntity>().Find(entity.ID);
+            var foundEntity = Context.Set<TEntity>().Find(entity.Id);
             Context.Entry(foundEntity).CurrentValues.SetValues(entity);
         }
 
@@ -50,7 +50,7 @@ namespace Infrastructure.EntityFramework
                 ctx = ctx.Include(include);
             }
             return await ctx
-                .SingleOrDefaultAsync(entity => entity.ID.Equals(id));
+                .SingleOrDefaultAsync(entity => entity.Id.Equals(id));
         }
 
         

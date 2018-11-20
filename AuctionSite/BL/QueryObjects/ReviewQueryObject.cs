@@ -46,7 +46,7 @@ namespace BL.QueryObjects
             {
                 return null;
             }
-            return new SimplePredicate(nameof(User.ID), ValueComparingOperator.Equal, filter.UserID);
+            return new SimplePredicate(nameof(User.Id), ValueComparingOperator.Equal, filter.UserID);
         }
 
         private static CompositePredicate FilterEvaluations(ReviewFilterDto filter)

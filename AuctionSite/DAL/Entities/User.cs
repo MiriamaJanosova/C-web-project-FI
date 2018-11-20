@@ -7,25 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Entities
 {
-    public class User : IEntity
+    public class User : IdentityUser<int,Login,UserRole,Claim>, IEntity
     {
-        public int ID { get; set; }
-
         [NotMapped] 
         public string TableName { get; } = "users";
 
         [Required, MaxLength(50)]
         public string Name { get; set; }
-        
-        [Required, MaxLength(50)]
+
+        [Required, MaxLength(50)] 
         public string Surname { get; set; }
-        
-        [Required]
-        public string Email { get; set; }
-        
+
         public virtual List<Raise> UserRaisesForAuction { get; set; }
         
         public virtual List<UserRole> UserRoles { get; set; }

@@ -45,7 +45,7 @@ namespace BL.Services
         {
             var entity = AutoMapper.Mapper.Map<TEntity>(entityDto);
             Repository.Create(entity);
-            return entity.ID;
+            return entity.Id;
         }
 
         public virtual async Task Update(TDto entityDto)

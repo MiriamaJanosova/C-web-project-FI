@@ -19,9 +19,9 @@ namespace BL.Services.Users
         Task<UserDto> GetUserAccordingToEmailAsync(string email);
 
         /// <summary>
-        /// Gets DTO representing the entity according to ID
+        /// Gets DTO representing the entity according to Id
         /// </summary>
-        /// <param name="entityId">entity ID</param>
+        /// <param name="entityId">entity Id</param>
         /// <param name="withIncludes">include all entity complex types</param>
         /// <returns>The DTO representing the entity</returns>
         Task<UserDto> GetAsync(int entityId, bool withIncludes = true);

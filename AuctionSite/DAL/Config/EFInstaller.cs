@@ -14,7 +14,7 @@ namespace DAL.Config
     public class EFInstaller : IWindsorInstaller
     {
         internal const string ConnectionString =
-            "Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User ID=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
+            "Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User Id=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
 

@@ -7,10 +7,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL
 {
-    public class AuctionSiteDbContext : DbContext
+    public class AuctionSiteDbContext : IdentityDbContext<User, Role, int, Login, UserRole, Claim>
     {
         public DbSet<Auction> Auctions { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -23,9 +24,10 @@ namespace DAL
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        
 
         public static string ConnectionString { get; } =
-            "Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User ID=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
+            "Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User Id=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
 
         public AuctionSiteDbContext() 
             : base(ConnectionString)
@@ -46,11 +48,13 @@ namespace DAL
             modelBuilder.Entity<Auction>()
                 .HasMany(t => t.AuctionedItems)
                 .WithRequired(a => a.InAuction)
-                .WillCascadeOnDelete(false); 
+                .WillCascadeOnDelete(false);
             modelBuilder.Entity<User>()
                 .HasMany(t => t.UserRaisesForAuction)
                 .WithRequired(a => a.UserWhoRaised)
                 .WillCascadeOnDelete(false);
+            modelBuilder.Entity<User>()
+                .HasRequired(a => a.Email);
         }
 
     }

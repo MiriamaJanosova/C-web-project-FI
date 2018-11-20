@@ -6,25 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Entities
 {
-    public class UserRole : IEntity
+    public class UserRole : IdentityUserRole<int>
     {
-        public int ID { get; set; }
-
-        [NotMapped] 
-        public string TableName { get; } = "user_roles";
-        
-        public Role Role { get; set; }
-        
-        [Required]
-        public int RoleID { get; set; }
-        
-        public User User { get; set; }
-        
-        [Required]
-        public int UserID { get; set; }
-
+        //[NotMapped] 
+        //public string TableName { get; } = "user_roles";
     }
 }

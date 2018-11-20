@@ -43,6 +43,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>C:\Users\cyril\.nuget\packages\microsoft.aspnet.identity.entityframework\2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -61,11 +64,13 @@
     <Compile Include="Entities\Auction.cs" />
     <Compile Include="AuctionSiteDbContext.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Claim.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\EmailTemplate.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemCategory.cs" />
     <Compile Include="Entities\ItemCategoryType.cs" />
+    <Compile Include="Entities\Login.cs" />
     <Compile Include="Entities\Raise.cs" />
     <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\Role.cs" />

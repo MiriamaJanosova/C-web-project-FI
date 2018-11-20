@@ -40,7 +40,7 @@ namespace Infrastructure.Query
             return TotalItemsCount == other.TotalItemsCount &&
                    RequestedPageNumber == other.RequestedPageNumber &&
                    PageSize == other.PageSize &&
-                   Items.All(entity => other.Items.Select(item => item.ID).Contains(entity.ID)); 
+                   Items.All(entity => other.Items.Select(item => item.Id).Contains(entity.Id)); 
         }
 
         public override bool Equals(object obj)

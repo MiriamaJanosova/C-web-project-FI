@@ -11,7 +11,7 @@ namespace DAL.Entities
 {
     public class Category : IEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [NotMapped] 
         public string TableName { get; } = "categories";

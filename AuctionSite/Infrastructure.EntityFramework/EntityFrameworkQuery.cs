@@ -33,7 +33,7 @@ namespace Infrastructure.EntityFramework
             if (string.IsNullOrWhiteSpace(SortAccordingTo) && DesiredPage.HasValue)
             {
                 // Sorting must always take place when paging is required
-                SortAccordingTo = nameof(IEntity.ID);
+                SortAccordingTo = nameof(IEntity.Id);
                 UseAscendingOrder = true;
             }
             if (SortAccordingTo != null)

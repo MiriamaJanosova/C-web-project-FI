@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 // modelu COM, nastavte atribut ComVisible daného typu na hodnotu True.
 [assembly: ComVisible(false)]
 
-// Následující GUID se používá pro ID knihovny typů, pokud je tento projekt vystavený pro COM.
+// Následující GUID se používá pro Id knihovny typů, pokud je tento projekt vystavený pro COM.
 [assembly: Guid("198a47a1-5f73-4b4e-b973-93a729c805c9")]
 
 // Informace o verzi sestavení se skládá z těchto čtyř hodnot:
