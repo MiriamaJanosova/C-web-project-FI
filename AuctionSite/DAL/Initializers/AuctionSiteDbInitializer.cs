@@ -36,7 +36,11 @@ namespace DAL.Initializers
                 //new Role { RoleType = UserRoleType.User }
             };
 
-            context.Roles.AddRange(roles);
+            foreach (var role in roles)
+            {
+                context.Roles.Add(role);
+            }
+
             context.SaveChanges();
 
             var users = new List<User>
@@ -45,9 +49,14 @@ namespace DAL.Initializers
                 new User { Name = "Jaroslav", Surname = "Dlouhý", Email = "druhy@email.com" },
                 new User { Name = "Ladislav", Surname = "Krátky", Email = "treti@email.com" },
                 new User { Name = "Karolína", Surname = "Milová", Email = "ctvrty@email.com" }
-            }; 
+            };
 
-            context.Users.AddRange(users);
+            foreach (var user in users)
+            {
+                context.Users.Add(user);
+            }
+            
+            
             context.SaveChanges();
 
             var reviews = new List<Review>
