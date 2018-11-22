@@ -19,7 +19,7 @@ namespace DBRun
                 //{
                 //    Name = "marekch"
                 //});
-                var users = db.Users.AsEnumerable();
+                var users = db.Users.AsNoTracking().AsEnumerable();
                 foreach (var user in users)
                 {
                     Console.WriteLine(user.Name);

@@ -51,8 +51,8 @@ namespace DAL
                 .HasMany(t => t.UserRaisesForAuction)
                 .WithRequired(a => a.UserWhoRaised)
                 .WillCascadeOnDelete(false);
-            modelBuilder.Entity<User>()
-                .HasRequired(a => a.Email);
+            //modelBuilder.Entity<User>()
+            //    .HasRequired(a => a.Email);
         }
 
     }

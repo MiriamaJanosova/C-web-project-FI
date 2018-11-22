@@ -6,7 +6,7 @@ namespace DAL.Entities
 {
     public class Claim : IdentityUserClaim<int>, IEntity
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         [NotMapped] 
         public string TableName { get; } = "claims";

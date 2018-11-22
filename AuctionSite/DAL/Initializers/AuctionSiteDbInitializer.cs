@@ -31,6 +31,9 @@ namespace DAL.Initializers
 
             var roles = new List<Role>
             {
+                new Role { Name = "Admin" },
+                new Role { Name = "RegisteredUser" },
+                new Role { Name = "User" }
                 //new Role { RoleType = UserRoleType.Admin },
                 //new Role { RoleType = UserRoleType.RegisteredUser },
                 //new Role { RoleType = UserRoleType.User }

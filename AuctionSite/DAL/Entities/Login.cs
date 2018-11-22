@@ -5,9 +5,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Entities
 {
-    public class Login : IdentityUserLogin<int>
+    public class Login : IdentityUserLogin<int>, IEntity
     {
-        //[NotMapped]
-        //public string TableName { get; } = "bullshit";
+        [NotMapped]
+        public string TableName { get; } = "bullshit";
+        public int Id { get; set; }
     }
 }
