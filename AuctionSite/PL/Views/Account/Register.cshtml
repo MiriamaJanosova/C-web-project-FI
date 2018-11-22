@@ -1,0 +1,13 @@
+﻿@model BL.DTOs.Users.CreateUser
+
+<h2>Register</h2>
+<form method="post">
+    <div>
+        @Html.DisplayTextFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        <p style="color: red">
+            @Html.ValidationMessageFor(m => m.Email)
+        </p>
+    </div>
+
+</form>

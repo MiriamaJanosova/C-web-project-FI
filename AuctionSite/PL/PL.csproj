@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Windsor\PLInstaller.cs" />
     <Compile Include="App_Start\Windsor\WindsorControllerFactory.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionsController.cs" />
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -222,8 +223,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auctions\AuctionList.cshtml" />
     <Content Include="Views\Auctions\Auction.cshtml" />
@@ -231,6 +230,8 @@
     <Content Include="Views\Users\UserList.cshtml" />
     <Content Include="Views\Review\User.cshtml" />
     <Content Include="Views\Shared\PermisionDenied.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,8 +9,8 @@ namespace PL.Models.Home
     public class IndexModel
     {
 
-        [Required(ErrorMessage = "Bullshit")]
-        [StringLength(10, ErrorMessage = "Kill yourself")]
+        [Required(ErrorMessage = "Required")]
+        [StringLength(10, ErrorMessage = "Too short")]
         public string Search { get; set; }
     }
 }
