@@ -17,7 +17,7 @@ namespace PL.Controllers
         
         public async Task<ActionResult> Index()
         {
-            var users = await UserFacade.GetAll();
+            var users = await UserFacade.GetUsersAsync();
             if (users == null)
                 return Error();
             return View("UserList", new UserListModel(users));

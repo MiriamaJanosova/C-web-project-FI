@@ -12,6 +12,7 @@
       <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.2" />
       <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.2" />
       <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0-preview3-35497" />
+      <PackageReference Include="Microsoft.Owin" Version="4.0.0" />
     </ItemGroup>
 
     <ItemGroup>

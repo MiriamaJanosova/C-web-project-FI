@@ -13,17 +13,38 @@ namespace PL.Controllers
 {
     public class AccountController : BaseController
     {
-        public UserFacade UserFacade { get; set; }
+        public UserFacade UserFacade;
 
+        public AccountController(UserFacade UserFacade)
+        {
+            this.UserFacade = UserFacade;
+        }
         // GET: Account
         public ActionResult Index()
         {
             return View();
         }
 
-        public async Task<ActionResult> Login()
+        [HttpGet]
+        public ActionResult Login()
         {
             // TODO
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginUser dto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = UserFacade.Login(dto.Email, dto.Password);
+                if (result.IsAuthenticated)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                TempData["Error"] = "Couldn't login";
+            }
             return View();
         }
 
@@ -42,9 +63,14 @@ namespace PL.Controllers
                 var result = await UserFacade.CreateAsync(dto);
                 if (result.Succeeded)
                 {
-                    new NotImplementedException();
+                    var res = UserFacade.Login(dto.Email, dto.Password);
+                    if (res.IsAuthenticated)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
 
+                TempData["Error"] = result.ToString();
             }
 
             

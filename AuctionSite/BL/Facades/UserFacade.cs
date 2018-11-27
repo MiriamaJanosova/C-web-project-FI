@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -14,6 +15,9 @@ using DAL.Entities;
 using Infrastructure.UnitOfWork;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using IdentityResult = Microsoft.AspNet.Identity.IdentityResult;
 
 namespace BL.Facades
 {
@@ -21,13 +25,15 @@ namespace BL.Facades
     {
         private IUserService _service;
         private readonly IMapper _mapper;
-        private Func<IdentityUserManager> UserManagerFactory{ get; set; }
+        private Func<IdentityUserManager> UserManagerFactory{ get;}
 
-        public UserFacade(IUnitOfWorkProvider unitOfWorkProvider, IUserService service, IMapper mapper) 
-            : base(unitOfWorkProvider, service)
+        public UserFacade(IUnitOfWorkProvider unitOfWorkProvider, IUserService service, IMapper mapper, 
+            Func<IdentityUserManager> userManagerFactory) 
+            : base(unitOfWorkProvider)
         {
             _service = service;
             _mapper = mapper;
+            UserManagerFactory = userManagerFactory;
         }
 
         public async Task<UserDto> GetUserById(int id)
@@ -50,6 +56,26 @@ namespace BL.Facades
 
                     return await manager.CreateAsync(user, dto.Password);
                 }
+            }
+        }
+
+        public ClaimsIdentity Login(string email, string password)
+        {
+            using ( UnitOfWorkProvider.Create())
+            using (var userManager = UserManagerFactory())
+            {
+                var user = userManager.Find(email, password);
+                var result = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                return result;
+            }
+
+        }
+        public async Task<IEnumerable<UserDto>> GetUsersAsync()
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var l = await _service.ListAllAsync();
+                return l.Items;
             }
         }
     }

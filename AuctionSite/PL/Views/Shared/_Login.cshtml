@@ -1,2 +1,18 @@
-﻿
-@Html.ActionLink("Register", "Register", "Account")
+﻿<div>
+    @if (User != null)
+    {
+        <span>
+            @Html.ActionLink("Register", "Register", "Account")
+        </span>
+        <span>
+            @Html.ActionLink("Login", "Login", "Account")
+        </span>
+    
+    }
+    else
+    {
+        <p>Logged in as tmp</p>
+    }
+</div>
+
+

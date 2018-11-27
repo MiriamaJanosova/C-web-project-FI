@@ -16,8 +16,7 @@
     @foreach (var user in  Model.Users)
     {
         <tr>
-            <td>@user.Name</td>
-            <td>@user.Surname</td>
+            <td>@user.UserName</td>
             <td>@user.Email</td>
             <td>
                 @Model.GetAverageReviewString(user)
