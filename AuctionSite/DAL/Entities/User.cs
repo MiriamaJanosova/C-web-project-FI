@@ -16,12 +16,6 @@ namespace DAL.Entities
         [NotMapped] 
         public string TableName { get; } = "users";
 
-        [Required, MaxLength(50)]
-        public string Name { get; set; }
-
-        [Required, MaxLength(50)] 
-        public string Surname { get; set; }
-
         public virtual List<Raise> UserRaisesForAuction { get; set; }
         
         public virtual List<UserRole> UserRoles { get; set; }

@@ -19,7 +19,7 @@ namespace BL.DTOs.Base
 
         public override string ToString()
         {
-            return $"{UserWhoRaised.Name} is willing to pay {Amount} for auction {RaiseForAuctionID} {RaiseForAuction.Name}";
+            return $"{UserWhoRaised.UserName} is willing to pay {Amount} for auction {RaiseForAuctionID} {RaiseForAuction.Name}";
         }
 
         protected bool Equals(RaiseDto other)

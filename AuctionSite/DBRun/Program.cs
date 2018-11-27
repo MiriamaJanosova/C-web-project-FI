@@ -22,7 +22,7 @@ namespace DBRun
                 var users = db.Users.AsNoTracking().AsEnumerable();
                 foreach (var user in users)
                 {
-                    Console.WriteLine(user.Name);
+                    Console.WriteLine(user.UserName);
                 }
 
                 //db.SaveChanges();

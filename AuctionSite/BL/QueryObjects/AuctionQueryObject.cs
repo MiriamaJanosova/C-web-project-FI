@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
@@ -22,6 +23,7 @@ namespace BL.QueryObjects
             var definedPredicates = new List<IPredicate>();
             AddIfDefined(FilterAuctionNames(filter), definedPredicates);
             AddIfDefined(FilterAuctionPrices(filter), definedPredicates);
+            AddIfDefined(FilterAuctionDate(filter), definedPredicates);
 
             if (definedPredicates.Count == 0)
             {
@@ -46,6 +48,21 @@ namespace BL.QueryObjects
             }
             
             collection.Add(predicate);
+        }
+
+        private static IPredicate FilterAuctionDate(AuctionFilterDto filter)
+        {
+            if (filter.ActualDateTime == DateTime.MaxValue)
+            {
+                return null;
+            }
+            
+            return new CompositePredicate(new List<IPredicate>
+            {
+                new SimplePredicate(nameof(Auction.StartDate), ValueComparingOperator.LessThanOrEqual, filter.ActualDateTime),
+                new SimplePredicate(nameof(Auction.StartDate), ValueComparingOperator.LessThanOrEqual, filter.ActualDateTime)
+            });
+            
         }
 
         private static IPredicate FilterAuctionPrices(AuctionFilterDto filter)

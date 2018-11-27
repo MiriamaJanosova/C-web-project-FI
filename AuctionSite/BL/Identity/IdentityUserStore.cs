@@ -16,5 +16,10 @@ namespace BL.Identity
         public IdentityUserStore() : base(new AuctionSiteDbContext()) // change
         {
         }
+
+        /**public IdentityUserStore(IUnitOfWorkProvider unitOfWorkProvider)
+            : base((unitOfWorkProvider.GetUnitOfWorkInstance() as UnitOfWorkBase)?.Context)
+        {
+        }*/
     }
 }

@@ -6,9 +6,7 @@ namespace BL.DTOs.Base
 {   
     public class UserDto : DtoBase
     {
-        public string Name { get; set; }
-
-        public string Surname { get; set; }
+        public string UserName { get; set; }
 
         public string Email { get; set; }
 
@@ -37,7 +35,7 @@ namespace BL.DTOs.Base
 
         public override string ToString()
         {
-            return $"{Name} {Surname}";
+            return $"{UserName}";
         }
 
         protected bool Equals(UserDto other)
@@ -68,8 +66,7 @@ namespace BL.DTOs.Base
             unchecked
             {
                 var hashCode = ID.GetHashCode();
-                hashCode = (hashCode * 397) ^ Name.GetHashCode();
-                hashCode = (hashCode * 397) ^ Surname.GetHashCode();
+                hashCode = (hashCode * 397) ^ UserName.GetHashCode();
                 hashCode = (hashCode * 397) ^ Email.GetHashCode();
                 hashCode = (hashCode * 397) ^ UserRaisesForAuction.GetHashCode();
                 hashCode = (hashCode * 397) ^ UserRoles.GetHashCode();

@@ -48,10 +48,10 @@ namespace DAL.Initializers
 
             var users = new List<User>
             {
-                new User { Name = "Peter", Surname = "Novotný", Email = "prvni@email.com" },
-                new User { Name = "Jaroslav", Surname = "Dlouhý", Email = "druhy@email.com" },
-                new User { Name = "Ladislav", Surname = "Krátky", Email = "treti@email.com" },
-                new User { Name = "Karolína", Surname = "Milová", Email = "ctvrty@email.com" }
+                new User { UserName = "Peter Novotný", Email = "prvni@email.com" },
+                new User { UserName = "Jaroslav Dlouhý", Email = "druhy@email.com" },
+                new User { UserName = "Ladislav Krátky", Email = "treti@email.com" },
+                new User { UserName = "Karolína Milová", Email = "ctvrty@email.com" }
             };
 
             foreach (var user in users)

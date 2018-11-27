@@ -17,7 +17,7 @@ namespace BL.Facades
         private IAuctionService _service;
 
         public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService service) 
-            : base(unitOfWorkProvider, service)
+            : base(unitOfWorkProvider)
         {
             _service = service;
         }

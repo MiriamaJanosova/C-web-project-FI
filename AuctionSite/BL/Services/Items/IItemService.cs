@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Entities;
 
 namespace BL.Services.Items
 {
@@ -43,11 +44,8 @@ namespace BL.Services.Items
         /// <param name="entityId">Id of the entity to delete</param>
         void Delete(int entityId);
 
-        /// <summary>
-        /// Gets ItemDtos according to Filters  (for given type)
-        /// <param name="item">Item Filter</param>
-        /// </summary>
-        /// <returns>all available dtos (for given type)</returns>
-        Task<QueryResultDto<ItemDto, ItemFilterDto>> ListAllAsync(ItemFilterDto item);
+        Task<ItemDto> AddItemCategory(Category category, int itemId);
+        Task<ItemDto> GetItemsByCategoriesAsync(List<ItemCategory> category);
+        Task<ItemDto> GetItemsByAuctionIDAsync(int auctionID);
     }
 }

@@ -12,23 +12,11 @@ namespace BL.Facades.Base
         where TDto : DtoBase
     {
         protected readonly IUnitOfWorkProvider UnitOfWorkProvider;
-        protected readonly IService<TDto, TFilterDto> Service;
 
-        protected FacadeBase(IUnitOfWorkProvider unitOfWorkProvider, 
-            IService<TDto, TFilterDto> service)
+        protected FacadeBase(IUnitOfWorkProvider unitOfWorkProvider)
         {
             UnitOfWorkProvider = unitOfWorkProvider;
-            Service = service;
 
-        }
-
-        public async Task<IEnumerable<TDto>> GetAll()
-        {
-            using (UnitOfWorkProvider.Create())
-            {
-                var list = await Service.ListAllAsync();
-                return list.Items;
-            }
         }
         
     }

@@ -6,6 +6,9 @@ namespace Infrastructure.UnitOfWork
 {
     public abstract class UnitOfWorkBase : IUnitOfWork
     {
+        //public AuctionSiteDbContext Context => (AuctionSiteDbContext)base.Context;
+        
+        
         private readonly IList<Action> afterCommitActions = new List<Action>();
 
         /// <summary>

@@ -19,10 +19,4 @@
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="BL">
-        <HintPath>..\PL\Bin\BL.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
 </Project>

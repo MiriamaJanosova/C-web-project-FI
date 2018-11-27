@@ -22,6 +22,8 @@ namespace BL.QueryObjects
             var definedPredicates = new List<IPredicate>();
             AddIfDefined(FilterName(filter), definedPredicates);
             AddIfDefined(FilterCategories(filter), definedPredicates);
+            AddIfDefined(FilterUser(filter), definedPredicates);
+            AddIfDefined(FilterAuction(filter), definedPredicates);
             if (definedPredicates.Count == 0)
             {
                 return query;
@@ -53,18 +55,40 @@ namespace BL.QueryObjects
                 filter.SearchedName);
         }
 
-        private static CompositePredicate FilterCategories(ItemFilterDto filter)
+        private static SimplePredicate FilterUser(ItemFilterDto filter)
         {
-            if (filter.CategoryTypes == null || filter.CategoryTypes.Any())
+            if (filter.OwnerID == 0)
             {
                 return null;
             }
 
-            var categoryTypesPredicates = new List<IPredicate>(filter.CategoryTypes
+            return new SimplePredicate(nameof(Item.OwnerID), ValueComparingOperator.Equal,
+                filter.OwnerID);
+        }
+
+        private static SimplePredicate FilterAuction(ItemFilterDto filter)
+        {
+            if (filter.AuctionID == 0)
+            {
+                return null;
+            }
+
+            return new SimplePredicate(nameof(Item.AuctionID), ValueComparingOperator.Equal,
+                filter.AuctionID);
+        }
+
+        private static CompositePredicate FilterCategories(ItemFilterDto filter)
+        {
+            if (filter.ItemCategoryTypes == null || filter.ItemCategoryTypes.Any())
+            {
+                return null;
+            }
+
+            var categoryTypesPredicates = new List<IPredicate>(filter.ItemCategoryTypes
                 .Select(cat => new SimplePredicate
-                (nameof(Category.CategoryType),
+                (nameof(ItemCategory.Id),
                 ValueComparingOperator.Equal,
-                cat)));
+                cat.Id)));
 
             return new CompositePredicate(categoryTypesPredicates, LogicalOperator.OR);
         }

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
@@ -18,6 +20,10 @@ namespace BL.Services.Auctions
 
         void Delete(int entityId);
 
-        Task<QueryResultDto<AuctionDto, AuctionFilterDto>> ListAllAsync();
+        Task<int> RaiseForAuction(int raiseID);
+
+        Task<IEnumerable<AuctionDto>> GetCurrentAuctions(DateTime dateTime);
+
+
     }
 }

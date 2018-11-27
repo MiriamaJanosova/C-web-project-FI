@@ -18,7 +18,7 @@ namespace BL.DTOs.Base
 
         public override string ToString()
         {
-            return $"{UserID} {User.Surname} has Role {RoleType.ToString()}";
+            return $"{UserID} {User.UserName} has Role {RoleType.ToString()}";
         }
 
         protected bool Equals(UserRoleDto other)
@@ -27,7 +27,7 @@ namespace BL.DTOs.Base
             {
                 return true;
             }
-            return User.Surname.Equals(other.User.Surname) &&
+            return User.UserName.Equals(other.User.UserName) &&
                 UserID == other.UserID &&
                 RoleID == other.RoleID &&
                 RoleType == other.RoleType;

@@ -9,7 +9,10 @@ namespace BL.DTOs.Filter
         
         public double MinimalPrice { get; set; } = 0;  
 
-        public double MaximalPrice { get; set; } = double.MaxValue;   
-        
+        public double MaximalPrice { get; set; } = double.MaxValue;
+
+        public DateTime ActualDateTime { get; set; }
+
+
     }
 }

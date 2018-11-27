@@ -27,6 +27,14 @@ namespace BL.Services.Users
             return queryResult.Items.SingleOrDefault();
         }
 
+        public async Task<UserDto> GetUserAccordingToNameAsync(string searchedName)
+        {
+            var queryResult = await Query.ExecuteQuery(new UserFilterDto { UserName = searchedName });
+            return queryResult.Items.SingleOrDefault();
+        }
+
+
+
         protected override async Task<User> GetWithIncludesAsync(int entityId)
         {
             return await Repository.GetAsync(entityId);

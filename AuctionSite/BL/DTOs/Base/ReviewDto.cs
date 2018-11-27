@@ -17,7 +17,7 @@ namespace BL.DTOs.Base
 
         public override string ToString()
         {
-            return $"{ReviewedUser.Name} got {Evaluation} points.";
+            return $"{ReviewedUser.UserName} got {Evaluation} points.";
         }
 
         protected bool Equals(ReviewDto other)

@@ -44,10 +44,7 @@ namespace BL.Services.Users
         /// <param name="entityId">Id of the entity to delete</param>
         void Delete(int entityId);
 
-        /// <summary>
-        /// Gets all DTOs (for given type)
-        /// </summary>
-        /// <returns>all available dtos (for given type)</returns>
-        Task<QueryResultDto<UserDto, UserFilterDto>> ListAllAsync();
+        Task<UserDto> GetUserAccordingToNameAsync(string searchedName);
+
     }
 }

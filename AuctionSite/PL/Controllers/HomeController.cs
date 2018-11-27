@@ -32,7 +32,7 @@ namespace PL.Controllers
             }
 
             throw new NotImplementedException();
-            return View();
+            //return View();
         }
     }
 }

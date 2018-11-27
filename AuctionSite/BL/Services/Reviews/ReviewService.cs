@@ -7,6 +7,7 @@ using Infrastructure;
 using Infrastructure.Query;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,17 +18,44 @@ namespace BL.Services.Reviews
          CrudQueryServiceBase<Review, ReviewDto, ReviewFilterDto>,
          IReviewService
     {
-        public ReviewService(IMapper mapper, IRepository<Review> repository, 
-            QueryObjectBase<ReviewDto, Review, ReviewFilterDto, IQuery<Review>> query) 
-            : base(mapper, repository, query) {}
+        private readonly QueryObjectBase<UserDto, User, UserFilterDto, IQuery<User>> userQueryObject;
 
-        public async Task<ReviewDto> GetReviewForUserAsync(int userID)
+        public ReviewService(IMapper mapper, IRepository<Review> repository,
+            QueryObjectBase<ReviewDto, Review, ReviewFilterDto, IQuery<Review>> query,
+            QueryObjectBase<UserDto, User, UserFilterDto, IQuery<User>> userQueryObject)
+            : base(mapper, repository, query)
         {
-            var queryResult = await Query.ExecuteQuery(new ReviewFilterDto { UserID = userID });
-            return queryResult.Items.SingleOrDefault();
+            this.userQueryObject = userQueryObject;
         }
 
-        protected async override Task<Review> GetWithIncludesAsync(int entityId)
+        public async Task<QueryResultDto<ReviewDto, ReviewFilterDto>> GetReviewForUserAsync(int userID)
+        {
+            return await Query.ExecuteQuery(new ReviewFilterDto { UserID = userID });
+        }
+
+        public async Task<IDictionary<int,List<ReviewDto>>> GetReviewsWithEvaluationAsync(int[] evaluation)
+        {
+            var queryResult = await Query.ExecuteQuery(new ReviewFilterDto {Evaluation = evaluation});
+            return queryResult.Items
+                .GroupBy(c => (int) Math.Round(c.Evaluation))
+                .ToDictionary(c => c.Key,
+                    g => g.ToList());
+        }
+
+        public async Task<IDictionary<int, double>> GetUsersWithAvgRatings()
+        {
+            return (await ListAllAsync()).Items
+                .Join(userQueryObject.ExecuteQuery(new UserFilterDto()).Result.Items,
+                    userReview => userReview.ReviewedUserID,
+                    user => user.ID,
+                    (review, user) => new {User = user, Evaluation = review.Evaluation})
+                .GroupBy(join => join.User.ID)
+                .ToDictionary(group => group.Key,
+                    group => Math.Round(((double) group.Select(review => review.Evaluation).Sum() /
+                                         group.Select(review => review.Evaluation).Count()), 1));
+        }
+
+        protected override async Task<Review> GetWithIncludesAsync(int entityId)
         {
             return await Repository.GetAsync(entityId);
         }

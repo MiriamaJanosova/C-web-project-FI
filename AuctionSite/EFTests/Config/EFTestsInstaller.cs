@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
@@ -11,6 +12,8 @@ using Infrastructure.EntityFramework;
 using Infrastructure.EntityFramework.UnitOfWork;
 using Infrastructure.Query;
 using Infrastructure.UnitOfWork;
+using NMemory.Linq;
+using Component = Castle.MicroKernel.Registration.Component;
 
 namespace EFTests.Config
 {
@@ -39,7 +42,10 @@ namespace EFTests.Config
         private static DbContext InitializeDatabase()
         {
             var dbCxt = new AuctionSiteDbContext(Effort.DbConnectionFactory.CreatePersistent(TestDbConnection));
-            dbCxt.Users.RemoveRange(dbCxt.Users);
+            foreach (var dbCxtUser in dbCxt.Users)
+            {
+                dbCxt.Users.Remove(dbCxtUser);
+            }
             dbCxt.EmailTemplates.RemoveRange(dbCxt.EmailTemplates);
             dbCxt.SaveChanges();
 
@@ -56,15 +62,13 @@ namespace EFTests.Config
             
             var user1 = new User
             {
-                Name = "Pepa",
-                Surname = "Štok",
+                UserName = "Pepa Stok",
                 Email = "pepastok@fernet.com"
             };
 
             var user2 = new User
             {
-                Name = "Bořetěch",
-                Surname = "idk",
+                UserName = "Bořetěch idk",
                 Email = "boretechuv@email.cz"
             };
 

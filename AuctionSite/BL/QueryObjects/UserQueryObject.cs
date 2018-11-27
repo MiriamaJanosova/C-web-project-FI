@@ -19,7 +19,7 @@ namespace BL.QueryObjects
         {
             var definedPredicates = new List<IPredicate>();
             AddIfDefined(FilterEmail(filter), definedPredicates);
-            AddIfDefined(FilterEvaluation(filter), definedPredicates);
+            AddIfDefined(FilterUserName(filter), definedPredicates);
             if (definedPredicates.Count == 0)
             {
                 return query;
@@ -51,20 +51,16 @@ namespace BL.QueryObjects
                 filter.UserEmail);
         }
 
-        private static CompositePredicate FilterEvaluation(UserFilterDto filter)
+        private static SimplePredicate FilterUserName(UserFilterDto filter)
         {
-            if (filter.UserEvaluation == null || filter.UserEvaluation.Any())
+            if (string.IsNullOrWhiteSpace(filter.UserName))
             {
                 return null;
             }
 
-            var reviewsEvalPredicates = new List<IPredicate>(filter.UserEvaluation
-                .Select(eval => new SimplePredicate
-                (nameof(Review.Evaluation),
-                ValueComparingOperator.Equal,
-                eval)));
-
-            return  new CompositePredicate(reviewsEvalPredicates, LogicalOperator.OR);            
+            return new SimplePredicate(nameof(User.UserName), ValueComparingOperator.Equal,
+                filter.UserName);
         }
+
     }
 }
