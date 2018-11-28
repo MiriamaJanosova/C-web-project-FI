@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using DAL.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 
 namespace BL.Identity
 {
@@ -13,6 +15,19 @@ namespace BL.Identity
     {
         public IdentityUserManager(IUserStore<User, int> store) : base(store)
         {
+        }
+
+        public static IdentityUserManager Create(IdentityFactoryOptions<IdentityUserManager> options, IOwinContext context)
+        {
+            var manager = new IdentityUserManager(new IdentityUserStore());
+            // Configure validation logic for usernames
+
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if (dataProtectionProvider != null)
+            {
+                manager.UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
+            }
+            return manager;
         }
     }
 }

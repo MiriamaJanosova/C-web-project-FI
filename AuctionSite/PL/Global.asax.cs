@@ -7,7 +7,7 @@ using PL.Windsor;
 
 namespace PL
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class WebApiApplication : System.Web.HttpApplication
     {
         private static readonly IWindsorContainer Container = new WindsorContainer();
 

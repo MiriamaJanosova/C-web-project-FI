@@ -55,5 +55,6 @@ namespace DAL
             //    .HasRequired(a => a.Email);
         }
 
+
     }
 }

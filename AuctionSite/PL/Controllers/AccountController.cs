@@ -12,21 +12,19 @@ using Microsoft.Owin.Security;
 
 namespace PL.Controllers
 {
+    [Authorize]
     public class AccountController : BaseController
     {
         public UserFacade UserFacade;
+       
 
         public AccountController(UserFacade UserFacade)
         {
             this.UserFacade = UserFacade;
         }
-        // GET: Account
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Login()
         {
             // TODO
@@ -34,13 +32,14 @@ namespace PL.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(LoginUser dto)
         {
             if (ModelState.IsValid)
             {
                 var result = UserFacade.Login(dto.Email, dto.Password);
-                HttpContext.GetOwinContext().Authentication.SingIn(new AuthenticationProperties { IsPersistent = false }, result);
-                if (result.IsAuthenticated)
+                HttpContext.GetOwinContext().Authentication.SignIn(new AuthenticationProperties { IsPersistent = false }, result);
+                if (User.Identity.IsAuthenticated)
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -51,13 +50,14 @@ namespace PL.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Register()
+        [AllowAnonymous]
+        public ActionResult Register()
         {
-            // TODO
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Register(CreateUser dto)
         {
             if (ModelState.IsValid)

@@ -2,9 +2,9 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// Obecné informace o sestavení jsou řízeny prostřednictvím následující
-// sady atributů. Chcete-li změnit informace související se sestavením,
-// změňte hodnoty těchto atributů.
+// General Information about an assembly is controlled through the following
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
 [assembly: AssemblyTitle("PL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -14,22 +14,22 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Nastavení atributu ComVisible na hodnotu false má za výsledek, že typy v tomto sestavení nejsou viditelné
-// pro komponenty modelu COM. Potřebujete-li přistupovat k typu v tomto sestavení
-// z modelu COM, nastavte atribut ComVisible pro daný typ na hodnotu true.
+// Setting ComVisible to false makes the types in this assembly not visible
+// to COM components.  If you need to access a type in this assembly from
+// COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-// Následující GUID je určen pro ID knihovny typelib, pokud je tento projekt zpřístupněn modulu COM.
-[assembly: Guid("6a792bab-ae08-4c59-a4ac-64fb143c3bb2")]
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+[assembly: Guid("d55e2347-0b0c-4274-b08f-ec08040e0793")]
 
-// Informace o verzi sestavení jsou tvořeny následujícími čtyřmi hodnotami:
+// Version information for an assembly consists of the following four values:
 //
-//      Hlavní verze
-//      Podverze
-//      Číslo sestavení
-//      Revize
+//      Major Version
+//      Minor Version
+//      Build Number
+//      Revision
 //
-// Můžete zadat všechny tyto hodnoty, nebo použít výchozí hodnoty pro číslo revize a sestavení
-// zadáním znaku * jako v příkladu níže:
+// You can specify all the values or you can default the Revision and Build Numbers
+// by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
