@@ -1,5 +1,5 @@
 ﻿<div>
-    @if (User != null)
+    @if (!User.Identity.IsAuthenticated)
     {
         <span>
             @Html.ActionLink("Register", "Register", "Account")
@@ -11,7 +11,7 @@
     }
     else
     {
-        <p>Logged in as tmp</p>
+        <p>Logged in as @User.Identity.Name</p>
     }
 </div>
 

@@ -8,6 +8,7 @@ using BL.DTOs.Users;
 using BL.Facades;
 using BL.Identity;
 using PL.Controllers.Common;
+using Microsoft.Owin.Security;
 
 namespace PL.Controllers
 {
@@ -38,6 +39,7 @@ namespace PL.Controllers
             if (ModelState.IsValid)
             {
                 var result = UserFacade.Login(dto.Email, dto.Password);
+                HttpContext.GetOwinContext().Authentication.SingIn(new AuthenticationProperties { IsPersistent = false }, result);
                 if (result.IsAuthenticated)
                 {
                     return RedirectToAction("Index", "Home");
