@@ -5,7 +5,7 @@ using BL.DTOs.Base;
 /// Pri zobrazeni vsech prihozu usera ///
 /////////////////////////////////////////
 
-namespace BL.DTOs
+namespace BL.DTOs.Users
 {
     public class UserShowRaises
     {

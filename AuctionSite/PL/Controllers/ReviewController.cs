@@ -22,7 +22,7 @@ namespace PL.Controllers
 
         public async Task<ActionResult> User(int id)
         {
-            var user = await UserFacade.GetUserById(id);
+            var user = await UserFacade.GetUserByIdAsync(id);
             if (user == null)
                 return Error();
             TempData["UserEmail"] = user.Email;

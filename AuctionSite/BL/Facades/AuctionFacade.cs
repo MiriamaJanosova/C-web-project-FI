@@ -1,45 +1,128 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OracleClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.Facades.Base;
+using BL.QueryObjects.Common;
 using BL.Services.Auctions;
+using BL.Services.Categories;
+using BL.Services.Items;
+using BL.Services.Raises;
+using BL.Services.Reviews;
 using DAL.Entities;
 using Infrastructure.UnitOfWork;
-
 namespace BL.Facades
 {
-    public class AuctionFacade : FacadeBase<AuctionDto, AuctionFilterDto>
+    public class AuctionFacade : FacadeBase
     {
-        private IAuctionService _service;
+        private readonly IAuctionService auctionService;
+        private readonly IRaiseService raiseService;
+        private readonly IItemService itemService;
+        private readonly IItemCategoryService itemCategoryService;
+        private readonly ICategoryService categoryService;
 
-        public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService service) 
+        public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService auctionService,
+            IRaiseService raiseService)
             : base(unitOfWorkProvider)
         {
-            _service = service;
+            this.auctionService = auctionService;
+            this.raiseService = raiseService;
         }
-
 
         public async Task<AuctionDto> GetAuctionById(int id)
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await _service.GetAsync(id);
+                return await auctionService.GetAsync(id);
             }
         }
 
-        public async Task<IEnumerable<AuctionDto>> GetAuctionsAsync()
+        public async Task<IEnumerable<RaiseDto>> GetRaisesForAuction(AuctionDto auction)
+        {
+            if (auction == null)
+            {
+                return new List<RaiseDto>();
+            }
+
+            var raises = await raiseService.GetRaisesByAuctionIDAsync(auction.ID);
+            return raises.Items;
+        }
+
+        public async Task<IEnumerable<RaiseDto>> GetRaisesForAuctionFromOldest(AuctionDto auction)
+        {
+            if (auction == null)
+            {
+                return new List<RaiseDto>();
+            }
+
+            var raises = await raiseService.GetRaisesByAuctionIDFromOldest(auction.ID);
+            return raises.Items;
+        }
+
+        public async Task<IEnumerable<AuctionDto>> GetCurrentAuctionsAsync(DateTime now)
         {
             using (UnitOfWorkProvider.Create())
             {
-                var l = await _service.ListAllAsync();
-                return l.Items;
+                return await auctionService.GetCurrentAuctions(now);
             }
         }
 
+        public async Task<QueryResultDto<AuctionDto, AuctionFilterDto>> GetAuctionsWithPrices(int minPrice, int maxPrice)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await auctionService.GetAuctionsWithPriceRange(minPrice, maxPrice);
+            }
+        }
+
+        public async Task<QueryResultDto<AuctionDto, AuctionFilterDto>> GetFilteredAuctionsAsync(AuctionFilterDto filter)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                if (filter == null)
+                {
+                    return await auctionService.ListAllAsync();
+                }
+
+                return await auctionService.ListFilteredAuctions(filter);
+            }
+        }
+
+        public async Task<IEnumerable<AuctionDto>> GetAuctionsForAuctioner(UserDto user)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await auctionService.GetAuctionsForAuctioner(user.ID);
+            }
+        }
+
+        public async Task<IEnumerable<ItemDto>> GetItemsForAuction(AuctionDto auction)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await auctionService.GetItemsForAuctionAsync(auction.ID);
+            }
+        }
+
+        public async Task<IEnumerable<AuctionDto>> GetAuctionsByName(string name)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await auctionService.GetAuctionsByNameAsync(name);
+            }
+        }
+
+        public async Task<bool> RaiseForAuction(RaiseDto raise)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await auctionService.RaiseForAuction(raise);
+            }
+        }
 
     }
 }

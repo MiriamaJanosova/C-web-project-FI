@@ -5,7 +5,7 @@ using BL.DTOs.Base;
 /// Pri zobrazeni vsech userovych aukci ///
 ///////////////////////////////////////////
 
-namespace BL.DTOs
+namespace BL.DTOs.Users
 {
     public class UserShowAuctions
     {

@@ -13,7 +13,7 @@ namespace BL.Services
         where TFilterDto : FilterDtoBase, new()
         where TEntity : class, IEntity, new()
         where TDto : DtoBase
-    
+
     {
         protected readonly IRepository<TEntity> Repository;
 
@@ -24,7 +24,7 @@ namespace BL.Services
             this.Query = query;
             this.Repository = repository;
         }
-        
+
         public virtual async Task<TDto> GetAsync(int entityId, bool withIncludes = true)
         {
             TEntity entity;

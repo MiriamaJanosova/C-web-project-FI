@@ -13,12 +13,12 @@ using Infrastructure.Query;
 
 namespace BL.Services.Raises
 {
-    public class RaiseService : 
+    public class RaiseService :
         CrudQueryServiceBase<Raise, RaiseDto, RaiseFilterDto>,
         IRaiseService
     {
-        public RaiseService(IMapper mapper, IRepository<Raise> repository, 
-            QueryObjectBase<RaiseDto, Raise, RaiseFilterDto, IQuery<Raise>> query) 
+        public RaiseService(IMapper mapper, IRepository<Raise> repository,
+            QueryObjectBase<RaiseDto, Raise, RaiseFilterDto, IQuery<Raise>> query)
             : base(mapper, repository, query)
         {
         }
@@ -28,24 +28,33 @@ namespace BL.Services.Raises
             return await Repository.GetAsync(entityId);
         }
 
-        public async Task<RaiseDto> GetRaisesByAuctionIDAsync(int auctionID)
+        public async Task<QueryResultDto<RaiseDto, RaiseFilterDto>> GetRaisesByAuctionIDAsync(int auctionID)
         {
-            var queryResult = await Query.ExecuteQuery(new RaiseFilterDto() { RaiseForAuctionID = auctionID });
-            return queryResult.Items.SingleOrDefault();
+            return await Query.ExecuteQuery(new RaiseFilterDto() { RaiseForAuctionID = auctionID });
         }
 
-        public async Task<RaiseDto> GetRaisesByAuctionerIDAsync(int auctionerID)
+        public async Task<QueryResultDto<RaiseDto, RaiseFilterDto>> GetRaisesByAuctionIDFromOldest(int auctionID)
         {
-            var queryResult = await Query.ExecuteQuery(new RaiseFilterDto() { AuctionerID =  auctionerID});
-            return queryResult.Items.SingleOrDefault();
+            return await Query.ExecuteQuery(new RaiseFilterDto() { RaiseForAuctionID = auctionID, SortAscending = true });
+
+
         }
 
-        public async Task<RaiseDto> GetRaisesByPriceAsync(double price)
+        public async Task<QueryResultDto<RaiseDto, RaiseFilterDto>> GetRaisesByUserIDAsync(int userID)
+        {
+            return await Query.ExecuteQuery(new RaiseFilterDto() { AuctionerID = userID });
+        }
+
+        public async Task<QueryResultDto<RaiseDto, RaiseFilterDto>> GetUserRaisesForAuction(int userID, int auctionID)
+        {
+            return await Query.ExecuteQuery(new RaiseFilterDto { AuctionerID = userID, RaiseForAuctionID = auctionID });
+
+        }
+
+        public async Task<IEnumerable<RaiseDto>> GetRaisesByPriceAsync(double price)
         {
             var queryResult = await Query.ExecuteQuery(new RaiseFilterDto() { Amount = price });
-            return queryResult.Items.SingleOrDefault();
+            return queryResult.Items;
         }
-
-
     }
 }

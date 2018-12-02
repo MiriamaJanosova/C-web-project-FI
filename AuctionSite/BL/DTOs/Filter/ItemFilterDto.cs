@@ -1,12 +1,12 @@
 using BL.DTOs.Common;
-using DAL.Entities;
 using System.Collections.Generic;
+using BL.DTOs.Base;
 
 namespace BL.DTOs.Filter
 {
     public class ItemFilterDto : FilterDtoBase
     {
-        public List<ItemCategory> ItemCategoryTypes { get; set; }
+        public List<ItemCategoryDto> ItemCategoryTypes { get; set; }
 
         public string SearchedName { get; set; }
 

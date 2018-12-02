@@ -44,7 +44,8 @@ namespace BL.Services.Users
         /// <param name="entityId">Id of the entity to delete</param>
         void Delete(int entityId);
 
-        Task<UserDto> GetUserAccordingToNameAsync(string searchedName);
-
+        Task<IEnumerable<UserDto>> GetUserAccordingToNameAsync(string searchedName);
+        Task<IEnumerable<AuctionDto>> GetAuctionsForUser(int id);
+        Task<IEnumerable<UserDto>> ListFilteredUsers(UserFilterDto filter);
     }
 }

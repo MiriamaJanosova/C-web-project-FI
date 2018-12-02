@@ -48,7 +48,7 @@ namespace BL.Config
                     .LifestyleTransient(),
 
                 Classes.FromThisAssembly()
-                    .BasedOn(typeof(FacadeBase<,>))
+                    .BasedOn(typeof(FacadeBase))
                     .LifestyleTransient(),
 
                 Component.For<IMapper>()

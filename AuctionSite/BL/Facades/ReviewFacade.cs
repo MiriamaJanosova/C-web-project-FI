@@ -14,13 +14,13 @@ using Infrastructure.UnitOfWork;
 
 namespace BL.Facades
 {
-    public class ReviewFacade : FacadeBase<ReviewDto, ReviewFilterDto>
+    public class ReviewFacade : FacadeBase
     {
         private readonly IUserService userService;
         private readonly IReviewService reviewService;
-        
 
-        public ReviewFacade(IUnitOfWorkProvider unitOfWorkProvider, 
+
+        public ReviewFacade(IUnitOfWorkProvider unitOfWorkProvider,
             IReviewService reviewService,
             IUserService userService)
             : base(unitOfWorkProvider)
@@ -44,7 +44,16 @@ namespace BL.Facades
                 return res;
             }
         }
-        
+
+        public async Task<ReviewDto> GetReviewByIdAsync(int id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return (await reviewService.GetAsync(id));
+            }
+        }
+
+
         public async Task<IEnumerable<ReviewDto>> GetReviewsForUserAsync(UserDto user)
         {
             using (UnitOfWorkProvider.Create())
@@ -84,7 +93,7 @@ namespace BL.Facades
                     var reviews = (await reviewService.GetReviewForUserAsync(user.ID)).Items;
                     var reviewDtos = reviews as IList<ReviewDto> ?? reviews.ToList();
                     var reviewCount = reviewDtos.Count();
-                    var totalScore = reviewDtos.Sum(rev => (double) rev.Evaluation);
+                    var totalScore = reviewDtos.Sum(rev => (double)rev.Evaluation);
                     dict.Add(user, totalScore / reviewCount);
                 }
                 return dict.OrderByDescending(pair => pair.Value).Take(10);
