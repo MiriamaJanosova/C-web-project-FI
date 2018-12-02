@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using BL.DTOs.Users;
 using BL.Facades;
 using BL.Identity;
+using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
 using Microsoft.Owin.Security;
 
@@ -18,6 +19,14 @@ namespace PL.Controllers
         public UserFacade UserFacade;
        
 
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+        
         public AccountController(UserFacade UserFacade)
         {
             this.UserFacade = UserFacade;
@@ -38,7 +47,7 @@ namespace PL.Controllers
             if (ModelState.IsValid)
             {
                 var result = UserFacade.Login(dto.Email, dto.Password);
-                HttpContext.GetOwinContext().Authentication.SignIn(new AuthenticationProperties { IsPersistent = false }, result);
+                AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, result);
                 if (User.Identity.IsAuthenticated)
                 {
                     return RedirectToAction("Index", "Home");
@@ -54,6 +63,13 @@ namespace PL.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+        
+        //[HttpPost]
+        public ActionResult Logout()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

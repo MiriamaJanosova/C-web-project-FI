@@ -16,11 +16,11 @@ namespace PL.Models.Users
         public IEnumerable<UserDto> Users { get; }
 
         public string GetAverageReviewString(UserDto dto)
-        {
-            var c = dto.Reviews.Count;
-            if (c == 0)
-                return "no reviews";
-            return $"{dto.ReviewAvg} from {c} reviews";
+             {
+                 var c = dto.Reviews.Count;
+                 if (c == 0)
+                     return "no reviews";
+                 return $"{dto.ReviewAvg} from {c} reviews";
+             }
         }
-    }
 }
