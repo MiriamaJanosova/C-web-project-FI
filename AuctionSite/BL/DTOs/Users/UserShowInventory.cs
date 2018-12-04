@@ -5,7 +5,7 @@ using BL.DTOs.Base;
 /// Kdyz user zobrazi svuj inventar ///
 ///////////////////////////////////////
 
-namespace BL.DTOs
+namespace BL.DTOs.Users
 {
     public class UserShowInventory
     {

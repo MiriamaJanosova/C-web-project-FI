@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace BL.Services.Users
 {
-    public class UserService : 
-        CrudQueryServiceBase<User, UserDto, UserFilterDto>, 
+    public class UserService :
+        CrudQueryServiceBase<User, UserDto, UserFilterDto>,
         IUserService
     {
-        public UserService(IMapper mapper, IRepository<User> customerRepository, 
+        public UserService(IMapper mapper, IRepository<User> customerRepository,
             QueryObjectBase<UserDto, User, UserFilterDto, IQuery<User>> userQueryObject)
             : base(mapper, customerRepository, userQueryObject) { }
 
@@ -27,12 +27,24 @@ namespace BL.Services.Users
             return queryResult.Items.SingleOrDefault();
         }
 
-        public async Task<UserDto> GetUserAccordingToNameAsync(string searchedName)
+        public async Task<IEnumerable<UserDto>> GetUserAccordingToNameAsync(string searchedName)
         {
             var queryResult = await Query.ExecuteQuery(new UserFilterDto { UserName = searchedName });
-            return queryResult.Items.SingleOrDefault();
+            return queryResult.Items;
         }
 
+        public async Task<IEnumerable<AuctionDto>> GetAuctionsForUser(int id)
+        {
+            throw new NotImplementedException();
+            var queryResult = await Query.ExecuteQuery(new UserFilterDto { ID = id });
+            //return queryResult.Items.Select();
+        }
+
+        public async Task<IEnumerable<UserDto>> ListFilteredUsers(UserFilterDto filter)
+        {
+            var queryResult = await Query.ExecuteQuery(filter);
+            return queryResult.Items;
+        }
 
 
         protected override async Task<User> GetWithIncludesAsync(int entityId)

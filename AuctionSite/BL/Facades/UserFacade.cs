@@ -10,6 +10,7 @@ using BL.DTOs.Filter;
 using BL.DTOs.Users;
 using BL.Facades.Base;
 using BL.Identity;
+using BL.QueryObjects.Common;
 using BL.Services.Users;
 using DAL.Entities;
 using Infrastructure.UnitOfWork;
@@ -21,41 +22,86 @@ using IdentityResult = Microsoft.AspNet.Identity.IdentityResult;
 
 namespace BL.Facades
 {
-    public class UserFacade : FacadeBase<UserDto, UserFilterDto>
+    public class UserFacade : FacadeBase
     {
-        private IUserService _service;
-        private readonly IMapper _mapper;
-        private Func<IdentityUserManager> UserManagerFactory{ get;}
+        private readonly IUserService userService;
+        private readonly IMapper mapper;
+        private Func<IdentityUserManager> UserManagerFactory { get; set; }
 
-        public UserFacade(IUnitOfWorkProvider unitOfWorkProvider, IUserService service, IMapper mapper, 
-            Func<IdentityUserManager> userManagerFactory) 
+        public UserFacade(IUnitOfWorkProvider unitOfWorkProvider, IUserService userService, IMapper mapper)
             : base(unitOfWorkProvider)
         {
-            _service = service;
-            _mapper = mapper;
-            UserManagerFactory = userManagerFactory;
+            this.userService = userService;
+            this.mapper = mapper;
         }
 
-        public async Task<UserDto> GetUserById(int id)
-        {
-            using (UnitOfWorkProvider.Create())
-            {
-                return await _service.GetAsync(id);
-            }
-        }
-
-        // TODO - move to base possibly
+        // TODO - urcite move mapper do servisy, nie tu
         public async Task<IdentityResult> CreateAsync(CreateUser dto)
         {
             using (UnitOfWorkProvider.Create())
             {
                 using (var manager = UserManagerFactory())
                 {
-                    var user = _mapper.Map<User>(dto);
+                    var user = mapper.Map<User>(dto);
                     user.UserName = user.Email;
 
                     return await manager.CreateAsync(user, dto.Password);
                 }
+            }
+        }
+
+        public async Task<UserDto> GetUserAccordingToEmailAsync(string email)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await userService.GetUserAccordingToEmailAsync(email);
+            }
+        }
+
+        public async Task<UserDto> GetUserByIdAsync(int id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await userService.GetAsync(id);
+            }
+        }
+
+
+        public async Task<IEnumerable<UserDto>> GetUserAccordingToUserNameAsync(string name)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await userService.GetUserAccordingToNameAsync(name);
+            }
+        }
+
+        public async Task<QueryResultDto<UserDto, UserFilterDto>> GetAllUsersAsync()
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await userService.ListAllAsync();
+            }
+        }
+
+        public async Task<IEnumerable<AuctionDto>> GetAuctionsForUser(UserDto user)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await userService.GetAuctionsForUser(user.ID);
+            }
+        }
+
+        public async Task<IEnumerable<UserDto>> GetFilteredUsersAsync(UserFilterDto filter)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                if (filter == null)
+                {
+                    var temp = await userService.ListAllAsync();
+                    return temp.Items;
+                }
+
+                return await userService.ListFilteredUsers(filter);
             }
         }
 
@@ -74,7 +120,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                var l = await _service.ListAllAsync();
+                var l = await userService.ListAllAsync();
                 return l.Items;
             }
         }

@@ -12,8 +12,8 @@ namespace BL.Services.Raises
 {
     public interface IRaiseService : IService<RaiseDto, RaiseFilterDto>
     {
-        
-        Task<RaiseDto> GetRaisesByAuctionIDAsync(int AuctionID);
+
+        Task<QueryResultDto<RaiseDto, RaiseFilterDto>> GetRaisesByAuctionIDAsync(int AuctionID);
 
         /// <summary>
         /// Gets DTO representing the entity according to Id
@@ -41,8 +41,12 @@ namespace BL.Services.Raises
         /// <param name="entityId">Id of the entity to delete</param>
         void Delete(int entityId);
 
-        Task<RaiseDto> GetRaisesByAuctionerIDAsync(int AuctionerID);
+        Task<QueryResultDto<RaiseDto, RaiseFilterDto>> GetRaisesByUserIDAsync(int userID);
 
-        Task<RaiseDto> GetRaisesByPriceAsync(double price);
+        Task<QueryResultDto<RaiseDto, RaiseFilterDto>> GetUserRaisesForAuction(int userID, int auctionID);
+
+        Task<QueryResultDto<RaiseDto, RaiseFilterDto>> GetRaisesByAuctionIDFromOldest(int auctionID);
+
+        Task<IEnumerable<RaiseDto>> GetRaisesByPriceAsync(double price);
     }
 }

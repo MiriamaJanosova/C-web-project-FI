@@ -2,7 +2,6 @@
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.QueryObjects.Common;
-using DAL.Entities;
 using Infrastructure.Query;
 using Infrastructure.Query.Predicates;
 using Infrastructure.Query.Predicates.Operators;
@@ -10,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DAL.Entities;
 
 namespace BL.QueryObjects
 {
@@ -88,7 +88,7 @@ namespace BL.QueryObjects
                 .Select(cat => new SimplePredicate
                 (nameof(ItemCategory.Id),
                 ValueComparingOperator.Equal,
-                cat.Id)));
+                cat.ID)));
 
             return new CompositePredicate(categoryTypesPredicates, LogicalOperator.OR);
         }

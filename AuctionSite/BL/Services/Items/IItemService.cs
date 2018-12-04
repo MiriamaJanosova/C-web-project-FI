@@ -16,7 +16,7 @@ namespace BL.Services.Items
         /// </summary>
         /// <param name="names">names of the categories</param>
         /// <returns>ids of categories with specified name</returns>
-        Task<ItemDto> GetItemsByNameAsync(string name);
+        Task<IEnumerable<ItemDto>> GetItemsByNameAsync(string name);
 
         /// <summary>
         /// Gets DTO representing the entity according to Id
@@ -45,7 +45,12 @@ namespace BL.Services.Items
         void Delete(int entityId);
 
         Task<ItemDto> AddItemCategory(Category category, int itemId);
-        Task<ItemDto> GetItemsByCategoriesAsync(List<ItemCategory> category);
-        Task<ItemDto> GetItemsByAuctionIDAsync(int auctionID);
+
+        Task<IEnumerable<ItemDto>> GetItemsByCategoriesAsync(List<ItemCategoryDto> category);
+
+        Task<IEnumerable<ItemDto>> GetItemsByAuctionIDAsync(int auctionID);
+
+        Task<IEnumerable<ItemDto>> ListFilteredItems(ItemFilterDto filter);
+
     }
 }

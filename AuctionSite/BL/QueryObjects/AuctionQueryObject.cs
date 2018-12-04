@@ -24,7 +24,7 @@ namespace BL.QueryObjects
             AddIfDefined(FilterAuctionNames(filter), definedPredicates);
             AddIfDefined(FilterAuctionPrices(filter), definedPredicates);
             AddIfDefined(FilterAuctionDate(filter), definedPredicates);
-
+            AddIfDefined(FilterAuctioner(filter), definedPredicates);
             if (definedPredicates.Count == 0)
             {
                 return query;
@@ -34,7 +34,7 @@ namespace BL.QueryObjects
             {
                 return query.Where(definedPredicates.First());
             }
-            
+
             var whereŠtokPredicate = new CompositePredicate(definedPredicates);
             return query.Where(whereŠtokPredicate);
 
@@ -46,7 +46,7 @@ namespace BL.QueryObjects
             {
                 return;
             }
-            
+
             collection.Add(predicate);
         }
 
@@ -56,13 +56,19 @@ namespace BL.QueryObjects
             {
                 return null;
             }
-            
+
             return new CompositePredicate(new List<IPredicate>
             {
                 new SimplePredicate(nameof(Auction.StartDate), ValueComparingOperator.LessThanOrEqual, filter.ActualDateTime),
                 new SimplePredicate(nameof(Auction.StartDate), ValueComparingOperator.LessThanOrEqual, filter.ActualDateTime)
             });
-            
+
+        }
+
+        private static IPredicate FilterAuctioner(AuctionFilterDto filter)
+        {
+            return filter.AuctionerID == 0 ? null
+                : new SimplePredicate(nameof(Auction.AuctionerID), ValueComparingOperator.Equal, filter.AuctionerID);
         }
 
         private static IPredicate FilterAuctionPrices(AuctionFilterDto filter)
@@ -96,11 +102,11 @@ namespace BL.QueryObjects
             {
                 return null;
             }
-            
+
             return new SimplePredicate(nameof(Auction.Name), ValueComparingOperator.StringContains, filter.AuctionSearchedName);
-            
+
         }
-        
-       
+
+
     }
 }

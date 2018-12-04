@@ -10,19 +10,27 @@ namespace BL.Services.Auctions
 {
     public interface IAuctionService : IService<AuctionDto, AuctionFilterDto>
     {
-        Task<AuctionDto> GetAuctionByNameAsync(string names);
+        Task<IEnumerable<AuctionDto>> GetAuctionsByNameAsync(string names);
 
         Task<AuctionDto> GetAsync(int entityId, bool withIncludes = true);
 
         int Create(AuctionDto entity);
-        
+
         Task Update(AuctionDto entityDto);
 
         void Delete(int entityId);
 
-        Task<int> RaiseForAuction(int raiseID);
+        Task<bool> RaiseForAuction(RaiseDto raiseDto);
 
         Task<IEnumerable<AuctionDto>> GetCurrentAuctions(DateTime dateTime);
+
+        Task<QueryResultDto<AuctionDto, AuctionFilterDto>> ListFilteredAuctions(AuctionFilterDto filter);
+
+        Task<IEnumerable<AuctionDto>> GetAuctionsForAuctioner(int auctionerID);
+
+        Task<IEnumerable<ItemDto>> GetItemsForAuctionAsync(int auctionsId);
+
+        Task<QueryResultDto<AuctionDto, AuctionFilterDto>> GetAuctionsWithPriceRange(int minPrice, int maxPrice);
 
 
     }

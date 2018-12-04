@@ -25,6 +25,5 @@ namespace BL.Services.Categories
 
         void Delete(int entityId);
 
-       
     }
 }

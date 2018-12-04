@@ -33,11 +33,11 @@ namespace BL.Services.Reviews
             return await Query.ExecuteQuery(new ReviewFilterDto { UserID = userID });
         }
 
-        public async Task<IDictionary<int,List<ReviewDto>>> GetReviewsWithEvaluationAsync(int[] evaluation)
+        public async Task<IDictionary<int, List<ReviewDto>>> GetReviewsWithEvaluationAsync(int[] evaluation)
         {
-            var queryResult = await Query.ExecuteQuery(new ReviewFilterDto {Evaluation = evaluation});
+            var queryResult = await Query.ExecuteQuery(new ReviewFilterDto { Evaluation = evaluation });
             return queryResult.Items
-                .GroupBy(c => (int) Math.Round(c.Evaluation))
+                .GroupBy(c => (int)Math.Round(c.Evaluation))
                 .ToDictionary(c => c.Key,
                     g => g.ToList());
         }
@@ -48,10 +48,10 @@ namespace BL.Services.Reviews
                 .Join(userQueryObject.ExecuteQuery(new UserFilterDto()).Result.Items,
                     userReview => userReview.ReviewedUserID,
                     user => user.ID,
-                    (review, user) => new {User = user, Evaluation = review.Evaluation})
+                    (review, user) => new { User = user, Evaluation = review.Evaluation })
                 .GroupBy(join => join.User.ID)
                 .ToDictionary(group => group.Key,
-                    group => Math.Round(((double) group.Select(review => review.Evaluation).Sum() /
+                    group => Math.Round(((double)group.Select(review => review.Evaluation).Sum() /
                                          group.Select(review => review.Evaluation).Count()), 1));
         }
 

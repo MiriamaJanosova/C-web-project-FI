@@ -13,18 +13,19 @@ namespace PL.Controllers
 {
     public class AuctionsController : BaseController
     {
-        public AuctionFacade AuctionFacade { get; set; }
+        public AuctionFacade auctionFacade { get; set; }
+        public ModifyAuctionsFacade modifyAuctionFacade { get; set; }
 
 
         public async Task<ActionResult> Index()
         {
-            var all = await AuctionFacade.GetAuctionsAsync();
-            return View("AuctionList", all);
+            var all = await modifyAuctionFacade.GetAllAuctionsAsync();
+            return View("AuctionList", all.Items);
         }
 
         public async Task<ActionResult> Auction(int id)
         {
-            var dto = await AuctionFacade.GetAuctionById(id);
+            var dto = await auctionFacade.GetAuctionById(id);
             if (dto == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "One man’s crappy software is another man’s full time job.");

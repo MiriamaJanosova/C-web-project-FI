@@ -27,28 +27,36 @@ namespace BL.Services.Items
             this.itemCategoryRepository = itemCategoryRepository;
         }
 
-        public async Task<ItemDto> GetItemsByNameAsync(string name)
+        public async Task<IEnumerable<ItemDto>> GetItemsByNameAsync(string name)
         {
             var queryResult = await Query.ExecuteQuery(new ItemFilterDto { SearchedName = name });
-            return queryResult.Items.SingleOrDefault();
+            return queryResult.Items;
         }
 
-        public async Task<ItemDto> GetItemsUserIDAsync(int userID)
+        public async Task<IEnumerable<ItemDto>> GetItemsUserIDAsync(int userID)
         {
             var queryResult = await Query.ExecuteQuery(new ItemFilterDto { OwnerID = userID });
-            return queryResult.Items.SingleOrDefault();
+            return queryResult.Items;
         }
 
-        public async Task<ItemDto> GetItemsByAuctionIDAsync(int auctionID)
+        public async Task<IEnumerable<ItemDto>> GetItemsByAuctionIDAsync(int auctionID)
         {
             var queryResult = await Query.ExecuteQuery(new ItemFilterDto { AuctionID = auctionID });
-            return queryResult.Items.SingleOrDefault();
+            return queryResult.Items;
         }
 
-        public async Task<ItemDto> GetItemsByCategoriesAsync(List<ItemCategory> category)
+        public async Task<IEnumerable<ItemDto>> ListFilteredItems(ItemFilterDto filter)
         {
-            var queryResult = await Query.ExecuteQuery(new ItemFilterDto {ItemCategoryTypes = category});
-            return queryResult.Items.SingleOrDefault();
+            var queryResult = await Query.ExecuteQuery(filter);
+
+            return queryResult.Items;
+
+        }
+
+        public async Task<IEnumerable<ItemDto>> GetItemsByCategoriesAsync(List<ItemCategoryDto> category)
+        {
+            var queryResult = await Query.ExecuteQuery(new ItemFilterDto { ItemCategoryTypes = category });
+            return queryResult.Items;
         }
 
         public async Task<ItemDto> AddItemCategory(Category category, int itemId)
@@ -62,7 +70,7 @@ namespace BL.Services.Items
                 Item = item,
                 ItemID = itemId
             };
-            
+
             itemCategoryRepository.Create(itemCategory);
 
             item.HasCategories.Add(itemCategory);
