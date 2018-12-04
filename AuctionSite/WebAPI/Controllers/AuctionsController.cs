@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
             var auctions = (await AuctionFacade.GetFilteredAuctionsAsync(filter)).Items;
             foreach (var auction in auctions)
             {
-                auction.ID = 0;
+                auction.Id = 0;
             }
             return auctions;
         }
@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
             var auctions = (await AuctionFacade.GetCurrentAuctionsAsync(DateTime.Now));
             foreach (var auction in auctions)
             {
-                auction.ID = 0;
+                auction.Id = 0;
             }
             return auctions;
         }
@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
             var items = await AuctionFacade.GetItemsForAuction(auction);
             foreach (var item in items)
             {
-                item.ID = 0;
+                item.Id = 0;
             }
             return items;
         }
@@ -84,7 +84,7 @@ namespace WebAPI.Controllers
             var raises = await AuctionFacade.GetRaisesForAuction(auction);
             foreach (var raise in raises)
             {
-                raise.ID = 0;
+                raise.Id = 0;
             }
             return raises;
         }

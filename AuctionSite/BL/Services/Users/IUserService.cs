@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using BL.DTOs.Common;
+using BL.DTOs.Users;
 
 namespace BL.Services.Users
 {
@@ -47,5 +49,7 @@ namespace BL.Services.Users
         Task<IEnumerable<UserDto>> GetUserAccordingToNameAsync(string searchedName);
         Task<IEnumerable<AuctionDto>> GetAuctionsForUser(int id);
         Task<IEnumerable<UserDto>> ListFilteredUsers(UserFilterDto filter);
+        UserShowSettingPage ConvertUserDtoForSettingPage(UserDto dto);
+
     }
 }

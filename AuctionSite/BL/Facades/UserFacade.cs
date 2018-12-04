@@ -28,11 +28,12 @@ namespace BL.Facades
         private readonly IMapper mapper;
         private Func<IdentityUserManager> UserManagerFactory { get; set; }
 
-        public UserFacade(IUnitOfWorkProvider unitOfWorkProvider, IUserService userService, IMapper mapper)
+        public UserFacade(IUnitOfWorkProvider unitOfWorkProvider, IUserService userService, IMapper mapper, Func<IdentityRoleManager> roleManagerFactory, Func<IdentityUserManager> userManagerFactory)
             : base(unitOfWorkProvider)
         {
             this.userService = userService;
             this.mapper = mapper;
+            this.UserManagerFactory = userManagerFactory;
         }
 
         // TODO - urcite move mapper do servisy, nie tu
@@ -40,11 +41,10 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                using (var manager = UserManagerFactory())
+                using (var manager = UserManagerFactory.Invoke())
                 {
                     var user = mapper.Map<User>(dto);
-                    user.UserName = user.Email;
-
+                    
                     return await manager.CreateAsync(user, dto.Password);
                 }
             }
@@ -87,7 +87,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await userService.GetAuctionsForUser(user.ID);
+                return await userService.GetAuctionsForUser(user.Id);
             }
         }
 
@@ -108,7 +108,7 @@ namespace BL.Facades
         public ClaimsIdentity Login(string email, string password)
         {
             using ( UnitOfWorkProvider.Create())
-            using (var userManager = UserManagerFactory())
+            using (var userManager = UserManagerFactory.Invoke())
             {
                 var user = userManager.Find(email, password);
                 var result = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
@@ -123,6 +123,24 @@ namespace BL.Facades
                 var l = await userService.ListAllAsync();
                 return l.Items;
             }
+        }
+
+        public UserShowSettingPage ConvertUserDtoToSettingPage(UserDto dto)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return userService.ConvertUserDtoForSettingPage(dto);
+            }
+        }
+
+        public async Task UpdateUserInfo(UserShowSettingPage dto)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var user = new UserDto();
+                await userService.Update(userService.ConvertFromTo(dto, user));
+            }
+            
         }
     }
 }

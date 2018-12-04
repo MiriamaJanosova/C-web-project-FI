@@ -23,7 +23,7 @@ namespace BL.DTOs.Base
 
         protected bool Equals(UserRoleDto other)
         {
-            if (ID == other.ID)
+            if (Id == other.Id)
             {
                 return true;
             }
@@ -51,7 +51,7 @@ namespace BL.DTOs.Base
         {
             unchecked
             {
-                var hashCode = ID.GetHashCode();
+                var hashCode = Id.GetHashCode();
                 hashCode = (hashCode * 397) ^ UserID.GetHashCode();
                 hashCode = (hashCode * 397) ^ RoleID.GetHashCode();
                 hashCode = (hashCode * 397) ^ RoleType.GetHashCode();

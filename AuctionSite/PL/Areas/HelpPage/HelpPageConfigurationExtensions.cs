@@ -212,7 +212,7 @@ namespace PL.Areas.HelpPage
         /// Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
         /// </summary>
         /// <param name="config">The <see cref="HttpConfiguration"/>.</param>
-        /// <param name="apiDescriptionId">The <see cref="ApiDescription"/> ID.</param>
+        /// <param name="apiDescriptionId">The <see cref="ApiDescription"/> Id.</param>
         /// <returns>
         /// An <see cref="HelpPageApiModel"/>
         /// </returns>

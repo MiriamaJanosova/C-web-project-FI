@@ -13,5 +13,6 @@ namespace BL.Services.Common
         where TDto : DtoBase
     {
         Task<QueryResultDto<TDto, TFilterDto>> ListAllAsync();
+        TO ConvertFromTo<TFrom, TO>(TFrom source, TO destination);
     }
 }

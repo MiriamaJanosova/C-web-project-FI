@@ -25,5 +25,7 @@ namespace DAL.Entities
         public virtual List<Review> Reviews { get; set; }
         
         public virtual List<Auction> AuctionsCreated { get; set; }
+        
+        
     }
 }

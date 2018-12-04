@@ -88,7 +88,7 @@ namespace BL.QueryObjects
                 .Select(cat => new SimplePredicate
                 (nameof(ItemCategory.Id),
                 ValueComparingOperator.Equal,
-                cat.ID)));
+                cat.Id)));
 
             return new CompositePredicate(categoryTypesPredicates, LogicalOperator.OR);
         }

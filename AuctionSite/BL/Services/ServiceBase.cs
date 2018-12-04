@@ -10,5 +10,10 @@ namespace BL.Services
         {
             this.Mapper = mapper;
         }
+        
+        public TO ConvertFromTo<TFrom, TO>(TFrom source, TO destination)
+        {
+            return Mapper.Map(source, destination);
+        }
     }
 }

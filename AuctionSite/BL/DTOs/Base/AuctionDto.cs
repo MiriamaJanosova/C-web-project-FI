@@ -31,7 +31,7 @@ namespace BL.DTOs.Base
 
         protected bool Equals(AuctionDto other)
         {
-            return ID == other.ID;
+            return Id == other.Id;
         }
 
         public override bool Equals(object obj)
@@ -50,13 +50,13 @@ namespace BL.DTOs.Base
 
         public override int GetHashCode()
         {
-            if (ID >= 0)
+            if (Id >= 0)
             {
-                return ID.GetHashCode();
+                return Id.GetHashCode();
             }
             unchecked
             {
-                var hashCode = ID.GetHashCode();
+                var hashCode = Id.GetHashCode();
                 hashCode = (hashCode * 397) ^ StartDate.GetHashCode();
                 hashCode = (hashCode * 397) ^ EndDate.GetHashCode();
                 hashCode = (hashCode * 397) ^ AuctionerID.GetHashCode();

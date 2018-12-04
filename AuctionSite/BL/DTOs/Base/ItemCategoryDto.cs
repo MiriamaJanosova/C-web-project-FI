@@ -24,7 +24,7 @@ namespace BL.DTOs.Base
 
         protected bool Equals(ItemCategoryDto other)
         {
-            if (ID == other.ID)
+            if (Id == other.Id)
             {
                 return true;
             }
@@ -52,7 +52,7 @@ namespace BL.DTOs.Base
         {
             unchecked
             {
-                var hashCode = ID.GetHashCode();
+                var hashCode = Id.GetHashCode();
                 hashCode = (hashCode * 397) ^ ItemID.GetHashCode();
                 hashCode = (hashCode * 397) ^ Item.GetHashCode();
                 hashCode = (hashCode * 397) ^ CategoryID.GetHashCode();

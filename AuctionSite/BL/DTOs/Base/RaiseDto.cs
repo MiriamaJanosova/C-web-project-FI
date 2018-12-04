@@ -24,7 +24,7 @@ namespace BL.DTOs.Base
 
         protected bool Equals(RaiseDto other)
         {
-            if (ID == other.ID)
+            if (Id == other.Id)
             {
                 return true;
             }
@@ -53,7 +53,7 @@ namespace BL.DTOs.Base
         {
             unchecked
             {
-                var hashCode = ID.GetHashCode();
+                var hashCode = Id.GetHashCode();
                 hashCode = (hashCode * 397) ^ Amount.GetHashCode();
                 hashCode = (hashCode * 397) ^ UserWhoRaisedID.GetHashCode();
                 hashCode = (hashCode * 397) ^ RaiseForAuctionID.GetHashCode();

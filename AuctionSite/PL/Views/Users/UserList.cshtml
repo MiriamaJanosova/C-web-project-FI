@@ -5,8 +5,7 @@
 <table style="width: 100%">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Surname</th>
+        <th>User</th>
         <th>Email</th>
         <th>Review average</th>
         <th>Actions</th>
@@ -22,7 +21,7 @@
                 @Model.GetAverageReviewString(user)
             </td>
             <td>
-                @Html.ActionLink("Read reviews", "User", "Review", new { id = user.ID }, null)
+                @Html.ActionLink("Read reviews", "User", "Review", new { id = user.Id }, null)
             </td>
         </tr>
     }

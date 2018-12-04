@@ -47,9 +47,9 @@ namespace BL.Services.Reviews
             return (await ListAllAsync()).Items
                 .Join(userQueryObject.ExecuteQuery(new UserFilterDto()).Result.Items,
                     userReview => userReview.ReviewedUserID,
-                    user => user.ID,
+                    user => user.Id,
                     (review, user) => new { User = user, Evaluation = review.Evaluation })
-                .GroupBy(join => join.User.ID)
+                .GroupBy(join => join.User.Id)
                 .ToDictionary(group => group.Key,
                     group => Math.Round(((double)group.Select(review => review.Evaluation).Sum() /
                                          group.Select(review => review.Evaluation).Count()), 1));

@@ -1,0 +1,34 @@
+﻿@using WebGrease.Css
+@model BL.DTOs.Users.UserShowSettingPage
+
+<h2>Informations</h2>
+<p style="color: lawngreen">@TempData["Success"]</p>
+<form method="post">
+    <div>
+        <p>Id: </p>
+        @Html.TextBoxFor(m => m.Id)
+    </div>
+    <div>
+        <p>Email:</p>
+
+        @Html.TextBoxFor(m => m.Email)
+        <p style="color: red">
+            @Html.ValidationMessageFor(m => m.Email)
+        </p>
+    </div>
+    <div>
+        <p>User name:</p>
+        @Html.TextBoxFor(m => m.UserName)
+        <p style="color: red">
+            @Html.ValidationMessageFor(m => m.UserName)
+        </p>
+    </div>
+    <div>
+        <p>Phone: </p>
+        @Html.TextBoxFor(m => m.PhoneNumber)
+    </div>
+    <div>
+        
+        <button type="submit">Update</button>
+    </div>
+</form>

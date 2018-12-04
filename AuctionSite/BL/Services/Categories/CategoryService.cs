@@ -31,7 +31,7 @@ namespace BL.Services.Categories
             var enumNames = names.Select(x => (DTOs.Enums.ItemCategoryType)Enum.
                 Parse(typeof(DTOs.Enums.ItemCategoryType), x)).ToList();
             var queryResult = await Query.ExecuteQuery(new CategoryFilterDto { Names = enumNames });
-            return queryResult.Items.Select(category => category.ID).ToArray();
+            return queryResult.Items.Select(category => category.Id).ToArray();
         }
 
     }

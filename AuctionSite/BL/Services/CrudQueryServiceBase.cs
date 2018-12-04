@@ -50,7 +50,7 @@ namespace BL.Services
 
         public virtual async Task Update(TDto entityDto)
         {
-            var entity = await GetWithIncludesAsync(entityDto.ID);
+            var entity = await GetWithIncludesAsync(entityDto.Id);
             AutoMapper.Mapper.Map(entityDto, entity);
             Repository.Update(entity);
         }

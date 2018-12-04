@@ -4,12 +4,15 @@
 <p style="color: red">
     @TempData["Error"]
 </p>
+<p style="color: lawngreen">
+    @TempData["Info"]
+</p>
 <form method="post">
     <div>
-        <p>Login:</p>
-        @Html.TextBoxFor(m => m.Email)
+        <p>User name:</p>
+        @Html.TextBoxFor(m => m.UserName)
         <p style="color: red">
-            @Html.ValidationMessageFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.UserName)
         </p>
     </div>
     <div>
@@ -17,6 +20,13 @@
         @Html.TextBoxFor(m => m.Password)
         <p style="color: red">
             @Html.ValidationMessageFor(m => m.Password)
+        </p>
+    </div>
+    <div>
+        <p>Email:</p>
+        @Html.TextBoxFor(m => m.Email)
+        <p style="color: red">
+            @Html.ValidationMessageFor(m => m.Email)
         </p>
     </div>
     <div>

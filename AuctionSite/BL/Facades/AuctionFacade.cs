@@ -48,7 +48,7 @@ namespace BL.Facades
                 return new List<RaiseDto>();
             }
 
-            var raises = await raiseService.GetRaisesByAuctionIDAsync(auction.ID);
+            var raises = await raiseService.GetRaisesByAuctionIDAsync(auction.Id);
             return raises.Items;
         }
 
@@ -59,7 +59,7 @@ namespace BL.Facades
                 return new List<RaiseDto>();
             }
 
-            var raises = await raiseService.GetRaisesByAuctionIDFromOldest(auction.ID);
+            var raises = await raiseService.GetRaisesByAuctionIDFromOldest(auction.Id);
             return raises.Items;
         }
 
@@ -96,7 +96,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await auctionService.GetAuctionsForAuctioner(user.ID);
+                return await auctionService.GetAuctionsForAuctioner(user.Id);
             }
         }
 
@@ -104,7 +104,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await auctionService.GetItemsForAuctionAsync(auction.ID);
+                return await auctionService.GetItemsForAuctionAsync(auction.Id);
             }
         }
 

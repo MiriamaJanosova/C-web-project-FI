@@ -22,7 +22,7 @@ namespace BL.DTOs.Base
 
         protected bool Equals(ReviewDto other)
         {
-            if (ID == other.ID)
+            if (Id == other.Id)
             {
                 return true;
             }
@@ -49,7 +49,7 @@ namespace BL.DTOs.Base
         {
             unchecked
             {
-                var hashCode = ID.GetHashCode();
+                var hashCode = Id.GetHashCode();
                 hashCode = (hashCode * 397) ^ ReviewedUserID.GetHashCode();
                 hashCode = (hashCode * 397) ^ Evaluation.GetHashCode();
                 hashCode = (hashCode * 397) ^ Description.GetHashCode();

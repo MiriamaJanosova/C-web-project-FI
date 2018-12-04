@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.DTOs.Common;
+using BL.DTOs.Users;
 
 namespace BL.Services.Users
 {
@@ -44,6 +46,12 @@ namespace BL.Services.Users
         {
             var queryResult = await Query.ExecuteQuery(filter);
             return queryResult.Items;
+        }
+
+        public UserShowSettingPage ConvertUserDtoForSettingPage(UserDto dto)
+        {
+            
+            return Mapper.Map<UserShowSettingPage>(dto);
         }
 
 

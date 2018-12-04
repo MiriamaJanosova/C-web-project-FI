@@ -163,19 +163,19 @@ namespace BL.Facades
                 var items = (await itemService.GetItemsByAuctionIDAsync(auctionID));
                 foreach (var item in items)
                 {
-                    var itemCategories = (await itemCategoryService.GetCategoryByItemIdsAsync(item.ID));
+                    var itemCategories = (await itemCategoryService.GetCategoryByItemIdsAsync(item.Id));
                     foreach (var itemCategory in itemCategories)
                     {
-                        itemCategoryService.Delete(itemCategory.ID);
+                        itemCategoryService.Delete(itemCategory.Id);
                     }
 
-                    itemService.Delete(item.ID);
+                    itemService.Delete(item.Id);
                 }
 
                 var raises = (await raiseService.GetRaisesByAuctionIDAsync(auctionID)).Items;
                 foreach (var raise in raises)
                 {
-                    raiseService.Delete(raise.ID);
+                    raiseService.Delete(raise.Id);
                 }
 
                 auctionService.Delete(auctionID);
@@ -200,7 +200,7 @@ namespace BL.Facades
                 var itemCategories = (await itemCategoryService.GetItemCategoriesByCategoryIdAsync(categoryID));
                 foreach (var itemCategory in itemCategories)
                 {
-                    itemCategoryService.Delete(itemCategory.ID);
+                    itemCategoryService.Delete(itemCategory.Id);
                 }
 
                 categoryService.Delete(categoryID);
@@ -244,7 +244,7 @@ namespace BL.Facades
                 var itemCategories = (await itemCategoryService.GetCategoryByItemIdsAsync(itemID));
                 foreach (var itemCategory in itemCategories)
                 {
-                    itemCategoryService.Delete(itemCategory.ID);
+                    itemCategoryService.Delete(itemCategory.Id);
                 }
 
                 itemService.Delete(itemID);
@@ -276,7 +276,7 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (await itemService.GetAsync(item.ID) == null)
+                if (await itemService.GetAsync(item.Id) == null)
                 {
                     return false;
                 }
@@ -295,7 +295,7 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (await auctionService.GetAsync(auction.ID) == null)
+                if (await auctionService.GetAsync(auction.Id) == null)
                 {
                     return false;
                 }
@@ -314,7 +314,7 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (await categoryService.GetAsync(category.ID) == null)
+                if (await categoryService.GetAsync(category.Id) == null)
                 {
                     return false;
                 }
@@ -333,7 +333,7 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (await raiseService.GetAsync(raise.ID) == null)
+                if (await raiseService.GetAsync(raise.Id) == null)
                 {
                     return false;
                 }
@@ -352,7 +352,7 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (await itemCategoryService.GetAsync(itemCategory.ID) == null)
+                if (await itemCategoryService.GetAsync(itemCategory.Id) == null)
                 {
                     return false;
                 }

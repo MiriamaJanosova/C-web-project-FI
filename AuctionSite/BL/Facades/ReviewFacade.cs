@@ -59,7 +59,7 @@ namespace BL.Facades
             using (UnitOfWorkProvider.Create())
             {
 
-                var reviews = await reviewService.GetReviewForUserAsync(user.ID);
+                var reviews = await reviewService.GetReviewForUserAsync(user.Id);
                 return reviews.Items.ToList();
             }
         }
@@ -68,7 +68,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                var result = await reviewService.GetReviewForUserAsync(user.ID);
+                var result = await reviewService.GetReviewForUserAsync(user.Id);
                 double sum = result.Items.Sum(r => Convert.ToDouble(r.Evaluation));
                 return Math.Round(sum / result.Items.Count(), 1);
             }
@@ -90,7 +90,7 @@ namespace BL.Facades
                 var dict = new Dictionary<UserDto, double>();
                 foreach (var user in users)
                 {
-                    var reviews = (await reviewService.GetReviewForUserAsync(user.ID)).Items;
+                    var reviews = (await reviewService.GetReviewForUserAsync(user.Id)).Items;
                     var reviewDtos = reviews as IList<ReviewDto> ?? reviews.ToList();
                     var reviewCount = reviewDtos.Count();
                     var totalScore = reviewDtos.Sum(rev => (double)rev.Evaluation);
@@ -112,7 +112,7 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (await reviewService.GetAsync(review.ID, false) == null)
+                if (await reviewService.GetAsync(review.Id, false) == null)
                 {
                     return false;
                 }
@@ -126,9 +126,9 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var rev = await reviewService.GetAsync(review.ID, false);
+                var rev = await reviewService.GetAsync(review.Id, false);
                 if (rev == null) return false;
-                reviewService.Delete(rev.ID);
+                reviewService.Delete(rev.Id);
                 await uow.Commit();
                 return true;
             }

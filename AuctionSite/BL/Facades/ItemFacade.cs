@@ -84,7 +84,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await itemService.GetAsync(item.ID) != null;
+                return await itemService.GetAsync(item.Id) != null;
             }
         }
 

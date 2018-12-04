@@ -9,6 +9,8 @@ namespace BL.DTOs.Base
         public string UserName { get; set; }
 
         public string Email { get; set; }
+        
+        public string PhoneNumber { get; set; }
 
         public List<RaiseDto> UserRaisesForAuction { get; set; }
 
@@ -40,7 +42,7 @@ namespace BL.DTOs.Base
 
         protected bool Equals(UserDto other)
         {
-            return ID == other.ID;
+            return Id == other.Id;
         }
 
         public override bool Equals(object obj)
@@ -59,13 +61,13 @@ namespace BL.DTOs.Base
 
         public override int GetHashCode()
         {
-            if (ID >= 0)
+            if (Id >= 0)
             {
-                return ID.GetHashCode();
+                return Id.GetHashCode();
             }
             unchecked
             {
-                var hashCode = ID.GetHashCode();
+                var hashCode = Id.GetHashCode();
                 hashCode = (hashCode * 397) ^ UserName.GetHashCode();
                 hashCode = (hashCode * 397) ^ Email.GetHashCode();
                 hashCode = (hashCode * 397) ^ UserRaisesForAuction.GetHashCode();

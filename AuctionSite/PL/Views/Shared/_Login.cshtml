@@ -1,26 +1,37 @@
-﻿<div>
-    @if (!User.Identity.IsAuthenticated)
+﻿    @if (!Request.IsAuthenticated)
     {
-        <span>
-            @Html.ActionLink("Register", "Register", "Account")
-        </span>
-        <span>
-            @Html.ActionLink("Login", "Login", "Account")
-        </span>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Register", "Register", "Account")
+            </li>
+            <li>
+                @Html.ActionLink("Login", "Login", "Account")
+            </li>
+        </ul>
     
     }
     else
     {
-        <p>Logged in as @User.Identity.Name</p>
+        
+        
         using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
         {
             @Html.AntiForgeryToken()
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-            </ul>
+            
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @User.Identity.Name <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("My account", "Info", "Account")</li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">My auctions</a></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">My reviews</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                </ul>
+            </div>
+                                                                                                                                                            
         }   
     }
-</div>
-
 

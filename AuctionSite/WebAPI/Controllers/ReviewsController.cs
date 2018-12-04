@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
             var reviews = await ReviewsFacade.GetReviewsForUserAsync(user);
             foreach (var review in reviews)
             {
-                review.ID = 0;
+                review.Id = 0;
             }
 
             return reviews;
