@@ -135,11 +135,13 @@ namespace BL.Facades
 
         public async Task UpdateUserInfo(UserShowSettingPage dto)
         {
-            using (UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
                 var user = new UserDto();
                 await userService.Update(userService.ConvertFromTo(dto, user));
+                await uow.Commit();
             }
+            
             
         }
     }

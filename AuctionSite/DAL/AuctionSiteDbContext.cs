@@ -22,9 +22,10 @@ namespace DAL
         public DbSet<Raise> Raises { get; set; }
         public DbSet<Review> Reviews { get; set; }
         // public DbSet<UserRole> UserRoles { get; set; }
-        
+
 
         public static string ConnectionString { get; } =
+            //"Data source=(localdb)\\mssqllocaldb;Database=AuctionSite;Trusted_Connection=True;MultipleActiveResultSets=true";
             "Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User Id=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
 
         public AuctionSiteDbContext() 
