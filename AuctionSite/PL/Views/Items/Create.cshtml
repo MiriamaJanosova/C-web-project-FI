@@ -1,0 +1,16 @@
+﻿@model BL.DTOs.Item.CreateItem
+
+<h2>Add new item</h2>
+
+<form method="post">
+    <div>
+        <p>Name:</p>
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+    <div>
+        <p>Description:</p>
+        @Html.TextBoxFor(m => m.Description)
+    </div>
+    <button type="submit">Submit</button>
+</form>
+

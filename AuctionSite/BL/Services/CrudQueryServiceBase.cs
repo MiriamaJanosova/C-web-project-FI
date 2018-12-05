@@ -9,7 +9,7 @@ using Infrastructure.Query;
 
 namespace BL.Services
 {
-    public abstract class CrudQueryServiceBase<TEntity, TDto, TFilterDto> : ServiceBase
+    public abstract class CrudQueryServiceBase<TEntity, TDto, TFilterDto> : ServiceBase<TDto>
         where TFilterDto : FilterDtoBase, new()
         where TEntity : class, IEntity, new()
         where TDto : DtoBase

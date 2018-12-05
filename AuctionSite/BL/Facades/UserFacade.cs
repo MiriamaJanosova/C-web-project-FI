@@ -141,8 +141,6 @@ namespace BL.Facades
                 await userService.Update(userService.ConvertFromTo(dto, user));
                 await uow.Commit();
             }
-            
-            
         }
     }
 }

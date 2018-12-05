@@ -65,12 +65,13 @@ namespace PL.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
+
         [HttpGet]
         public async Task<ActionResult> Info()
         {
@@ -102,6 +103,20 @@ namespace PL.Controllers
                 TempData["Error"] = result.ToString();
             }
             return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> MyAuctions()
+        {
+            var userDTO = await UserFacade.GetUserByIdAsync(User.Identity.GetUserId<int>());
+            return View(userDTO.AuctionsCreated);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> MyItems()
+        {
+            var userDTO = await UserFacade.GetUserByIdAsync(User.Identity.GetUserId<int>());
+            return View(userDTO.Inventory);
         }
     }
 }

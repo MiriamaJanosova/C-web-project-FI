@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
+using BL.DTOs.Item;
 using BL.Facades.Base;
 using BL.QueryObjects.Common;
 using BL.Services.Auctions;
@@ -20,14 +22,16 @@ namespace BL.Facades
         private readonly ICategoryService categoryService;
         private readonly IItemCategoryService itemCategoryService;
         private readonly IItemService itemService;
+        private readonly IMapper mapper;
 
         public ItemFacade(IUnitOfWorkProvider provider, ICategoryService categoryService,
-            IItemService itemService, IItemCategoryService itemCategoryService)
+            IItemService itemService, IItemCategoryService itemCategoryService, IMapper mapper)
             : base(provider)
         {
             this.categoryService = categoryService;
             this.itemService = itemService;
             this.itemCategoryService = itemCategoryService;
+            this.mapper = mapper;
         }
 
         public async Task<CategoryDto> GetCategoryById(int id)
@@ -85,6 +89,16 @@ namespace BL.Facades
             using (UnitOfWorkProvider.Create())
             {
                 return await itemService.GetAsync(item.Id) != null;
+            }
+        }
+
+        public async Task<int> Create(CreateItem dto)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                var id = itemService.Create(itemService.MapToBase(dto));
+                await uow.Commit();
+                return id;
             }
         }
 

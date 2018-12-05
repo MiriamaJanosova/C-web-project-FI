@@ -82,5 +82,10 @@ namespace BL.Services.Items
         {
             return Repository.GetAsync(entityId);
         }
+
+        public To ConverTo<From, To>(From source)
+        {
+            return Mapper.Map<From, To>(source);
+        }
     }
 }

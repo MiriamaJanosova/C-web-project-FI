@@ -25,10 +25,10 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li>@Html.ActionLink("My account", "Info", "Account")</li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()">My auctions</a></li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()">My reviews</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    <li>@Html.ActionLink("My items", "MyItems", "Account")</li>
+                    <li>@Html.ActionLink("My auctions", "MyAuctions", "Account")</li>
+                    <li>@Html.ActionLink("My reviews", "Logout", "Account")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                 </ul>
             </div>
                                                                                                                                                             

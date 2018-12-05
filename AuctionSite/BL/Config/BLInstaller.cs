@@ -43,7 +43,7 @@ namespace BL.Config
                         .LifestyleTransient(),
 
                 Classes.FromThisAssembly()
-                    .BasedOn<ServiceBase>()
+                    .BasedOn(typeof(ServiceBase<>))
                     .WithServiceDefaultInterfaces()
                     .LifestyleTransient(),
 

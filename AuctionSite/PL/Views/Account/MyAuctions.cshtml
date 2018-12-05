@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BL.DTOs.Base.AuctionDto>
+
+<h2>MyAuctions</h2>
+
+@Html.ActionLink("Create new auction", "Create", "Auctions")
+
+@if (Model.Any())
+{
+    foreach (var auction in Model)
+    {
+<div>
+    <div>
+        <p>Name:</p>
+        <p>@auction.Name</p>
+    </div>
+    <div>
+        <p>Price:</p>
+        <p>@auction.ActualPrice</p>
+    </div>
+    <div>
+        <p>Items:</p>
+        @Html.Partial("/Views/Auctions/ItemList", auction.AuctionedItems)
+    </div>
+</div>
+    }
+}
+else
+{
+    <p>Nothing to show</p>
+}

@@ -34,5 +34,9 @@ namespace BL.Services.Categories
             return queryResult.Items.Select(category => category.Id).ToArray();
         }
 
+        public To ConverTo<From, To>(From source)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

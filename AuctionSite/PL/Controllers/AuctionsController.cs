@@ -39,5 +39,12 @@ namespace PL.Controllers
             // TODO
             return Denied();
         }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Create()
+        {
+            return View();
+        }
     }
 }

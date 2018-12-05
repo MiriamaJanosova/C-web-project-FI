@@ -3,6 +3,7 @@ using AutoMapper;
 using BL.DTOs;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
+using BL.DTOs.Item;
 using BL.DTOs.Users;
 using BL.QueryObjects.Common;
 using DAL.Entities;
@@ -34,6 +35,8 @@ namespace BL.Config
             config.CreateMap<QueryResult<Auction>, QueryResultDto<AuctionDto, AuctionFilterDto>>();
 
             config.CreateMap<CreateUser, User>();
+            config.CreateMap<CreateItem, Item>();
+            config.CreateMap<CreateItem, ItemDto>();
         }
 
         public static void Initialize()
