@@ -7,6 +7,7 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Is Auctioned?</th>
         </tr>
         </thead>
         <tbody>
@@ -15,6 +16,18 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Description</td>
+                <td>
+                    @if (item.AuctionID.HasValue)
+                    {
+                        <span>
+                            @Html.ActionLink("Yes", "Auction", "Auctions", new {id = item.AuctionID.Value})
+                        </span>
+                    }
+                    else
+                    {
+                        <span>No</span>
+                    }
+                </td>
             </tr>
         }
         </tbody>

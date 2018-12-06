@@ -11,6 +11,7 @@ using BL.Identity;
 using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
 using Microsoft.Owin.Security;
+using PL.Models.Auctions;
 
 namespace PL.Controllers
 {
@@ -109,7 +110,7 @@ namespace PL.Controllers
         public async Task<ActionResult> MyAuctions()
         {
             var userDTO = await UserFacade.GetUserByIdAsync(User.Identity.GetUserId<int>());
-            return View(userDTO.AuctionsCreated);
+            return View(new MyAuctionsModel(userDTO.AuctionsCreated));
         }
 
         [HttpGet]

@@ -1,4 +1,59 @@
 ﻿@model BL.DTOs.Auction.CreateAuction
 
 <h2>Create</h2>
+<div>
+    <span style="color: red"> @TempData["ErrorMessage"]</span>
+</div>
+<form method="post">
+    <div>
+        <div>
+            <span>Name:</span>
+            <span>
+                @Html.TextBoxFor(m => m.Name)
+            </span>
+            <span>
+                @Html.ValidationMessageFor(m => m.Name)
+            </span>
+        </div>
+        <div>
+            <span>Description:</span>
+            <span>
+                @Html.TextBoxFor(m => m.Description)
+            </span>
+            <span>
+                @Html.ValidationMessageFor(m => m.Description)
+            </span>
+        </div>
+        <div>
+            <span>Starting price:</span>
+            <span>
+                @Html.TextBoxFor(m => m.ActualPrice)
+            </span>
+            <span>
+                @Html.ValidationMessageFor(m => m.ActualPrice)
+            </span>
+        </div>
+        <div>
+            <span>Starting date:</span>
+            <span>
+                @Html.TextBoxFor(m => m.StartDate)
+            </span>
+            <span>
+                @Html.ValidationMessageFor(m => m.StartDate)
+            </span>
+        </div>
+        <div>
+            <span>Emding date:</span>
+            <span>
+                @Html.TextBoxFor(m => m.EndDate)
+            </span>
+            <span>
+                @Html.ValidationMessageFor(m => m.EndDate)
+            </span>
+        </div>
+        <div>
+            <button type="submit">Create</button>
+        </div>
+    </div>
 
+</form>

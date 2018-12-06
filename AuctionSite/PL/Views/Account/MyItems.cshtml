@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<BL.DTOs.Base.ItemDto>
 
 <h2>My items</h2>
+<div>
+    @Html.ActionLink("Add new item", "Create", "Items")
+</div>
+<div>
+    @Html.Partial("/Views/Auctions/ItemList.cshtml", @Model)
+</div>
 
-@Html.ActionLink("Add new item", "Create", "Items")
-@Html.Partial("/Views/Auctions/ItemList.cshtml", @Model)
+
+

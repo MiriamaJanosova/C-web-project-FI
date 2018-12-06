@@ -6,7 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using BL.Services.Auctions;
 using System.Threading.Tasks;
+using BL.DTOs.Auction;
 using BL.Facades;
+using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
 
 namespace PL.Controllers
@@ -45,6 +47,24 @@ namespace PL.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> Create(CreateAuction model)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            model.AuctionerID = User.Identity.GetUserId<int>();
+            var res = await modifyAuctionFacade.AddAuctionAsync(model);
+            if (res == 0) // FAILED
+            {
+                TempData["ErrorMessage"] = "Adding item failed";
+                return View();
+            }
+
+            return RedirectToAction("MyAuctions", "Account");
         }
     }
 }

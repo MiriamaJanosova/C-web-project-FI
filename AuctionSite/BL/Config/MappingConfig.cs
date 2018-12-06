@@ -1,6 +1,8 @@
+using System;
 using System.IO.Compression;
 using AutoMapper;
 using BL.DTOs;
+using BL.DTOs.Auction;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.DTOs.Item;
@@ -37,12 +39,17 @@ namespace BL.Config
             config.CreateMap<CreateUser, User>();
             config.CreateMap<CreateItem, Item>();
             config.CreateMap<CreateItem, ItemDto>();
+
         }
 
         public static void Initialize()
         {
             Mapper.Initialize(config =>
-                config.CreateMap<UserDto, User>().ReverseMap()
+                {
+                    config.CreateMap<UserDto, User>().ReverseMap();
+                    config.CreateMap<ItemDto, Item>().ReverseMap();
+                    config.CreateMap<AuctionDto, Auction>().ReverseMap();
+                }
             );
             
         }

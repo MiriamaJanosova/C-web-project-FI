@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.DTOs.Auction;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.Facades.Base;
@@ -44,7 +45,7 @@ namespace BL.Facades
             this.raiseService = raiseService;
         }
 
-        public async Task<int> AddAuctionAsync(AuctionDto auction)
+        public async Task<int> AddAuctionAsync(CreateAuction auction)
         {
             if (auction == null)
             {
@@ -57,7 +58,7 @@ namespace BL.Facades
                     return 0;
                 }
 
-                var res = auctionService.Create(auction);
+                var res = auctionService.Create(auctionService.MapToBase(auction));
                 await uow.Commit();
                 return res;
             }
@@ -71,7 +72,12 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var auction = await auctionService.GetAsync(item.AuctionID);
+                if (!item.AuctionID.HasValue)
+                {
+                    return 0;
+                }
+
+                var auction = await auctionService.GetAsync(item.AuctionID.Value);
                 if (auction == null)
                 {
                     return 0;
