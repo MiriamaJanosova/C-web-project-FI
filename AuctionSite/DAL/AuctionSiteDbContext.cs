@@ -25,8 +25,7 @@ namespace DAL
 
 
         public static string ConnectionString { get; } =
-            "Data source=(localdb)\\mssqllocaldb;Database=AuctionSite;Trusted_Connection=True;MultipleActiveResultSets=true";
-            //"Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User Id=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
+            "Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User Id=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
 
         public AuctionSiteDbContext() 
             : base(ConnectionString)
@@ -44,10 +43,10 @@ namespace DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Auction>()
-                .HasMany(t => t.AuctionedItems)
-                .WithRequired(a => a.InAuction)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Auction>()
+            //    .HasMany(t => t.AuctionedItems)
+            //    .WithOptional(a => a.Auction)
+            //    .WillCascadeOnDelete(false);
             modelBuilder.Entity<User>()
                 .HasMany(t => t.UserRaisesForAuction)
                 .WithRequired(a => a.UserWhoRaised)

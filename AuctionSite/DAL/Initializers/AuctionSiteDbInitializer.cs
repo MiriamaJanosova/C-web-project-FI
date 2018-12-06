@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Initializers
 {
-    public class AuctionSiteDbInitializer : DropCreateDatabaseIfModelChanges<AuctionSiteDbContext>
+    public class AuctionSiteDbInitializer : CreateDatabaseIfNotExists<AuctionSiteDbContext>
     {
         protected override void Seed(AuctionSiteDbContext context)
         {

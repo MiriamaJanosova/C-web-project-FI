@@ -28,8 +28,9 @@ namespace DAL.Entities
         [Required]
         public int OwnerID { get; set; }
         
-        public Auction InAuction { get; set; }
+        public Auction Auction { get; set; }
         
-        public int AuctionID { get; set; }
+        public int? AuctionID { get; set; }
+        
     }
 }

@@ -88,6 +88,11 @@
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\UserRoleType.cs" />
     <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
+    <Compile Include="Migrations\201812060035539_Initial.cs" />
+    <Compile Include="Migrations\201812060035539_Initial.Designer.cs">
+      <DependentUpon>201812060035539_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +108,11 @@
       <Project>{5245993a-238b-46c1-972c-dafa75ab2d6e}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812060035539_Initial.resx">
+      <DependentUpon>201812060035539_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
