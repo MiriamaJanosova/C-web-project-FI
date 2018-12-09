@@ -409,5 +409,22 @@ namespace BL.Facades
                 return await raiseService.ListAllAsync();
             }
         }
+
+        public async Task<IEnumerable<ItemDto>> GetAvailableItemsOfUser(int userId)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var user = await userService.GetAsync(userId);
+                return user.Inventory.Where(i => !i.AuctionID.HasValue);
+            }
+        }
+
+        public async Task<ItemDto> GetItem(int id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await itemService.GetAsync(id);
+            }
+        }
     }
 }

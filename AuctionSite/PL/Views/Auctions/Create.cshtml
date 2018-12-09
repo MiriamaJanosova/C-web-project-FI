@@ -1,4 +1,6 @@
-﻿@model BL.DTOs.Auction.CreateAuction
+﻿@model PL.Models.Auctions.CreateAuctionModel
+
+
 
 <h2>Create</h2>
 <div>
@@ -9,50 +11,63 @@
         <div>
             <span>Name:</span>
             <span>
-                @Html.TextBoxFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Dto.Name)
             </span>
             <span>
-                @Html.ValidationMessageFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Dto.Name)
             </span>
         </div>
         <div>
             <span>Description:</span>
             <span>
-                @Html.TextBoxFor(m => m.Description)
+                @Html.TextBoxFor(m => m.Dto.Description)
             </span>
             <span>
-                @Html.ValidationMessageFor(m => m.Description)
+                @Html.ValidationMessageFor(m => m.Dto.Description)
             </span>
         </div>
         <div>
             <span>Starting price:</span>
             <span>
-                @Html.TextBoxFor(m => m.ActualPrice)
+                @Html.TextBoxFor(m => m.Dto.ActualPrice)
             </span>
             <span>
-                @Html.ValidationMessageFor(m => m.ActualPrice)
+                @Html.ValidationMessageFor(m => m.Dto.ActualPrice)
             </span>
         </div>
         <div>
             <span>Starting date:</span>
             <span>
-                @Html.TextBoxFor(m => m.StartDate)
+                @Html.TextBoxFor(m => m.Dto.StartDate)
             </span>
             <span>
-                @Html.ValidationMessageFor(m => m.StartDate)
+                @Html.ValidationMessageFor(m => m.Dto.StartDate)
             </span>
         </div>
         <div>
             <span>Ending date:</span>
             <span>
-                @Html.TextBoxFor(m => m.EndDate)
+                @Html.TextBoxFor(m => m.Dto.EndDate)
             </span>
             <span>
-                @Html.ValidationMessageFor(m => m.EndDate)
+                @Html.ValidationMessageFor(m => m.Dto.EndDate)
             </span>
         </div>
         <div>
             <span>Items:</span>
+            <span>
+                @foreach (var item in Model.AvailableItems)
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" 
+                                   name="SelectedItems" 
+                                   value="@item.Id"/>
+                            @item.Name
+                        </label>
+                    </div>
+                }
+            </span>
         </div>
         <div>
             <button type="submit">Create</button>

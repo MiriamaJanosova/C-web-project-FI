@@ -7,9 +7,11 @@ using System.Web.Mvc;
 using BL.Services.Auctions;
 using System.Threading.Tasks;
 using BL.DTOs.Auction;
+using BL.DTOs.Base;
 using BL.Facades;
 using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
+using PL.Models.Auctions;
 
 namespace PL.Controllers
 {
@@ -17,6 +19,8 @@ namespace PL.Controllers
     {
         public AuctionFacade auctionFacade { get; set; }
         public ModifyAuctionsFacade modifyAuctionFacade { get; set; }
+
+        public int UserId => User.Identity.GetUserId<int>(); 
 
 
         public async Task<ActionResult> Index()
@@ -44,27 +48,44 @@ namespace PL.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var avail = await modifyAuctionFacade.GetAvailableItemsOfUser(UserId);
+            return View(new CreateAuctionModel
+            {
+                AvailableItems = avail.ToList()
+            });
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> Create(CreateAuction model)
+        public async Task<ActionResult> Create(CreateAuctionModel model)
         {
             if (!ModelState.IsValid)
                 return View();
 
-            model.AuctionerID = User.Identity.GetUserId<int>();
-            var res = await modifyAuctionFacade.AddAuctionAsync(model);
-            if (res == 0) // FAILED
+            var dto = model.Dto;
+
+            dto.AuctionerID = User.Identity.GetUserId<int>();
+            await AssignItems(dto, model.SelectedItems);
+
+            var res = await modifyAuctionFacade.AddAuctionAsync(dto);
+            if (res != 0) // FAILED
             {
                 TempData["ErrorMessage"] = "Adding item failed";
                 return View();
             }
 
             return RedirectToAction("MyAuctions", "Account");
+        }
+
+        private async Task AssignItems(CreateAuction dto, IList<int> modelSelectedItems)
+        {
+            foreach (var id in modelSelectedItems)
+            {
+                var item = await modifyAuctionFacade.GetItem(id);
+                dto.AuctionedItems.Add(item);
+            }
         }
     }
 }

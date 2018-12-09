@@ -137,7 +137,7 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var user = new UserDto();
+                var user = await userService.GetAsync(dto.Id);
                 await userService.Update(userService.ConvertFromTo(dto, user));
                 await uow.Commit();
             }
