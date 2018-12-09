@@ -36,21 +36,14 @@ namespace BL.Config
             config.CreateMap<QueryResult<User>, QueryResultDto<UserDto, UserFilterDto>>();
             config.CreateMap<QueryResult<Auction>, QueryResultDto<AuctionDto, AuctionFilterDto>>();
 
-            config.CreateMap<CreateUser, User>();
-            config.CreateMap<CreateItem, Item>();
-            config.CreateMap<CreateItem, ItemDto>();
-
+            config.CreateMap<CreateUser, UserDto>().ReverseMap();
+            config.CreateMap<CreateItem, ItemDto>().ReverseMap();
+            config.CreateMap<CreateAuction, AuctionDto>().ReverseMap();
         }
 
         public static void Initialize()
         {
-            Mapper.Initialize(config =>
-                {
-                    config.CreateMap<UserDto, User>().ReverseMap();
-                    config.CreateMap<ItemDto, Item>().ReverseMap();
-                    config.CreateMap<AuctionDto, Auction>().ReverseMap();
-                }
-            );
+            Mapper.Initialize(config => ConfigureMapping(config));
             
         }
     }
