@@ -15,6 +15,10 @@ namespace BL.DTOs.Base
 
         public UserDto ReviewedUser { get; set; }
 
+        public int UserWhoWroteID { get; set; }
+
+        public UserDto UserWhoWrote { get; set; }
+
         public override string ToString()
         {
             return $"{ReviewedUser.UserName} got {Evaluation} points.";
@@ -28,7 +32,9 @@ namespace BL.DTOs.Base
             }
             return Evaluation == other.Evaluation &&
                 Description.Equals(other.Description) &&
-                ReviewedUserID == other.ReviewedUserID;
+                ReviewedUserID == other.ReviewedUserID &&
+                UserWhoWroteID == other.UserWhoWroteID;
+                
         }
 
         public override bool Equals(object obj)
@@ -53,6 +59,7 @@ namespace BL.DTOs.Base
                 hashCode = (hashCode * 397) ^ ReviewedUserID.GetHashCode();
                 hashCode = (hashCode * 397) ^ Evaluation.GetHashCode();
                 hashCode = (hashCode * 397) ^ Description.GetHashCode();
+                hashCode = (hashCode * 397) ^ UserWhoWroteID.GetHashCode();
                 return hashCode;
             }
         }

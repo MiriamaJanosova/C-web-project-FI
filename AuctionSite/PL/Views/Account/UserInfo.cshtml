@@ -6,19 +6,18 @@
 <form method="post">
     <div>
         <p>Id: </p>
-        @Html.TextBoxFor(m => m.Id)
+        @Html.TextBoxFor(m => m.Id, new { @readonly = true })
     </div>
     <div>
         <p>Email:</p>
-
-        @Html.TextBoxFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @readonly = true })
         <p style="color: red">
             @Html.ValidationMessageFor(m => m.Email)
         </p>
     </div>
     <div>
         <p>User name:</p>
-        @Html.TextBoxFor(m => m.UserName)
+        @Html.TextBoxFor(m => m.UserName, new { @readonly = true })
         <p style="color: red">
             @Html.ValidationMessageFor(m => m.UserName)
         </p>

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BL.DTOs.Common;
 using BL.DTOs.Users;
+using User = DAL.Entities.User;
 
 namespace BL.Services.Users
 {

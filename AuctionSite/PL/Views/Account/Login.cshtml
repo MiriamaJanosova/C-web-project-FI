@@ -14,7 +14,7 @@
     </div>
     <div>
         <p>Password:</p>
-        @Html.TextBoxFor(m => m.Password)
+        @Html.EditorFor(m => m.Password)
         <p style="color: red">
             @Html.ValidationMessageFor(m => m.Password)
         </p>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using BL.DTOs.Auction;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.Facades;
@@ -228,7 +229,7 @@ namespace WebAPI.Controllers
             return $"Created item in auction  with id: {res}.";
         }
 
-        public async Task<string> PostAuction([FromBody]AuctionDto auction)
+        public async Task<string> PostAuction([FromBody]CreateAuction auction)
         {
             if (auction == null || !ModelState.IsValid)
             {

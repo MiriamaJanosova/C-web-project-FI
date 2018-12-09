@@ -40,6 +40,8 @@ namespace BL.Facades
                 }
 
                 var res = reviewService.Create(review);
+                var user = await userService.GetAsync(review.ReviewedUserID);
+                review.ReviewedUser = user;
                 await uow.Commit();
                 return res;
             }

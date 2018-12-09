@@ -1,0 +1,23 @@
+﻿@model BL.DTOs.Base.ReviewDto
+
+<h2>AddReview</h2>
+
+@using (Html.BeginForm("AddReview", "Review", FormMethod.Post))
+{
+
+<p>
+    @for (int i = 1; i <= 10; i++)
+    {
+        @i
+        @:&nbsp;
+        @Html.RadioButtonFor(m => m.Evaluation, i)
+
+    }
+</p>
+    <p>
+        Description
+        @Html.EditorFor(m => m.Description)
+    </p>
+    @Html.HiddenFor(m => m.ReviewedUserID)
+    <input type="submit" value="Add review">
+}
