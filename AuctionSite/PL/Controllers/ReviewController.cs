@@ -58,7 +58,7 @@ namespace PL.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> UpdateReview(string description, decimal evaluation, int userId, int userWhoRev)
+        public async Task<ActionResult> UpdateReview(string description, int evaluation, int userId, int userWhoRev)
         {
             if (System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt() != userWhoRev)
             {

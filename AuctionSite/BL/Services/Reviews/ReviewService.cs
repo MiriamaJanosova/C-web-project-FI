@@ -37,7 +37,7 @@ namespace BL.Services.Reviews
         {
             var queryResult = await Query.ExecuteQuery(new ReviewFilterDto { Evaluation = evaluation });
             return queryResult.Items
-                .GroupBy(c => (int)Math.Round(c.Evaluation))
+                .GroupBy(c => c.Evaluation)
                 .ToDictionary(c => c.Key,
                     g => g.ToList());
         }

@@ -27,7 +27,7 @@ namespace BL.Config
             config.CreateMap<Review, ReviewDto>().ReverseMap();
             config.CreateMap<Role, RoleDto>().ReverseMap();
             config.CreateMap<UserRole, UserRoleDto>().ReverseMap();
-            //config.CreateMap<User, UserDto>();
+            config.CreateMap<User, UserDto>().ReverseMap();
             //config.CreateMap<UserDto, User>(MemberList.Destination);
             config.CreateMap<UserDto, UserShowSettingPage>().ReverseMap();
             config.CreateMap<QueryResult<Item>, QueryResultDto<ItemDto, ItemFilterDto>>();
@@ -37,8 +37,11 @@ namespace BL.Config
             config.CreateMap<QueryResult<Auction>, QueryResultDto<AuctionDto, AuctionFilterDto>>();
 
             config.CreateMap<CreateUser, UserDto>().ReverseMap();
+            config.CreateMap<CreateUser, User>();
             config.CreateMap<CreateItem, ItemDto>().ReverseMap();
+            config.CreateMap<CreateItem, Item>();
             config.CreateMap<CreateAuction, AuctionDto>().ReverseMap();
+            config.CreateMap<CreateAuction, Auction>();
         }
 
         public static void Initialize()

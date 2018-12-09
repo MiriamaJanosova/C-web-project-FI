@@ -113,9 +113,10 @@ namespace DAL.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Evaluation = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Evaluation = c.Int(nullable: false),
                         Description = c.String(),
                         ReviewedUserID = c.Int(nullable: false),
+                        UserWhoWroteID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.ReviewedUserID, cascadeDelete: true)

@@ -124,5 +124,14 @@ namespace BL.Facades
             }
         }
 
+        public async Task<IEnumerable<AuctionDto>> GetAuctionsAsync()
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var l = await auctionService.ListAllAsync();
+                return l.Items;
+            }
+        }
+
     }
 }

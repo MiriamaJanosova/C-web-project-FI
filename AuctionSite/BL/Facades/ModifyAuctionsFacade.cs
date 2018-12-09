@@ -369,11 +369,12 @@ namespace BL.Facades
             }
         }
 
-        public async Task<QueryResultDto<AuctionDto, AuctionFilterDto>> GetAllAuctionsAsync()
+        public async Task<IEnumerable<AuctionDto>> GetAllAuctionsAsync()
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await auctionService.ListAllAsync();
+                var l = await auctionService.ListAllAsync();
+                return l.Items;
             }
         }
 
