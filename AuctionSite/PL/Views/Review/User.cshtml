@@ -1,4 +1,6 @@
-﻿@model IEnumerable<BL.DTOs.Base.ReviewDto>
+﻿@using BL.DTOs.Base
+@using Microsoft.AspNet.Identity
+@model IEnumerable<BL.DTOs.Base.ReviewDto>
 
 <h2>Reviews of @TempData["UserEmail"]</h2>
 
@@ -11,10 +13,21 @@
             <tr>
                 <td>@rev.Description</td>
                 <td>@rev.Evaluation</td>
-            </tr>
+                @if (User.Identity.GetUserId().AsInt() == rev.UserWhoWroteID)
+                {
+                    <td>
+                        @Html.ActionLink("Update review", "UpdateReview", "Review", new { description = rev.Description, evaluation = rev.Evaluation,
+                            userId = rev.ReviewedUserID, userWhoRev = rev.UserWhoWroteID }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete review ", "DeleteReview", "Review", new { review = rev}, null)
+                    </td>
+                }
+</tr>
         }
         </tbody>
     </table>
+    
 }
 else
 {

@@ -28,6 +28,5 @@ namespace DAL.Entities
 
         [Required]
         public int UserWhoWroteID { get; set; }
-
     }
 }

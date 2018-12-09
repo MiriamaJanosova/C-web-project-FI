@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using System.Web.WebPages;
 using BL.DTOs.Base;
 using BL.Facades;
+using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
 
 namespace PL.Controllers
@@ -34,9 +37,15 @@ namespace PL.Controllers
 
         public async Task<ActionResult> AddReview(int userId)
         {
-            return View("AddReview",new ReviewDto
+            if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                ReviewedUserID = userId
+                return RedirectToAction("Denied", "Base");
+
+            }
+            return View("Detail",new ReviewDto
+            {
+                ReviewedUserID = userId,
+                UserWhoWroteID = System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt()
             });
         }
 
@@ -45,6 +54,51 @@ namespace PL.Controllers
         {
             if (!ModelState.IsValid) return View(model);
             await (ReviewFacade.AddUserReviewAsync(model));
+            return RedirectToAction("Index", "Users");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> UpdateReview(string description, decimal evaluation, int userId, int userWhoRev)
+        {
+            if (System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt() != userWhoRev)
+            {
+                return RedirectToAction("Denied", "Base");
+            }
+
+            return View("Detail", new ReviewDto
+            {
+                Description = description,
+                Evaluation = evaluation,
+                ReviewedUserID = userId,
+                UserWhoWroteID = userWhoRev
+            });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateReview(ReviewDto review)
+        {
+            if (System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt() != review.UserWhoWroteID)
+            {
+                return RedirectToAction("Denied", "Base");
+            }
+
+            if (await ReviewFacade.EditUserReview(review))
+            {
+                return RedirectToAction("Index", "Users");
+            }
+
+            return RedirectToAction("Detail", "Review", new {review.Description, review.Evaluation,
+                review.ReviewedUserID, review.UserWhoWroteID});
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> DeleteUser(ReviewDto review)
+        {
+            if (System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt() != review.UserWhoWroteID)
+            {
+                return RedirectToAction("Denied", "Base");
+            }
+            await (ReviewFacade.DeleteUserReview(review));
             return RedirectToAction("Index", "Users");
         }
     }

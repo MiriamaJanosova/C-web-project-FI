@@ -17,8 +17,6 @@ namespace BL.DTOs.Base
 
         public int UserWhoWroteID { get; set; }
 
-        public UserDto UserWhoWrote { get; set; }
-
         public override string ToString()
         {
             return $"{ReviewedUser.UserName} got {Evaluation} points.";

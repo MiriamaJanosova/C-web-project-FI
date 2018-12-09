@@ -355,7 +355,7 @@
     <Content Include="Views\Items\Create.cshtml" />
     <Content Include="Views\Account\MyItems.cshtml" />
     <Content Include="Views\Shared\_AuctionList.cshtml" />
-    <Content Include="Views\Review\AddReview.cshtml" />
+    <Content Include="Views\Review\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

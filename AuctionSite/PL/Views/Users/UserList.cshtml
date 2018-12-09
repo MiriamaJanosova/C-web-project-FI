@@ -24,7 +24,11 @@
                 @Html.ActionLink("Read reviews", "User", "Review", new { id = user.Id }, null)
             </td>
             <td>
-                @Html.ActionLink("Add review", "AddReview", "Review", new { userId = user.Id}, null )
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Add review", "AddReview", "Review", new {userId = user.Id}, null)
+
+                }
             </td>
         </tr>
     }
