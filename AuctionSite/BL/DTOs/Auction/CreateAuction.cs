@@ -39,7 +39,7 @@ namespace BL.DTOs.Auction
 
         public UserDto Auctioner { get; set; }
 
-        public List<ItemDto> AuctionedItems { get; set; }
+        public List<ItemDto> AuctionedItems { get; set; } = new List<ItemDto>();
         
     }
 }

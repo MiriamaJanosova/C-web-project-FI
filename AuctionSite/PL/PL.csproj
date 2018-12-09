@@ -250,6 +250,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Auctions\MyAuctionsModel.cs" />
+    <Compile Include="Models\Auctions\CreateAuctionModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Users\UserInfoModel.cs" />
@@ -356,6 +357,7 @@
     <Content Include="Views\Account\MyItems.cshtml" />
     <Content Include="Views\Shared\_AuctionList.cshtml" />
     <Content Include="Views\Review\Detail.cshtml" />
+    <Content Include="Views\Auctions\_AssignItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
