@@ -11,7 +11,7 @@ namespace BL.DTOs.Filter
 
         public double MaximalPrice { get; set; } = double.MaxValue;
 
-        public DateTime ActualDateTime { get; set; }
+        public DateTime ActualDateTime { get; set; } = DateTime.MaxValue;
 
         public int AuctionerID { get; set; }
 
