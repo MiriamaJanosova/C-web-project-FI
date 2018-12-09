@@ -21,7 +21,7 @@ namespace PL.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var all = await modifyAuctionFacade.GetAllAuctionsAsync();
+            var all = await auctionFacade.GetAllAuctionsAsync();
             return View("AuctionList", all);
         }
 
