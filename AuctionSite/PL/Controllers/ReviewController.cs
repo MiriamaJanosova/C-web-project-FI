@@ -92,7 +92,7 @@ namespace PL.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> DeleteUser(ReviewDto review)
+        public async Task<ActionResult> DeleteReview(ReviewDto review)
         {
             if (System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt() != review.UserWhoWroteID)
             {

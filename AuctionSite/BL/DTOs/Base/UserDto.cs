@@ -1,3 +1,4 @@
+using System;
 using BL.DTOs.Common;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace BL.DTOs.Base
 
         public List<AuctionDto> AuctionsCreated { get; set; }
 
-        public decimal ReviewAvg
+        public double ReviewAvg
         {
             get
             {
@@ -30,7 +31,7 @@ namespace BL.DTOs.Base
                 if (count == 0)
                     return 0;
                 var total = Reviews.Sum(r => r.Evaluation);
-                return total / count;
+                return Math.Round(((double) total / count), 2);
             }
         }
 

@@ -7,7 +7,7 @@ namespace BL.DTOs.Base
 {
     public class ReviewDto : DtoBase
     {
-        public decimal Evaluation { get; set; }
+        public int Evaluation { get; set; }
 
         public string Description { get; set; }
 
