@@ -16,28 +16,22 @@
         </p>
     </div>
     <div>
-        <p>User name:</p>
-        @Html.TextBoxFor(m => m.UserName, new { @readonly = true })
-        <p style="color: red">
-            @Html.ValidationMessageFor(m => m.UserName)
-        </p>
+        <p>Phone</p>
+        <form name="rn">
+            @Html.TextBoxFor(m => m.PhoneNumber, new {@type = "text", @id = "tb", @name = "tb", @readonly = true})
+            <input type="button" value="Generate!" onclick="Random();"/>
+        </form>
     </div>
 
-            
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           Phone<span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-        @for (int i = 0; i <= 999999999; ++i)
-        {
-            <li>@i</li>
-    
-        }
-        </ul>
-    </div>
     <div>
         
         <button type="submit">Update</button>
     </div>
 </form>
+
+<script>
+    function Random() {
+        var rnd = Math.floor(Math.random() * 1000000000);
+        document.getElementById('tb').value = rnd;
+    }
+</script>
