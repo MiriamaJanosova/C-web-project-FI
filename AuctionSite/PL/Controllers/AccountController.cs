@@ -66,6 +66,29 @@ namespace PL.Controllers
             return View();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Register(CreateUser dto)
+        {
+            if (!ModelState.IsValid) return View();
+            var result = await UserFacade.CreateAsync(dto);
+            if (result.Succeeded)
+            {
+                var model = new LoginUser
+                {
+                    UserName = dto.UserName,
+                    Password = dto.Password
+                };
+
+                return Login(model);
+            }
+            else
+            {
+                TempData["Error"] = result.ToString();
+            }
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Logout()
         {
@@ -89,22 +112,7 @@ namespace PL.Controllers
             return View("UserInfo", dto);
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> Register(CreateUser dto)
-        {
-            if (!ModelState.IsValid) return View();
-            var result = await UserFacade.CreateAsync(dto);
-            if (result.Succeeded)
-            {
-                TempData["Info"] = result.ToString();
-            }
-            else
-            {
-                TempData["Error"] = result.ToString();
-            }
-            return View();
-        }
+       
 
         [HttpGet]
         public async Task<ActionResult> MyAuctions()

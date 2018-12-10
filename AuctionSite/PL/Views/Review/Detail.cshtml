@@ -2,22 +2,24 @@
 
 <h2>AddReview</h2>
 
-@using (Html.BeginForm("AddReview", "Review", FormMethod.Post))
-{
 
-<p>
-    @for (int i = 1; i <= 10; i++)
-    {
-        @i 
-        @Html.RadioButtonFor(m => m.Evaluation, i)
-        @:&nbsp;
-    }
-</p>
+<form method="post">
+    <p>
+        @for (int i = 1; i <= 10; i++)
+        {
+            <span style="width: 5rem">@i</span>
+            @Html.RadioButtonFor(m => m.Evaluation, i)
+            @:&nbsp;
+        }
+    </p>
     <p>
         Description
         @Html.EditorFor(m => m.Description)
     </p>
+
     @Html.HiddenFor(m => m.ReviewedUserID)
     @Html.HiddenFor(m => m.UserWhoWroteID)
+    @Html.HiddenFor(m => m.Id)
     <input type="submit" value="Submit">
-}
+</form>
+
