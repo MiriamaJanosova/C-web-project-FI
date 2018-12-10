@@ -96,9 +96,9 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var id = itemService.Create(itemService.MapToBase(dto));
+                var item = itemService.Create(itemService.MapToBase(dto));
                 await uow.Commit();
-                return id;
+                return item.Id;
             }
         }
 

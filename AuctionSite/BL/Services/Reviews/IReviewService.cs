@@ -2,6 +2,7 @@
 using BL.DTOs.Filter;
 using BL.QueryObjects.Common;
 using BL.Services.Common;
+using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +16,7 @@ namespace BL.Services.Reviews
 
         Task<ReviewDto> GetAsync(int entityId, bool withIncludes = true);
 
-        int Create(ReviewDto entityDto);
+        Review Create(ReviewDto entityDto);
 
         Task Update(ReviewDto entityDto);
 

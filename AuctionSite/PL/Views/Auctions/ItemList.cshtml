@@ -20,7 +20,7 @@
                     @if (item.AuctionID.HasValue)
                     {
                         <span>
-                            @Html.ActionLink("Yes", "Auction", "Auctions", new {id = item.AuctionID.Value})
+                            @Html.ActionLink("Yes", "Auction", "Auctions", new {id = item.AuctionID.Value}, new { id = item.AuctionID.Value })
                         </span>
                     }
                     else

@@ -41,11 +41,11 @@ namespace BL.Services
 
         protected abstract Task<TEntity> GetWithIncludesAsync(int entityId);
 
-        public virtual int Create(TDto entityDto)
+        public virtual TEntity Create(TDto entityDto)
         {
             var entity = AutoMapper.Mapper.Map<TEntity>(entityDto);
             Repository.Create(entity);
-            return entity.Id;
+            return entity;
         }
 
         public virtual async Task Update(TDto entityDto)

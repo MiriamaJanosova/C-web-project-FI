@@ -43,7 +43,7 @@ namespace BL.Facades
                 var user = await userService.GetAsync(review.ReviewedUserID);
                 review.ReviewedUser = user;
                 await uow.Commit();
-                return res;
+                return res.Id;
             }
         }
 
