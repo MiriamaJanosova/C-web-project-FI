@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BL.DTOs.Common;
 using BL.DTOs.Users;
+using DAL.Entities;
 
 namespace BL.Services.Users
 {
@@ -32,7 +33,7 @@ namespace BL.Services.Users
         /// Creates new entity
         /// </summary>
         /// <param name="entityDto">entity details</param>
-        int Create(UserDto entityDto);
+        User Create(UserDto entityDto);
 
         /// <summary>
         /// Updates entity

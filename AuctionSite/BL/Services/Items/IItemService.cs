@@ -30,7 +30,7 @@ namespace BL.Services.Items
         /// Creates new entity
         /// </summary>
         /// <param name="entityDto">entity details</param>
-        int Create(ItemDto entityDto);
+        Item Create(ItemDto entityDto);
 
         /// <summary>
         /// Updates entity

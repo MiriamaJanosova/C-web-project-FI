@@ -5,6 +5,7 @@ using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.QueryObjects.Common;
 using BL.Services.Common;
+using DAL.Entities;
 
 namespace BL.Services.Auctions
 {
@@ -14,7 +15,7 @@ namespace BL.Services.Auctions
 
         Task<AuctionDto> GetAsync(int entityId, bool withIncludes = true);
 
-        int Create(AuctionDto entity);
+        Auction Create(AuctionDto entity);
 
         Task Update(AuctionDto entityDto);
 

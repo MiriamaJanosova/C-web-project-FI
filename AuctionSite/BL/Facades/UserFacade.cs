@@ -22,6 +22,7 @@ using IdentityResult = Microsoft.AspNet.Identity.IdentityResult;
 
 namespace BL.Facades
 {
+
     public class UserFacade : FacadeBase
     {
         private readonly IUserService userService;

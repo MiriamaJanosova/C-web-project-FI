@@ -60,7 +60,7 @@ namespace BL.Facades
 
                 var res = auctionService.Create(auctionService.MapToBase(auction));
                 await uow.Commit();
-                return res;
+                return res.Id;
             }
         }
 
@@ -85,7 +85,7 @@ namespace BL.Facades
 
                 var res = itemService.Create(item);
                 await uow.Commit();
-                return res;
+                return res.Id;
             }
         }
 
@@ -99,7 +99,7 @@ namespace BL.Facades
             {
                 var res = categoryService.Create(category);
                 await uow.Commit();
-                return res;
+                return res.Id;
             }
         }
 
@@ -125,7 +125,7 @@ namespace BL.Facades
 
                 var res = itemCategoryService.Create(itemCategory);
                 await uow.Commit();
-                return res;
+                return res.Id;
             }
         }
 
@@ -150,7 +150,7 @@ namespace BL.Facades
 
                 var res = raiseService.Create(raise);
                 await uow.Commit();
-                return res;
+                return res.Id;
             }
         }
 
@@ -416,6 +416,15 @@ namespace BL.Facades
             using (UnitOfWorkProvider.Create())
             {
                 return await itemService.GetAsync(id);
+            }
+        }
+
+        public async Task UpdateItem(ItemDto dto)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                await itemService.Update(dto);
+                await uow.Commit();
             }
         }
     }

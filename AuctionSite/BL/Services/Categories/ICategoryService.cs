@@ -2,6 +2,7 @@
 using BL.DTOs.Filter;
 using BL.QueryObjects.Common;
 using BL.Services.Common;
+using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +16,7 @@ namespace BL.Services.Categories
 
         Task<CategoryDto> GetAsync(int entityId, bool withIncludes = true);
 
-        int Create(CategoryDto entityDto);
+        Category Create(CategoryDto entityDto);
 
         Task Update(CategoryDto entityDto);
 

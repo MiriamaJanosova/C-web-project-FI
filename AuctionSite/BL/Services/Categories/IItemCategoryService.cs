@@ -19,7 +19,7 @@ namespace BL.Services.Categories
 
         Task<ItemCategoryDto> GetAsync(int entityId, bool withIncludes = true);
 
-        int Create(ItemCategoryDto entityDto);
+        ItemCategory Create(ItemCategoryDto entityDto);
 
         Task Update(ItemCategoryDto entityDto);
 

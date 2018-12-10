@@ -104,20 +104,23 @@ namespace PL.Controllers
             await AssignItems(dto, model.SelectedItems);
             var res = await modifyAuctionFacade.AddAuctionAsync(dto);
             if (res != 0) // FAILED
+            if (res == 0) // FAILED
             {
                 TempData["ErrorMessage"] = "Adding item failed";
                 return View();
             }
 
+            AssignAuctionToItems(res, model.SelectedItems);
             return RedirectToAction("MyAuctions", "Account");
         }
 
-        private async Task AssignItems(CreateAuction dto, IList<int> modelSelectedItems)
+        private async Task AssignAuctionToItems(int auctionId, IList<int> itemIds)
         {
-            foreach (var id in modelSelectedItems)
+            foreach (var id in itemIds)
             {
                 var item = await modifyAuctionFacade.GetItem(id);
-                dto.AuctionedItems.Add(item);
+                item.AuctionID = auctionId;
+                await modifyAuctionFacade.UpdateItem(item);
             }
         }
         
@@ -136,4 +139,6 @@ namespace PL.Controllers
         }
 
     }
+
+    
 }
