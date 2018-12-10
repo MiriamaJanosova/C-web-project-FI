@@ -74,7 +74,7 @@ namespace PL.Controllers
         {
             if (UserId != review.UserWhoWroteID)
             {
-                return RedirectToAction("Denied", "Base");
+                return Denied();
             }
 
             if (await ReviewFacade.EditUserReview(review))

@@ -22,9 +22,19 @@
             @Html.ValidationMessageFor(m => m.UserName)
         </p>
     </div>
-    <div>
-        <p>Phone: </p>
-        @Html.TextBoxFor(m => m.PhoneNumber)
+
+            
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Phone<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+        @for (int i = 0; i <= 999999999; ++i)
+        {
+            <li>@i</li>
+    
+        }
+        </ul>
     </div>
     <div>
         
