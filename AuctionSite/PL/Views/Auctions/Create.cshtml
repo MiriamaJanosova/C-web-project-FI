@@ -1,11 +1,14 @@
 ﻿@model PL.Models.Auctions.CreateAuctionModel
 
 
-
 <h2>Create</h2>
 <div>
     <span style="color: red"> @TempData["ErrorMessage"]</span>
 </div>
+
+                                                         
+
+
 @using (Html.BeginForm("Create", "Auctions", FormMethod.Post, new
 {enctype = "multipart/form-data"}))
 {
@@ -37,23 +40,37 @@
                 @Html.ValidationMessageFor(m => m.Dto.ActualPrice)
             </span>
         </div>
-        <div>
-            <span>Starting date:</span>
-            <span>
-                @Html.TextBoxFor(m => m.Dto.StartDate)
-            </span>
-            <span>
-                @Html.ValidationMessageFor(m => m.Dto.StartDate)
-            </span>
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <span>Start Date</span>
+                        @Html.TextBoxFor(m => m.Dto.StartDate, new {@type = "text", @class = "form-control"})
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.Dto.StartDate)
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <span>Ending date:</span>
-            <span>
-                @Html.TextBoxFor(m => m.Dto.EndDate)
-            </span>
-            <span>
-                @Html.ValidationMessageFor(m => m.Dto.EndDate)
-            </span>
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker2'>
+                        <span>End Date</span>
+                        @Html.TextBoxFor(m => m.Dto.EndDate, new {@type = "text", @class = "form-control"})
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.Dto.EndDate)
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div>
             <span>Items:</span>
@@ -71,6 +88,7 @@
                 }
             </span>
         </div>
+ 
 
         <div>
             <span>Upload photo:</span>
@@ -81,6 +99,27 @@
         <div>
             <button type="submit">Create</button>
         </div>
+       
     </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.es.min.js"></script>
+    <script >
+        $(function () {
+            $('#datetimepicker1').datepicker({
+                format: "dd.mm.yyyy",
+                language: "en",
+                autoclose: true,
+                todayHighlight: true
+            });
+            
+            $('#datetimepicker2').datepicker({
+                format: "dd.mm.yyyy",
+                language: "en",
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
+                                        
 
 }

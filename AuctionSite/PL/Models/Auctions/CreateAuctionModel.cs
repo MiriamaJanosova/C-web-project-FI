@@ -10,7 +10,11 @@ namespace PL.Models.Auctions
 {
     public class CreateAuctionModel
     {
-        public CreateAuction Dto { get; set; } = new CreateAuction();
+        public CreateAuction Dto { get; set; } = new CreateAuction()
+        {
+            EndDate = DateTime.Now.Add(TimeSpan.FromDays(1)),
+            StartDate = DateTime.Now
+        };
 
         public IList<int> SelectedItems { get; set; } = new List<int>();
 

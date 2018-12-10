@@ -40,7 +40,7 @@
     using (Html.BeginForm("AddBid", "Auctions", new {auctionId = @Model.Id}, FormMethod.Post))
      {
          <div class="form-group">
-             <label>Ended after: </label>
+             <label>Prihod si </label>
              <label id="expDate"></label>
          </div>
          @Html.TextBoxFor(m => m.NewRaise)
