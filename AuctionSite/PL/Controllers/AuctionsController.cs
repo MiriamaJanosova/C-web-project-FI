@@ -101,16 +101,14 @@ namespace PL.Controllers
             var dto = model.Dto;
             dto.ImageBytes = await ImageToByteArray(dto.Upload.InputStream);
             dto.AuctionerID = User.Identity.GetUserId<int>();
-            await AssignItems(dto, model.SelectedItems);
             var res = await modifyAuctionFacade.AddAuctionAsync(dto);
-            if (res != 0) // FAILED
             if (res == 0) // FAILED
             {
                 TempData["ErrorMessage"] = "Adding item failed";
                 return View();
             }
 
-            AssignAuctionToItems(res, model.SelectedItems);
+            await AssignAuctionToItems(res, model.SelectedItems);
             return RedirectToAction("MyAuctions", "Account");
         }
 
@@ -130,15 +128,5 @@ namespace PL.Controllers
             await input.CopyToAsync(ms);
             return ms.ToArray();
         }
-        
-        private Image ByteArrayToImage(byte[] byteArrayIn)
-        {
-            MemoryStream ms = new MemoryStream(byteArrayIn);
-            Image returnImage = Image.FromStream(ms);
-            return returnImage;
-        }
-
     }
-
-    
 }
