@@ -58,26 +58,21 @@ namespace PL.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> UpdateReview(string description, int evaluation, int userId, int userWhoRev)
-        {
-            if (System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt() != userWhoRev)
+        public async Task<ActionResult> UpdateReview(int reviewId)
+        {           
+            var review = await ReviewFacade.GetReviewByIdAsync(reviewId);
+
+            if (review == null || UserId != review.UserWhoWroteID)
             {
                 return RedirectToAction("Denied", "Base");
             }
-
-            return View("Detail", new ReviewDto
-            {
-                Description = description,
-                Evaluation = evaluation,
-                ReviewedUserID = userId,
-                UserWhoWroteID = userWhoRev
-            });
+            return View("Detail", review);
         }
 
         [HttpPost]
         public async Task<ActionResult> UpdateReview(ReviewDto review)
         {
-            if (System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt() != review.UserWhoWroteID)
+            if (UserId != review.UserWhoWroteID)
             {
                 return RedirectToAction("Denied", "Base");
             }
@@ -87,18 +82,18 @@ namespace PL.Controllers
                 return RedirectToAction("Index", "Users");
             }
 
-            return RedirectToAction("Detail", "Review", new {review.Description, review.Evaluation,
-                review.ReviewedUserID, review.UserWhoWroteID});
+            return RedirectToAction("Detail", "Review", new {review.Id});
         }
 
         [HttpGet]
-        public async Task<ActionResult> DeleteReview(ReviewDto review)
+        public async Task<ActionResult> DeleteReview(int reviewId)
         {
-            if (System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt() != review.UserWhoWroteID)
+            var review = await ReviewFacade.GetReviewByIdAsync(reviewId);
+            if (UserId != review.UserWhoWroteID)
             {
                 return RedirectToAction("Denied", "Base");
             }
-            await (ReviewFacade.DeleteUserReview(review));
+            await (ReviewFacade.DeleteUserReview(review.Id));
             return RedirectToAction("Index", "Users");
         }
     }

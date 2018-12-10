@@ -23,8 +23,6 @@ namespace PL.Controllers
         public AuctionFacade auctionFacade { get; set; }
         public ModifyAuctionsFacade modifyAuctionFacade { get; set; }
 
-        public int UserId => User.Identity.GetUserId<int>(); 
-
 
         public async Task<ActionResult> Index()
         {
