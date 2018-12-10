@@ -88,9 +88,13 @@
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\UserRoleType.cs" />
     <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
-    <Compile Include="Migrations\201812091759422_Initial.cs" />
-    <Compile Include="Migrations\201812091759422_Initial.Designer.cs">
-      <DependentUpon>201812091759422_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201812101356577_Test.cs" />
+    <Compile Include="Migrations\201812101356577_Test.Designer.cs">
+      <DependentUpon>201812101356577_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812101417284_Rename.cs" />
+    <Compile Include="Migrations\201812101417284_Rename.Designer.cs">
+      <DependentUpon>201812101417284_Rename.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,8 +114,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812091759422_Initial.resx">
-      <DependentUpon>201812091759422_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812101356577_Test.resx">
+      <DependentUpon>201812101356577_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812101417284_Rename.resx">
+      <DependentUpon>201812101417284_Rename.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

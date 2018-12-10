@@ -29,18 +29,21 @@ namespace DAL.Entities
         
         [Required]
         public DateTime EndDate { get; set; }
-        
+
         [Required, Range(0, double.MaxValue)]
         public double ActualPrice { get; set; }
         
         public User Auctioner { get; set; }
+        
+        public byte[] ImageBytes { get; set; }
         
         [Required, ForeignKey("Auctioner")]
         public int AuctionerID { get; set; }
         
         public virtual List<Item> AuctionedItems { get; set; }
         
-        public virtual List<Raise> RaisesForAuction { get; set; }                
+        public virtual List<Raise> RaisesForAuction { get; set; }
+
     }
 
 }

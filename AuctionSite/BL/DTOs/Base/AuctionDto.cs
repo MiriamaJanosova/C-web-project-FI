@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Web;
 using BL.DTOs.Common;
 
 namespace BL.DTOs.Base
@@ -15,14 +18,33 @@ namespace BL.DTOs.Base
         public DateTime EndDate { get; set; }
         
         public double ActualPrice { get; set; }
-
+        
         public int AuctionerID { get; set; }
 
         public UserDto Auctioner { get; set; }
+        
+        public double NewRaise { get; set; }
+        
+        public byte[] ImageBytes { get; set; }
+        
+        public Image Image { get; set; }
 
         public List<ItemDto> AuctionedItems { get; set; }
 
         public List<RaiseDto> RaisesForAuction { get; set; }
+        
+        public double TestPrice 
+        {
+            get
+            {
+                if (RaisesForAuction == null || RaisesForAuction.Count == 0)
+                {
+                    return ActualPrice;
+                }
+                return RaisesForAuction.Max(x => x.Amount);
+            }
+        
+        }
 
         public override string ToString()
         {

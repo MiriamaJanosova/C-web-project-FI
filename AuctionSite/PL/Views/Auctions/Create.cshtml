@@ -6,7 +6,9 @@
 <div>
     <span style="color: red"> @TempData["ErrorMessage"]</span>
 </div>
-<form method="post">
+@using (Html.BeginForm("Create", "Auctions", FormMethod.Post, new
+{enctype = "multipart/form-data"}))
+{
     <div>
         <div>
             <span>Name:</span>
@@ -60,8 +62,8 @@
                 {
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" 
-                                   name="SelectedItems" 
+                            <input type="checkbox"
+                                   name="SelectedItems"
                                    value="@item.Id"/>
                             @item.Name
                         </label>
@@ -69,9 +71,16 @@
                 }
             </span>
         </div>
+
+        <div>
+            <span>Upload photo:</span>
+            <span>
+                @Html.TextBoxFor(m => m.Dto.Upload, new { type = "file" })
+            </span>
+        </div>
         <div>
             <button type="submit">Create</button>
         </div>
     </div>
 
-</form>
+}

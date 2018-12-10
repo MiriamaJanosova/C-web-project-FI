@@ -1,9 +1,12 @@
 ﻿@using BL.DTOs.Base
 @model AuctionDto
 
+
 <h2>@Model.Name</h2>
 
-
+<div>
+    <span style="color: red"> @TempData["ErrorMessage"]</span>
+</div>
 
 <div class="form-group">
     <label>Decription: </label>
@@ -15,11 +18,67 @@
 </div>
 <div class="form-group">
     <label>Price: </label>
-    <label>@Model.ActualPrice</label>
+    <label>@Model.TestPrice</label>
 </div>
 <div class="form-group">
-    <label>Expiration date: </label>
-    <label>@Model.EndDate</label>
+    <label>Ended after: </label>
+    <label id="expDate"></label>
 </div>
+<div>
+    @{
+        var base64 = Convert.ToBase64String(Model.ImageBytes);
+        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    }
+
+ <img src="@imgSrc" />
+</div>
+
+
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("AddBid", "Auctions", new {auctionId = @Model.Id}, FormMethod.Post))
+     {
+         <div class="form-group">
+             <label>Ended after: </label>
+             <label id="expDate"></label>
+         </div>
+         @Html.TextBoxFor(m => m.NewRaise)
+         <button type="submit">Update</button>
+     }
+}
+
+
+<script type="text/javascript">
+        // Set the date we're counting down to
+        var countDownDate = new Date(@Model.EndDate.Year,@Model.EndDate.Month, @Model.EndDate.Day).getTime();
+
+// Update the count down every 1 second
+        var x = setInterval(function() {
+
+                // Get todays date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("expDate").innerHTML = "ENDED";
+                }
+                // Output the result in an element with id="demo"
+                document.getElementById("expDate").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+                // If the count down is over, write some text 
+                
+            },
+            1000);
+</script>
 
 <a href="https://www.youtube.com/watch?v=DLzxrzFCyOs">Edit</a>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 using BL.DTOs.Auction;
 using BL.DTOs.Base;
 using BL.Facades;
+using DAL.Entities;
 using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
 using PL.Models.Auctions;
@@ -39,6 +42,37 @@ namespace PL.Controllers
 
             return View(dto);
         }
+        
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> AddBid(int auctionId, AuctionDto dto)
+        {
+           var auctionDto = await auctionFacade.GetAuctionById(auctionId);
+
+            if (auctionDto.AuctionerID == UserId)
+            {
+                TempData["ErrorMessage"] = "Can't bid to the own auction";
+            }
+            if (dto.NewRaise <= auctionDto.TestPrice)
+            {
+               TempData["ErrorMessage"] = "Raise have to be bigger than actual price";
+               return RedirectToAction("Auction", new {id = auctionId});
+            }
+            
+            var raiseDto = new RaiseDto
+            {
+                Amount = dto.NewRaise, 
+                DateTime = DateTime.Now,
+                RaiseForAuctionID = auctionId,
+                UserWhoRaisedID = HttpContext.User.Identity.GetUserId<int>()
+            };
+
+            await modifyAuctionFacade.AddRaiseAsync(raiseDto);
+            TempData["ErrorMessage"] = "Success";
+            return RedirectToAction("Auction", new {id = auctionId});
+        }
+        
+        
 
         public async Task<ActionResult> Delete(int id)
         {
@@ -65,10 +99,9 @@ namespace PL.Controllers
                 return View();
 
             var dto = model.Dto;
-
+            dto.ImageBytes = await ImageToByteArray(dto.Upload.InputStream);
             dto.AuctionerID = User.Identity.GetUserId<int>();
             await AssignItems(dto, model.SelectedItems);
-
             var res = await modifyAuctionFacade.AddAuctionAsync(dto);
             if (res != 0) // FAILED
             {
@@ -87,5 +120,20 @@ namespace PL.Controllers
                 dto.AuctionedItems.Add(item);
             }
         }
+        
+        private async Task<byte[]> ImageToByteArray(Stream input)
+        {
+            var ms = new MemoryStream();
+            await input.CopyToAsync(ms);
+            return ms.ToArray();
+        }
+        
+        private Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
+
     }
 }

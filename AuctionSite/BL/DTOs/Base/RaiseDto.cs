@@ -57,7 +57,6 @@ namespace BL.DTOs.Base
                 hashCode = (hashCode * 397) ^ Amount.GetHashCode();
                 hashCode = (hashCode * 397) ^ UserWhoRaisedID.GetHashCode();
                 hashCode = (hashCode * 397) ^ RaiseForAuctionID.GetHashCode();
-                hashCode = (hashCode * 397) ^ RaiseForAuction.GetHashCode();
                 hashCode = (hashCode * 397) ^ DateTime.GetHashCode();
                 return hashCode;
             }

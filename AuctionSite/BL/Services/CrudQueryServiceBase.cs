@@ -47,7 +47,7 @@ namespace BL.Services
             Repository.Create(entity);
             return entity.Id;
         }
-
+    
         public virtual async Task Update(TDto entityDto)
         {
             var entity = await GetWithIncludesAsync(entityDto.Id);

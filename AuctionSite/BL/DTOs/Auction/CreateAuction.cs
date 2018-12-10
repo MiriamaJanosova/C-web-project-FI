@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using BL.DTOs.Base;
 using BL.DTOs.Common;
 
@@ -34,6 +35,10 @@ namespace BL.DTOs.Auction
         [DataType(DataType.Text)]
         // TODO custom validation for numbers
         public double ActualPrice { get; set; }
+        
+        public byte[] ImageBytes { get; set; }
+        
+        public HttpPostedFileBase Upload { get; set; }
 
         public int AuctionerID { get; set; }
 

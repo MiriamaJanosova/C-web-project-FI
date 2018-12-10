@@ -25,6 +25,7 @@ namespace BL.DTOs.Base
 
         public double ReviewAvg
         {
+            
             get
             {
                 var count = Reviews.Count;

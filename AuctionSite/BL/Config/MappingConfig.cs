@@ -23,7 +23,7 @@ namespace BL.Config
             config.CreateMap<EmailTemplate, EmailTemplateDto>().ReverseMap();
             config.CreateMap<ItemCategory, ItemCategoryDto>().ReverseMap();
             config.CreateMap<Item, ItemDto>().ReverseMap();
-            config.CreateMap<Raise, RaiseDto>().ReverseMap();
+            config.CreateMap<RaiseDto, Raise>().ReverseMap();
             config.CreateMap<Review, ReviewDto>().ReverseMap();
             config.CreateMap<Role, RoleDto>().ReverseMap();
             config.CreateMap<UserRole, UserRoleDto>().ReverseMap();

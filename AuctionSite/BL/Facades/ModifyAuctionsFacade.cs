@@ -137,6 +137,7 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
+               
                 if (await auctionService.GetAsync(raise.RaiseForAuctionID, false) == null)
                 {
                     return 0;
