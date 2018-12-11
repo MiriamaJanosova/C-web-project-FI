@@ -7,13 +7,13 @@ namespace DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class DontTouchThisMotherfuckerORIWillFindYouAndKillYou : IMigrationMetadata
+    public sealed partial class Init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DontTouchThisMotherfuckerORIWillFindYouAndKillYou));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou"; }
+            get { return "201812110948056_Init"; }
         }
         
         string IMigrationMetadata.Source

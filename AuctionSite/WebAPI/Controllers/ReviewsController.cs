@@ -79,7 +79,7 @@ namespace WebAPI.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            var success = await ReviewsFacade.DeleteUserReview(review);
+            var success = await ReviewsFacade.DeleteUserReview(review.Id);
             if (!success)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);

@@ -99,7 +99,7 @@ namespace PL.Controllers
         [HttpGet]
         public async Task<ActionResult> Info()
         {
-            var dto = await UserFacade.GetUserByIdAsync(int.Parse(User.Identity.GetUserId()));
+            var dto = await UserFacade.GetUserByIdAsync(UserId);
             var userModel = UserFacade.ConvertUserDtoToSettingPage(dto);
             return View("UserInfo", userModel);
         }

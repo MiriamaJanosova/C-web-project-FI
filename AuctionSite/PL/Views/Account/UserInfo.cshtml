@@ -4,27 +4,25 @@
 <h2>Informations</h2>
 <p style="color: lawngreen">@TempData["Success"]</p>
 <form method="post">
-    <div>
-        <p>Id: </p>
-        @Html.TextBoxFor(m => m.Id, new { @readonly = true })
-    </div>
+    @Html.HiddenFor(m => m.UserName)
+    @Html.HiddenFor(m => m.Id)
     <div>
         <p>Email:</p>
-        @Html.TextBoxFor(m => m.Email, new { @readonly = true })
+        @Html.TextBoxFor(m => m.Email, new {@readonly = true})
         <p style="color: red">
             @Html.ValidationMessageFor(m => m.Email)
         </p>
     </div>
     <div>
         <p>Phone</p>
-        <form name="rn">
-            @Html.TextBoxFor(m => m.PhoneNumber, new {@type = "text", @id = "tb", @name = "tb", @readonly = true})
-            <input type="button" value="Generate!" onclick="Random();"/>
-        </form>
+
+        @Html.TextBoxFor(m => m.PhoneNumber, new {@type = "text", @id = "tb", @name = "tb", @readonly = true})
+        <input type="button" value="Generate!" onclick="Random();"/>
+
     </div>
 
     <div>
-        
+
         <button type="submit">Update</button>
     </div>
 </form>

@@ -47,8 +47,8 @@
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\..\..\..\.nuget\packages\microsoft.aspnet.identity.entityframework\2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
@@ -88,9 +88,9 @@
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\UserRoleType.cs" />
     <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
-    <Compile Include="Migrations\201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.cs" />
-    <Compile Include="Migrations\201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.Designer.cs">
-      <DependentUpon>201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.cs</DependentUpon>
+    <Compile Include="Migrations\201812110948056_Init.cs" />
+    <Compile Include="Migrations\201812110948056_Init.Designer.cs">
+      <DependentUpon>201812110948056_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,8 +110,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.resx">
-      <DependentUpon>201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812110948056_Init.resx">
+      <DependentUpon>201812110948056_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -35,7 +35,7 @@ namespace PL.Controllers
             return View(user.Reviews);
         }
 
-        public async Task<ActionResult> AddReview(int userId)
+        public ActionResult AddReview(int userId)
         {
             if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
@@ -45,7 +45,7 @@ namespace PL.Controllers
             return View("Detail",new ReviewDto
             {
                 ReviewedUserID = userId,
-                UserWhoWroteID = System.Web.HttpContext.Current.User.Identity.GetUserId().AsInt()
+                UserWhoWroteID = UserId
             });
         }
 

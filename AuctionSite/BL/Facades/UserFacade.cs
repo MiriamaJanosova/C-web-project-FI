@@ -128,10 +128,7 @@ namespace BL.Facades
 
         public UserShowSettingPage ConvertUserDtoToSettingPage(UserDto dto)
         {
-            using (UnitOfWorkProvider.Create())
-            {
-                return userService.ConvertUserDtoForSettingPage(dto);
-            }
+            return userService.ConvertFromTo(dto, new UserShowSettingPage());
         }
 
         public async Task UpdateUserInfo(UserShowSettingPage dto)
