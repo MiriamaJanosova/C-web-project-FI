@@ -75,21 +75,35 @@
         <div>
             <span>Items:</span>
             <span>
-                @foreach (var item in Model.AvailableItems)
-                {
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"
-                                   name="SelectedItems"
-                                   value="@item.Id"/>
-                            @item.Name
-                        </label>
-                    </div>
-                }
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Photo</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.AvailableItems)
+                    {
+                        <tr>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"
+                                               name="SelectedItems"
+                                               value="@item.Id"/>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>  
             </span>
         </div>
- 
-
         <div>
             <span>Upload photo:</span>
             <span>

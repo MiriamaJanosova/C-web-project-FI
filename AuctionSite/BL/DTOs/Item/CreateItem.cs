@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.DTOs.Base;
 using BL.DTOs.Common;
 
 namespace BL.DTOs.Item
@@ -14,6 +15,8 @@ namespace BL.DTOs.Item
         public string Description { get; set; }
 
         public int OwnerID { get; set; }
+
+        public List<CategoryDto> HasCategories { get; set; }
 
         // TODO more fields 
     }
