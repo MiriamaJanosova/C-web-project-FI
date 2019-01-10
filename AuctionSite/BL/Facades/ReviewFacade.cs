@@ -124,11 +124,11 @@ namespace BL.Facades
             }
         }
 
-        public async Task<bool> DeleteUserReview(ReviewDto review)
+        public async Task<bool> DeleteUserReview(int reviewId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var rev = await reviewService.GetAsync(review.Id, false);
+                var rev = await reviewService.GetAsync(reviewId, false);
                 if (rev == null) return false;
                 reviewService.Delete(rev.Id);
                 await uow.Commit();

@@ -24,10 +24,6 @@ namespace DAL
 
         public DbSet<Image> Images { get; set; }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         public static string ConnectionString { get; } =
             //"Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User Id=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
             "Data source=(localdb)\\mssqllocaldb;Database=MySite;Trusted_Connection=True;MultipleActiveResultSets=true";

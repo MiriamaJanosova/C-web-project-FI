@@ -90,20 +90,10 @@
     <Compile Include="Entities\UserRoleType.cs" />
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
-<<<<<<< Updated upstream
-    <Compile Include="Migrations\201812101356577_Test.cs" />
-    <Compile Include="Migrations\201812101356577_Test.Designer.cs">
-      <DependentUpon>201812101356577_Test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812101417284_Rename.cs" />
-    <Compile Include="Migrations\201812101417284_Rename.Designer.cs">
-      <DependentUpon>201812101417284_Rename.cs</DependentUpon>
-=======
     <Compile Include="Initializers\ProductionInitializer.cs" />
     <Compile Include="Migrations\201901092014228_Init.cs" />
     <Compile Include="Migrations\201901092014228_Init.Designer.cs">
       <DependentUpon>201901092014228_Init.cs</DependentUpon>
->>>>>>> Stashed changes
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,16 +113,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-    <EmbeddedResource Include="Migrations\201812101356577_Test.resx">
-      <DependentUpon>201812101356577_Test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812101417284_Rename.resx">
-      <DependentUpon>201812101417284_Rename.cs</DependentUpon>
-=======
     <EmbeddedResource Include="Migrations\201901092014228_Init.resx">
       <DependentUpon>201901092014228_Init.cs</DependentUpon>
->>>>>>> Stashed changes
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

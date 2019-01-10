@@ -16,14 +16,13 @@
                 @if (User.Identity.GetUserId().AsInt() == rev.UserWhoWroteID)
                 {
                     <td>
-                        @Html.ActionLink("Update review", "UpdateReview", "Review", new { description = rev.Description, evaluation = rev.Evaluation,
-                            userId = rev.ReviewedUserID, userWhoRev = rev.UserWhoWroteID }, null)
+                        @Html.ActionLink("Update review", "UpdateReview", "Review", new { reviewId = rev.Id }, null)
                     </td>
                     <td>
-                        @Html.ActionLink("Delete review ", "DeleteReview", "Review", new { review = rev}, null)
+                        @Html.ActionLink("Delete review ", "DeleteReview", "Review", new { reviewId = rev.Id}, null)
                     </td>
                 }
-</tr>
+            </tr>
         }
         </tbody>
     </table>
@@ -33,5 +32,4 @@ else
 {
     <img style="display: block; margin-left: auto; margin-right: auto; width: 50%" src="/Content/img/nothingfound.gif"/>
 }
-
 

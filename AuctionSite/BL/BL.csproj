@@ -19,8 +19,6 @@
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
-<<<<<<< Updated upstream
-=======
     <ItemGroup>
       <Folder Include="Logger\" />
     </ItemGroup>
@@ -30,6 +28,4 @@
         <HintPath>bin\Debug\net461\DAL.dll</HintPath>
       </Reference>
     </ItemGroup>
-
->>>>>>> Stashed changes
 </Project>

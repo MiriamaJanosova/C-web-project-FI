@@ -1,16 +1,29 @@
-﻿@model BL.DTOs.Item.CreateItem
+﻿@model PL.Models.Category.CreateCategoryModel
 
 <h2>Add new item</h2>
 
 <form method="post">
     <div>
         <p>Name:</p>
-        @Html.TextBoxFor(m => m.Name)
+        @Html.TextBoxFor(m => m.CreateItem.Name)
     </div>
     <div>
         <p>Description:</p>
-        @Html.TextBoxFor(m => m.Description)
+        @Html.TextBoxFor(m => m.CreateItem.Description)
+    </div>
+    <div>
+        <p>Categories:</p>
+        @foreach (var c in Model.AvailableCategories)
+        {
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"
+                           name="SelectedCategories"
+                           value="@c.Id"/>
+                    @c.
+                </label>
+            </div>
+        }
     </div>
     <button type="submit">Submit</button>
 </form>
-

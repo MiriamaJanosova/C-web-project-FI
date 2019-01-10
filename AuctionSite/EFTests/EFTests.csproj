@@ -74,14 +74,9 @@
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
     </Reference>
-<<<<<<< Updated upstream
-    <Reference Include="NMemory, Version=3.0.0.0, Culture=neutral, PublicKeyToken=afc61983f100d280">
-      <HintPath>..\packages\NMemory.3.0.0\lib\net45\NMemory.dll</HintPath>
-=======
     <Reference Include="mscorlib" />
     <Reference Include="NMemory, Version=3.0.0.0, Culture=neutral, PublicKeyToken=afc61983f100d280">
       <HintPath>..\packages\NMemory.3.0.1\lib\net45\NMemory.dll</HintPath>
->>>>>>> Stashed changes
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
