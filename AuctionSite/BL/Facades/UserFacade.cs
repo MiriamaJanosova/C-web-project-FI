@@ -37,7 +37,6 @@ namespace BL.Facades
             this.UserManagerFactory = userManagerFactory;
         }
 
-        // TODO - urcite move mapper do servisy, nie tu
         public async Task<IdentityResult> CreateAsync(CreateUser dto)
         {
             using (UnitOfWorkProvider.Create())
@@ -47,6 +46,7 @@ namespace BL.Facades
                     var user = mapper.Map<User>(dto);
                     
                     return await manager.CreateAsync(user, dto.Password);
+
                 }
             }
         }
@@ -64,6 +64,15 @@ namespace BL.Facades
             using (UnitOfWorkProvider.Create())
             {
                 return await userService.GetAsync(id);
+            }
+        }
+        
+        public async Task DeleteUserAsync(int id)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                userService.Delete(id);
+                await uow.Commit();
             }
         }
 

@@ -93,7 +93,8 @@
         <div>
             <span>Upload photo:</span>
             <span>
-                @Html.TextBoxFor(m => m.Dto.Upload, new { type = "file" })
+                
+                @Html.TextBoxFor(m => m.Dto.Upload, new {type = "file", multiple = "true"})
             </span>
         </div>
         <div>

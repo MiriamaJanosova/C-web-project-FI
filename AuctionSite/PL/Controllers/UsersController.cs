@@ -22,5 +22,18 @@ namespace PL.Controllers
                 return Error();
             return View("UserList", new UserListModel(users));
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<ActionResult> Delete(int id)
+        {
+            if (UserId == id)
+            {
+                return await Index();
+            }
+            
+            await UserFacade.DeleteUserAsync(id);
+            return await Index();
+        }
     }
 }

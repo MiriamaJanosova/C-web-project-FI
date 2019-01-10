@@ -16,8 +16,20 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DAL\DAL.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
+<<<<<<< Updated upstream
+=======
+    <ItemGroup>
+      <Folder Include="Logger\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>bin\Debug\net461\DAL.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+>>>>>>> Stashed changes
 </Project>

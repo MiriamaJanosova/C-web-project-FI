@@ -10,11 +10,13 @@ using BL.Services.Auctions;
 using System.Threading.Tasks;
 using BL.DTOs.Auction;
 using BL.DTOs.Base;
+using BL.DTOs.Filter;
 using BL.Facades;
 using DAL.Entities;
 using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
 using PL.Models.Auctions;
+using WebGrease.Css.Extensions;
 
 namespace PL.Controllers
 {
@@ -26,10 +28,10 @@ namespace PL.Controllers
         public int UserId => User.Identity.GetUserId<int>(); 
 
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 1)
         {
-            var all = await auctionFacade.GetAllAuctionsAsync();
-            return View("AuctionList", all);
+            var all = await auctionFacade.GetFilteredAuctionsAsync(new AuctionFilterDto { RequestedPageNumber = page, PageSize = 15 });
+            return View("AuctionList", new AuctionListModel(all.Items));
         }
 
         public async Task<ActionResult> Auction(int id)
@@ -72,14 +74,7 @@ namespace PL.Controllers
             return RedirectToAction("Auction", new {id = auctionId});
         }
         
-        
-
-        public async Task<ActionResult> Delete(int id)
-        {
-            // TODO
-            return Denied();
-        }
-
+       
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> Create()
@@ -99,7 +94,16 @@ namespace PL.Controllers
                 return View();
 
             var dto = model.Dto;
-            dto.ImageBytes = await ImageToByteArray(dto.Upload.InputStream);
+
+            foreach (var file in dto.Upload)
+            {
+                if (file?.InputStream == null)
+                {
+                    continue;
+                }   
+                dto.ImageBytes.Add(new ImageDto(await ImageToByteArray(file.InputStream)));
+            }
+            
             dto.AuctionerID = User.Identity.GetUserId<int>();
             var res = await modifyAuctionFacade.AddAuctionAsync(dto);
             if (res == 0) // FAILED
@@ -122,11 +126,19 @@ namespace PL.Controllers
             }
         }
         
-        private async Task<byte[]> ImageToByteArray(Stream input)
+        private static async Task<byte[]> ImageToByteArray(Stream input)
         {
             var ms = new MemoryStream();
             await input.CopyToAsync(ms);
             return ms.ToArray();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<ActionResult> Delete (int auctionId)
+        {
+            await auctionFacade.DeleteAuctionAsync(auctionId);
+            return await Index();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace BL.DTOs.Base
         
         public double NewRaise { get; set; }
         
-        public byte[] ImageBytes { get; set; }
+        public List<ImageDto> ImageBytes { get; set; }
         
         public Image Image { get; set; }
 

@@ -21,16 +21,21 @@ namespace DAL
         public DbSet<ItemCategory> ItemCategories { get; set; }
         public DbSet<Raise> Raises { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        // public DbSet<UserRole> UserRoles { get; set; }
 
+        public DbSet<Image> Images { get; set; }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         public static string ConnectionString { get; } =
             //"Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User Id=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
             "Data source=(localdb)\\mssqllocaldb;Database=MySite;Trusted_Connection=True;MultipleActiveResultSets=true";
         public AuctionSiteDbContext() 
             : base(ConnectionString)
         {
-            Database.SetInitializer(new AuctionSiteDbInitializer());
+            //Database.SetInitializer(new AuctionSiteDbInitializer());
+            Database.SetInitializer(new ProductionInitializer());
             Database.CommandTimeout = 300;
         }
         
@@ -38,6 +43,8 @@ namespace DAL
             base(connection, true)
         {
             Database.CreateIfNotExists();
+            
+            
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -51,6 +58,25 @@ namespace DAL
                 .HasMany(t => t.UserRaisesForAuction)
                 .WithRequired(a => a.UserWhoRaised)
                 .WillCascadeOnDelete(false);
+            
+            modelBuilder.Entity<UserRole>()
+                .HasKey(p => new { p.RoleId, p.UserId });
+                
+            modelBuilder.Entity<Login>().HasKey(p => p.UserId);
+
+            
+            //this is instead of DbSet<User>
+            modelBuilder.Entity<User>()
+                .ToTable("Users");
+
+            modelBuilder.Entity<Role>()
+                .ToTable("Roles");
+
+            modelBuilder.Entity<UserRole>()
+                .ToTable("UserRoles");
+
+            modelBuilder.Entity<Login>()
+                .ToTable("Logins");
             //modelBuilder.Entity<User>()
             //    .HasRequired(a => a.Email);
         }

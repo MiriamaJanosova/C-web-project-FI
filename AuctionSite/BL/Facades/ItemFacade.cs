@@ -101,6 +101,20 @@ namespace BL.Facades
                 return item.Id;
             }
         }
+        
+        public async Task<bool> EditItem(ItemDto item)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                if (await itemService.GetAsync(item.Id, false) == null)
+                {
+                    return false;
+                }
+                await itemService.Update(item);
+                await uow.Commit();
+                return true;
+            }
+        }
 
     }
 }

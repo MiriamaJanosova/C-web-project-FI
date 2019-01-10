@@ -74,12 +74,12 @@ namespace WebAPI.Controllers
 
         public async Task<string> DeleteReview(int id)
         {
-            var review = await ReviewsFacade.GetReviewByIdAsync(id);
-            if (review == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-            var success = await ReviewsFacade.DeleteUserReview(review);
+            //var review = await ReviewsFacade.GetReviewByIdAsync(id);
+            //if (review == null)
+            //{
+            //    throw new HttpResponseException(HttpStatusCode.NotFound);
+            //}
+            var success = await ReviewsFacade.DeleteUserReview(id);
             if (!success)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);

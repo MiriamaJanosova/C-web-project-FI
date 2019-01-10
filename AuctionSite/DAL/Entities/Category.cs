@@ -16,13 +16,14 @@ namespace DAL.Entities
         [NotMapped] 
         public string TableName { get; } = "categories";
 
+        [Index(IsUnique = true)]
+        [MaxLength(300)]
         [Required]
-        public ItemCategoryType CategoryType { get; set; }
+        public string CategoryType { get; set; }
         
         [MaxLength(100)]
         public string Description { get; set; }
         
-        //Nemusi byt
-        //public List<ItemCategory> ItemsWithCategory { get; set; }
+        public virtual List<ItemCategory> ItemsWithCategory { get; set; }
     }
 }

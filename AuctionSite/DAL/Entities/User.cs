@@ -17,13 +17,11 @@ namespace DAL.Entities
         public string TableName { get; } = "users";
 
         public virtual List<Raise> UserRaisesForAuction { get; set; }
-        
-        public virtual List<UserRole> UserRoles { get; set; }
-        
+       
         public virtual List<Item> Inventory { get; set; }
         
         public virtual List<Review> Reviews { get; set; }
-        
+       
         public virtual List<Auction> AuctionsCreated { get; set; }
         
         

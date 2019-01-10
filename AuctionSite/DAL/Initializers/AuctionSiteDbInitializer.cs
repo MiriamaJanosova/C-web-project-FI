@@ -3,13 +3,16 @@ using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Initializers
 {
-    public class AuctionSiteDbInitializer : CreateDatabaseIfNotExists<AuctionSiteDbContext>
+    public class AuctionSiteDbInitializer : DropCreateDatabaseAlways<AuctionSiteDbContext>
     {
         protected override void Seed(AuctionSiteDbContext context)
         {
@@ -34,9 +37,6 @@ namespace DAL.Initializers
                 new Role { Name = "Admin" },
                 new Role { Name = "RegisteredUser" },
                 new Role { Name = "User" }
-                //new Role { RoleType = UserRoleType.Admin },
-                //new Role { RoleType = UserRoleType.RegisteredUser },
-                //new Role { RoleType = UserRoleType.User }
             };
 
             foreach (var role in roles)
@@ -51,15 +51,15 @@ namespace DAL.Initializers
                 new User { UserName = "Peter Novotný", Email = "prvni@email.com" },
                 new User { UserName = "Jaroslav Dlouhý", Email = "druhy@email.com" },
                 new User { UserName = "Ladislav Krátky", Email = "treti@email.com" },
-                new User { UserName = "Karolína Milová", Email = "ctvrty@email.com" }
+                new User { UserName = "Karolína Milová", Email = "ctvrty@email.com" },
+                
             };
 
             foreach (var user in users)
             {
                 context.Users.Add(user);
             }
-            
-            
+
             context.SaveChanges();
 
             var reviews = new List<Review>
@@ -74,11 +74,11 @@ namespace DAL.Initializers
 
             var categories = new List<Category>
             {
-                new Category {CategoryType = ItemCategoryType.Art},
-                new Category {CategoryType = ItemCategoryType.ElectronicAppliances},
-                new Category {CategoryType = ItemCategoryType.Furniture},
-                new Category {CategoryType = ItemCategoryType.RandomHouseStuff},
-                new Category {CategoryType = ItemCategoryType.Vintage}
+                new Category {CategoryType = "Art"},
+                new Category {CategoryType = "Electronic appliances"},
+                new Category {CategoryType = "Furniture"},
+                new Category {CategoryType = "Random house stuff"},
+                new Category {CategoryType = "Vintage"}
             };
 
             context.Categories.AddRange(categories);
@@ -113,16 +113,6 @@ namespace DAL.Initializers
             context.ItemCategories.AddRange(itemCategories);
             context.SaveChanges();
 
-            //var userRoles = new List<UserRole>
-            //{
-            //    new UserRole {RoleID = 1, UserID = 1},
-            //    new UserRole {RoleID = 2, UserID = 2},
-            //    new UserRole {RoleID = 2, UserID = 3},
-            //    new UserRole {RoleID = 2, UserID = 4}
-            //};
-
-            //context.UserRoles.AddRange(userRoles);
-            //context.SaveChanges();
 
             var raises = new List<Raise>
             {

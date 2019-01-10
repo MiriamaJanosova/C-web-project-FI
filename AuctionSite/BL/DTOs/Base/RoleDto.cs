@@ -8,10 +8,8 @@ namespace BL.DTOs.Base
 {
     public class RoleDto : DtoBase
     {
-        public UserRoleType RoleType { get; set; }
+        public List<UserRoleDto> Users { get; set; }
 
-        public List<UserRoleDto> UsersOfRole { get; set; }
-
-        public override string ToString() => RoleType.ToString();     
+        public string Name { get; set; }
     }
 }

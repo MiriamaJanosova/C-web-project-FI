@@ -29,6 +29,7 @@ namespace Infrastructure.EntityFramework
         public override async Task<QueryResult<TEntity>> ExecuteAsync()
         {
             IQueryable<TEntity> queryable = Context.Set<TEntity>();
+            
 
             if (string.IsNullOrWhiteSpace(SortAccordingTo) && DesiredPage.HasValue)
             {

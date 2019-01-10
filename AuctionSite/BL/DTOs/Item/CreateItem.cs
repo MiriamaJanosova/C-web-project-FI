@@ -15,6 +15,11 @@ namespace BL.DTOs.Item
 
         public int OwnerID { get; set; }
 
+<<<<<<< Updated upstream
+=======
+        public List<ItemCategoryDto> HasCategories { get; set; }
+
+>>>>>>> Stashed changes
         // TODO more fields 
     }
 }

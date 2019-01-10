@@ -1,5 +1,6 @@
 using System;
 using System.IO.Compression;
+using System.Web.UI.WebControls;
 using AutoMapper;
 using BL.DTOs;
 using BL.DTOs.Auction;
@@ -18,11 +19,12 @@ namespace BL.Config
         public static void ConfigureMapping(IMapperConfigurationExpression config)
         {
             config.CreateMap<Auction, AuctionDto>().ReverseMap();
+            config.CreateMap<Image, ImageDto>().ReverseMap();
             config.CreateMap<Category, CategoryDto>().ReverseMap();
             config.CreateMap<Currency, CurrencyDto>().ReverseMap();
             config.CreateMap<EmailTemplate, EmailTemplateDto>().ReverseMap();
             config.CreateMap<ItemCategory, ItemCategoryDto>().ReverseMap();
-            config.CreateMap<Item, ItemDto>().ReverseMap();
+            config.CreateMap<ItemDto, Item>().ReverseMap();
             config.CreateMap<RaiseDto, Raise>().ReverseMap();
             config.CreateMap<Review, ReviewDto>().ReverseMap();
             config.CreateMap<Role, RoleDto>().ReverseMap();

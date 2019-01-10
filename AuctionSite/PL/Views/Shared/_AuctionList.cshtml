@@ -1,8 +1,9 @@
 ﻿@using BL.DTOs.Base
-@model IEnumerable<AuctionDto>
+@using X.PagedList.Mvc
+@model PL.Models.Auctions.AuctionListModel
 
 <div>
-    @if (Model.Any())
+    @if (Model.Auctions != null && Model.Auctions.Any())
     {
         <table style="width: 100%">
             <thead>
@@ -15,19 +16,28 @@
 
             <tbody>
 
-            @foreach (var dto in Model)
+            @foreach (var dto in Model.Auctions)
             {
                 <tr>
                     <td>@dto.Name</td>
                     <td>@dto.TestPrice</td>
                     <td>
                         @Html.ActionLink("Inspect", "Auction", new {controller = "Auctions", action = "Auction", id = dto.Id})
-                        <!---- Html.ActionLink("Delete", "Delete", "Auctions", new {id = dto.Id}) ---->
                     </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { controller = "Auctions", auctionId = dto.Id})
+                        </td>  
+                    }
                 </tr>
             }
             </tbody>
         </table>
+        
+        <div class="col-md-12">
+            @Html.PagedListPager(Model.Auctions, page => Url.Action("Index", new { controller = "Auctions", page}))
+        </div>
     }
     else
     { 

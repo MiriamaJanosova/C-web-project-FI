@@ -35,7 +35,7 @@ namespace DAL.Entities
         
         public User Auctioner { get; set; }
         
-        public byte[] ImageBytes { get; set; }
+        public virtual List<Image>  ImageBytes { get; set; }
         
         [Required, ForeignKey("Auctioner")]
         public int AuctionerID { get; set; }

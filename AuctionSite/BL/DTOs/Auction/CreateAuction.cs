@@ -36,9 +36,9 @@ namespace BL.DTOs.Auction
         // TODO custom validation for numbers
         public double ActualPrice { get; set; }
         
-        public byte[] ImageBytes { get; set; }
+        public IList<ImageDto> ImageBytes { get; set; } = new List<ImageDto>();
         
-        public HttpPostedFileBase Upload { get; set; }
+        public IList<HttpPostedFileBase> Upload { get; set; }
 
         public int AuctionerID { get; set; }
 

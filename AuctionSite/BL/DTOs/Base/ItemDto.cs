@@ -15,7 +15,7 @@ namespace BL.DTOs.Base
 
         public int OwnerID { get; set; }
 
-        public int?AuctionID { get; set; }
+        public int? AuctionID { get; set; }
 
         public AuctionDto InAuction { get; set; }
 

@@ -26,7 +26,7 @@ namespace PL.Controllers
             return View();
         }
 
-        public async Task<ActionResult> User(int id)
+        public new async Task<ActionResult> User(int id)
         {
             var user = await UserFacade.GetUserByIdAsync(id);
             if (user == null)
@@ -35,13 +35,9 @@ namespace PL.Controllers
             return View(user.Reviews);
         }
 
+        [Authorize]
         public async Task<ActionResult> AddReview(int userId)
         {
-            if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Denied", "Base");
-
-            }
             return View("Detail",new ReviewDto
             {
                 ReviewedUserID = userId,

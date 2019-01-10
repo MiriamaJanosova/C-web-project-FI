@@ -41,6 +41,15 @@ namespace BL.Facades
             }
         }
         
+        public async Task DeleteAuctionAsync(int id)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                auctionService.Delete(id);
+                await uow.Commit();
+            }
+        }
+        
         public async Task<IEnumerable<AuctionDto>> GetAllAuctionsAsync()
         {
             using (UnitOfWorkProvider.Create())

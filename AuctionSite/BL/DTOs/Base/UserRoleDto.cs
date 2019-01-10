@@ -8,17 +8,17 @@ namespace BL.DTOs.Base
 {
     public class UserRoleDto : DtoBase
     {
-        public int RoleID { get; set; }
-
-        public UserRoleType RoleType { get; set; }
-
-        public int UserID { get; set; }
+        public int RoleId { get; set; }
+        
+        public int UserId { get; set; }
 
         public UserDto User { get; set; }
+        
+        public RoleDto Role { get; set; }
 
         public override string ToString()
         {
-            return $"{UserID} {User.UserName} has Role {RoleType.ToString()}";
+            return $"{UserId} {User.UserName}";
         }
 
         protected bool Equals(UserRoleDto other)
@@ -27,10 +27,10 @@ namespace BL.DTOs.Base
             {
                 return true;
             }
+
             return User.UserName.Equals(other.User.UserName) &&
-                UserID == other.UserID &&
-                RoleID == other.RoleID &&
-                RoleType == other.RoleType;
+                   UserId == other.UserId &&
+                   RoleId == other.RoleId;
         }
 
         public override bool Equals(object obj)
@@ -52,9 +52,8 @@ namespace BL.DTOs.Base
             unchecked
             {
                 var hashCode = Id.GetHashCode();
-                hashCode = (hashCode * 397) ^ UserID.GetHashCode();
-                hashCode = (hashCode * 397) ^ RoleID.GetHashCode();
-                hashCode = (hashCode * 397) ^ RoleType.GetHashCode();
+                hashCode = (hashCode * 397) ^ UserId.GetHashCode();
+                hashCode = (hashCode * 397) ^ RoleId.GetHashCode();
                 return hashCode;
             }
         }

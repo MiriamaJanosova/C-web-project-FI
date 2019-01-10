@@ -2,6 +2,7 @@ using System;
 using BL.DTOs.Common;
 using System.Collections.Generic;
 using System.Linq;
+using DAL.Entities;
 
 namespace BL.DTOs.Base
 {   
@@ -15,14 +16,14 @@ namespace BL.DTOs.Base
 
         public List<RaiseDto> UserRaisesForAuction { get; set; }
 
-        public List<UserRoleDto> UserRoles { get; set; }
+        public List<UserRoleDto> Roles { get; set; }
 
         public List<ItemDto> Inventory { get; set; }
 
         public List<ReviewDto> Reviews { get; set; }
 
         public List<AuctionDto> AuctionsCreated { get; set; }
-
+        
         public double ReviewAvg
         {
             
@@ -34,6 +35,11 @@ namespace BL.DTOs.Base
                 var total = Reviews.Sum(r => r.Evaluation);
                 return Math.Round(((double) total / count), 2);
             }
+        }
+
+        public bool IsInRole(string name)
+        {
+            return Roles.First(a => a.Role.Name == name) != null;
         }
 
 
@@ -73,7 +79,7 @@ namespace BL.DTOs.Base
                 hashCode = (hashCode * 397) ^ UserName.GetHashCode();
                 hashCode = (hashCode * 397) ^ Email.GetHashCode();
                 hashCode = (hashCode * 397) ^ UserRaisesForAuction.GetHashCode();
-                hashCode = (hashCode * 397) ^ UserRoles.GetHashCode();
+                hashCode = (hashCode * 397) ^ Roles.GetHashCode();
                 hashCode = (hashCode * 397) ^ Inventory.GetHashCode();
                 hashCode = (hashCode * 397) ^ Reviews.GetHashCode();
                 hashCode = (hashCode * 397) ^ AuctionsCreated.GetHashCode();

@@ -116,8 +116,8 @@ namespace PL.Controllers
         [HttpGet]
         public async Task<ActionResult> MyItems()
         {
-            var userDTO = await UserFacade.GetUserByIdAsync(User.Identity.GetUserId<int>());
-            return View(userDTO.Inventory);
+            var userDto = await UserFacade.GetUserByIdAsync(UserId);
+            return View(userDto.Inventory);
         }
     }
 }
