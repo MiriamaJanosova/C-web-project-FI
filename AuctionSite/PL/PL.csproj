@@ -244,6 +244,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionsController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Models\Auctions\AuctionListModel.cs" />
     <Compile Include="Models\Auctions\MyAuctionsModel.cs" />
     <Compile Include="Models\Auctions\CreateAuctionModel.cs" />
+    <Compile Include="Models\Category\CategoryListModel.cs" />
     <Compile Include="Models\Category\CreateCategoryModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -325,6 +327,8 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Views\Account\UserInfo.cshtml" />
+    <Content Include="Views\Category\CategoryDetail.cshtml" />
+    <Content Include="Views\Category\CategoryList.cshtml" />
     <Content Include="Views\Shared\PermisionDenied.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Web.config" />

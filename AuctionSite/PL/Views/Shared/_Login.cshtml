@@ -31,6 +31,10 @@
                         <li>@Html.ActionLink("My auctions", "MyAuctions", "Account")</li>
                         <li>@Html.ActionLink("My reviews", "Logout", "Account")</li>
                     }
+                    else
+                    {
+                        <li>@Html.ActionLink("Categories", "Index", "Category")</li>    
+                    }
                     <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                 </ul>
             </div>

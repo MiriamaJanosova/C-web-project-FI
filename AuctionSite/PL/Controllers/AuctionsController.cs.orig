@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using BL.Services.Auctions;
 using System.Threading.Tasks;
+using BL.DTOs.Auction;
 using BL.DTOs.Base;
-using BL.DTOs.Filter;
 using BL.Facades;
+using DAL.Entities;
 using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
 using PL.Models.Auctions;
@@ -16,19 +20,21 @@ namespace PL.Controllers
 {
     public class AuctionsController : BaseController
     {
-        public AuctionFacade AuctionFacade { get; set; }
-        public ModifyAuctionsFacade ModifyAuctionFacade { get; set; }
+        public AuctionFacade auctionFacade { get; set; }
+        public ModifyAuctionsFacade modifyAuctionFacade { get; set; }
+
+        public int UserId => User.Identity.GetUserId<int>(); 
 
 
-        public async Task<ActionResult> Index(int page = 1)
+        public async Task<ActionResult> Index()
         {
-            var all = await AuctionFacade.GetFilteredAuctionsAsync(new AuctionFilterDto { RequestedPageNumber = page, PageSize = 15 });
-            return View("AuctionList", new AuctionListModel(all.Items));
+            var all = await auctionFacade.GetAllAuctionsAsync();
+            return View("AuctionList", all);
         }
 
         public async Task<ActionResult> Auction(int id)
         {
-            var dto = await AuctionFacade.GetAuctionById(id);
+            var dto = await auctionFacade.GetAuctionById(id);
             if (dto == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "One man’s crappy software is another man’s full time job.");
@@ -41,7 +47,7 @@ namespace PL.Controllers
         [Authorize]
         public async Task<ActionResult> AddBid(int auctionId, AuctionDto dto)
         {
-           var auctionDto = await AuctionFacade.GetAuctionById(auctionId);
+           var auctionDto = await auctionFacade.GetAuctionById(auctionId);
 
             if (auctionDto.AuctionerID == UserId)
             {
@@ -61,17 +67,24 @@ namespace PL.Controllers
                 UserWhoRaisedID = HttpContext.User.Identity.GetUserId<int>()
             };
 
-            await ModifyAuctionFacade.AddRaiseAsync(raiseDto);
+            await modifyAuctionFacade.AddRaiseAsync(raiseDto);
             TempData["ErrorMessage"] = "Success";
             return RedirectToAction("Auction", new {id = auctionId});
         }
         
-       
+        
+
+        public async Task<ActionResult> Delete(int id)
+        {
+            // TODO
+            return Denied();
+        }
+
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> Create()
         {
-            var avail = await ModifyAuctionFacade.GetAvailableItemsOfUser(UserId);
+            var avail = await modifyAuctionFacade.GetAvailableItemsOfUser(UserId);
             return View(new CreateAuctionModel
             {
                 AvailableItems = avail.ToList()
@@ -86,25 +99,21 @@ namespace PL.Controllers
                 return View();
 
             var dto = model.Dto;
-
-            foreach (var file in dto.Upload)
-            {
-                if (file?.InputStream == null)
-                {
-                    continue;
-                }   
-                dto.ImageBytes.Add(new ImageDto(await ImageToByteArray(file.InputStream)));
-            }
-            
+            dto.ImageBytes = await ImageToByteArray(dto.Upload.InputStream);
             dto.AuctionerID = User.Identity.GetUserId<int>();
-            var res = await ModifyAuctionFacade.AddAuctionAsync(dto);
+<<<<<<< HEAD
+            await AssignItems(dto, model.SelectedItems);
+=======
+
+>>>>>>> origin/fuck
+            var res = await modifyAuctionFacade.AddAuctionAsync(dto);
             if (res == 0) // FAILED
             {
                 TempData["ErrorMessage"] = "Adding item failed";
                 return View();
             }
 
-            await AssignAuctionToItems(res, model.SelectedItems);
+            AssignAuctionToItems(res, model.SelectedItems);
             return RedirectToAction("MyAuctions", "Account");
         }
 
@@ -112,25 +121,27 @@ namespace PL.Controllers
         {
             foreach (var id in itemIds)
             {
-                var item = await ModifyAuctionFacade.GetItem(id);
+                var item = await modifyAuctionFacade.GetItem(id);
                 item.AuctionID = auctionId;
-                await ModifyAuctionFacade.UpdateItem(item);
+                await modifyAuctionFacade.UpdateItem(item);
             }
         }
         
-        private static async Task<byte[]> ImageToByteArray(Stream input)
+        private async Task<byte[]> ImageToByteArray(Stream input)
         {
             var ms = new MemoryStream();
             await input.CopyToAsync(ms);
             return ms.ToArray();
         }
-
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public async Task<ActionResult> Delete (int auctionId)
+        
+        private Image ByteArrayToImage(byte[] byteArrayIn)
         {
-            await AuctionFacade.DeleteAuctionAsync(auctionId);
-            return await Index();
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
+
     }
+
+    
 }

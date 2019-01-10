@@ -56,13 +56,36 @@ namespace PL.Controllers
             }
 
             return RedirectToAction("Index", "Home");
-
         }
 
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Register()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Register(CreateUser dto)
+        {
+            if (!ModelState.IsValid) return View();
+            var result = await UserFacade.CreateAsync(dto);
+            if (result.Succeeded)
+            {
+                var model = new LoginUser
+                {
+                    UserName = dto.UserName,
+                    Password = dto.Password
+                };
+
+                return Login(model);
+            }
+            else
+            {
+                TempData["Error"] = result.ToString();
+            }
+
             return View();
         }
 
@@ -80,7 +103,7 @@ namespace PL.Controllers
             var userModel = UserFacade.ConvertUserDtoToSettingPage(dto);
             return View("UserInfo", userModel);
         }
-        
+
         [HttpPost]
         public async Task<ActionResult> Info(UserShowSettingPage dto)
         {
@@ -89,22 +112,6 @@ namespace PL.Controllers
             return View("UserInfo", dto);
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> Register(CreateUser dto)
-        {
-            if (!ModelState.IsValid) return View();
-            var result = await UserFacade.CreateAsync(dto);
-            if (result.Succeeded)
-            {
-                TempData["Info"] = result.ToString();
-            }
-            else
-            {
-                TempData["Error"] = result.ToString();
-            }
-            return View();
-        }
 
         [HttpGet]
         public async Task<ActionResult> MyAuctions()
@@ -116,8 +123,8 @@ namespace PL.Controllers
         [HttpGet]
         public async Task<ActionResult> MyItems()
         {
-            var userDto = await UserFacade.GetUserByIdAsync(UserId);
-            return View(userDto.Inventory);
+            var userDTO = await UserFacade.GetUserByIdAsync(User.Identity.GetUserId<int>());
+            return View(userDTO.Inventory);
         }
     }
 }
