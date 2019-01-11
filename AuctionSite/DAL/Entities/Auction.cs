@@ -38,7 +38,6 @@ namespace DAL.Entities
 
         public virtual List<Image>  ImageBytes { get; set; }
         
-        [Required]
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }
         public virtual User User { get; set; }
