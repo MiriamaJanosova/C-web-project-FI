@@ -21,7 +21,7 @@ namespace BL.DTOs.Base
         
         public int UserId { get; set; }
 
-        public UserDto Auctioner { get; set; }
+        public UserDto User { get; set; }
 
         public double NewRaise { get; set; }
 
@@ -53,8 +53,7 @@ namespace BL.DTOs.Base
             {
                 return true;
             }
-            return obj.GetType() == this.GetType() &&
-                Equals((AuctionDto) obj);
+            return obj.GetType() == this.GetType() && ((AuctionDto)obj).GetHashCode() == this.GetHashCode();
         }
 
         public override int GetHashCode()

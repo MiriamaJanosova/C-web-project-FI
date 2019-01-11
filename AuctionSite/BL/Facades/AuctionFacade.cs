@@ -136,9 +136,11 @@ namespace BL.Facades
 
         public async Task<bool> RaiseForAuction(RaiseDto raise)
         {
-            using (UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
-                return await auctionService.RaiseForAuction(raise);
+                await auctionService.RaiseForAuction(raise);
+                await uow.Commit();
+                return true;
             }
         }
 

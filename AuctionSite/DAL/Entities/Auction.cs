@@ -37,10 +37,9 @@ namespace DAL.Entities
         public DateTime EndDate { get; set; }
 
         public virtual List<Image>  ImageBytes { get; set; }
-        
-        [ForeignKey(nameof(User))]
         public int UserId { get; set; }
-        public virtual User User { get; set; }
+        
+        public User User { get; set; }
         
         public virtual List<Item> AuctionedItems { get; set; }
         

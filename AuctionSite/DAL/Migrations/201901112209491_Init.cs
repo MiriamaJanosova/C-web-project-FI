@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Inint : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -152,15 +152,15 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Amount = c.Double(nullable: false),
-                        RaiseForAuctionID = c.Int(nullable: false),
-                        UserWhoRaisedID = c.Int(nullable: false),
+                        AuctionId = c.Int(nullable: false),
+                        UserId = c.Int(nullable: false),
                         DateTime = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Auctions", t => t.RaiseForAuctionID, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.UserWhoRaisedID)
-                .Index(t => t.RaiseForAuctionID)
-                .Index(t => t.UserWhoRaisedID);
+                .ForeignKey("dbo.Auctions", t => t.AuctionId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId)
+                .Index(t => t.AuctionId)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.Images",
@@ -197,22 +197,22 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.Auctions", "UserId", "dbo.Users");
             DropForeignKey("dbo.Images", "AuctionId", "dbo.Auctions");
-            DropForeignKey("dbo.Raises", "UserWhoRaisedID", "dbo.Users");
-            DropForeignKey("dbo.Raises", "RaiseForAuctionID", "dbo.Auctions");
+            DropForeignKey("dbo.Raises", "UserId", "dbo.Users");
+            DropForeignKey("dbo.Raises", "AuctionId", "dbo.Auctions");
             DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserRoles", "RoleId", "dbo.Roles");
             DropForeignKey("dbo.Reviews", "ReviewedUserID", "dbo.Users");
             DropForeignKey("dbo.Logins", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Items", "OwnerID", "dbo.Users");
             DropForeignKey("dbo.Claims", "UserId", "dbo.Users");
+            DropForeignKey("dbo.Auctions", "UserId", "dbo.Users");
             DropForeignKey("dbo.ItemCategories", "ItemID", "dbo.Items");
             DropForeignKey("dbo.ItemCategories", "CategoryID", "dbo.Categories");
             DropForeignKey("dbo.Items", "AuctionID", "dbo.Auctions");
             DropIndex("dbo.Images", new[] { "AuctionId" });
-            DropIndex("dbo.Raises", new[] { "UserWhoRaisedID" });
-            DropIndex("dbo.Raises", new[] { "RaiseForAuctionID" });
+            DropIndex("dbo.Raises", new[] { "UserId" });
+            DropIndex("dbo.Raises", new[] { "AuctionId" });
             DropIndex("dbo.UserRoles", new[] { "UserId" });
             DropIndex("dbo.UserRoles", new[] { "RoleId" });
             DropIndex("dbo.Reviews", new[] { "ReviewedUserID" });

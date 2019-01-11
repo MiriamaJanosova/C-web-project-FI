@@ -19,6 +19,6 @@ namespace DAL.Entities
         [MaxLength(5)]
         public string Code  { get; set; }
         
-        public double ExchangeRate { get; set; }
+        public decimal ExchangeRate { get; set; }
     }
 }

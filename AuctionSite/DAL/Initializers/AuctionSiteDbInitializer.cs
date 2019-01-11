@@ -116,11 +116,11 @@ namespace DAL.Initializers
 
             var raises = new List<Raise>
             {
-                new Raise {Amount = 200, RaiseForAuctionID = 1, UserWhoRaisedID = 2, DateTime = DateTime.Parse("2017-08-16")},
-                new Raise {Amount = 300, RaiseForAuctionID = 1, UserWhoRaisedID = 3, DateTime = DateTime.Parse("2017-08-17")},
-                new Raise {Amount = 400, RaiseForAuctionID = 1, UserWhoRaisedID = 2, DateTime = DateTime.Parse("2017-08-22")},
-                new Raise {Amount = 185, RaiseForAuctionID = 1, UserWhoRaisedID = 2, DateTime = DateTime.Parse("2017-10-30")},
-                new Raise {Amount = 400, RaiseForAuctionID = 1, UserWhoRaisedID = 3, DateTime = DateTime.Parse("2017-11-03")}
+                new Raise {Amount = 200, AuctionId = 1, UserId = 2, DateTime = DateTime.Parse("2017-08-16")},
+                new Raise {Amount = 300, AuctionId = 1, UserId = 3, DateTime = DateTime.Parse("2017-08-17")},
+                new Raise {Amount = 400, AuctionId = 1, UserId = 2, DateTime = DateTime.Parse("2017-08-22")},
+                new Raise {Amount = 185, AuctionId = 1, UserId = 2, DateTime = DateTime.Parse("2017-10-30")},
+                new Raise {Amount = 400, AuctionId = 1, UserId = 3, DateTime = DateTime.Parse("2017-11-03")}
             };
 
             context.Raises.AddRange(raises);

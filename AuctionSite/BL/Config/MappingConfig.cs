@@ -1,6 +1,5 @@
 using System;
 using System.IO.Compression;
-using System.Web.UI.WebControls;
 using AutoMapper;
 using BL.DTOs;
 using BL.DTOs.Auction;
@@ -49,7 +48,6 @@ namespace BL.Config
         public static void Initialize()
         {
             Mapper.Initialize(config => ConfigureMapping(config));
-            
         }
     }
 }

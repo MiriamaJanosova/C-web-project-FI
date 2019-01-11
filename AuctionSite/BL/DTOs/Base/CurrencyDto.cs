@@ -9,7 +9,7 @@ namespace BL.DTOs.Base
     {
         public string Code { get; set; }
 
-        public double ExchangeRate { get; set; }
+        public decimal ExchangeRate { get; set; }
 
         public override string ToString() => Code;
 

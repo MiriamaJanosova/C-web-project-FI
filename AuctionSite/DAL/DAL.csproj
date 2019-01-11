@@ -91,9 +91,9 @@
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
     <Compile Include="Initializers\ProductionInitializer.cs" />
-    <Compile Include="Migrations\201901111634474_Inint.cs" />
-    <Compile Include="Migrations\201901111634474_Inint.Designer.cs">
-      <DependentUpon>201901111634474_Inint.cs</DependentUpon>
+    <Compile Include="Migrations\201901112209491_Init.cs" />
+    <Compile Include="Migrations\201901112209491_Init.Designer.cs">
+      <DependentUpon>201901112209491_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,8 +113,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901111634474_Inint.resx">
-      <DependentUpon>201901111634474_Inint.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901112209491_Init.resx">
+      <DependentUpon>201901112209491_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

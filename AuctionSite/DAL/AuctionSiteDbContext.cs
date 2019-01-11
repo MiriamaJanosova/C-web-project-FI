@@ -52,7 +52,7 @@ namespace DAL
             //    .WillCascadeOnDelete(false);
             modelBuilder.Entity<User>()
                 .HasMany(t => t.UserRaisesForAuction)
-                .WithRequired(a => a.UserWhoRaised)
+                .WithRequired(a => a.User)
                 .WillCascadeOnDelete(false);
             
             modelBuilder.Entity<UserRole>()

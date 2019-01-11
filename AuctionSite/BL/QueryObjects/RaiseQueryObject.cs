@@ -50,7 +50,7 @@ namespace BL.QueryObjects
             {
                 return null;
             }
-            return new SimplePredicate(nameof(Raise.UserWhoRaisedID), ValueComparingOperator.Equal, filter.AuctionerID);
+            return new SimplePredicate(nameof(Raise.User), ValueComparingOperator.Equal, filter.AuctionerID);
         }
 
         private static SimplePredicate FilterAuction(RaiseFilterDto filter)
@@ -59,7 +59,7 @@ namespace BL.QueryObjects
             {
                 return null;
             }
-            return new SimplePredicate(nameof(Raise.RaiseForAuctionID), ValueComparingOperator.Equal, filter.RaiseForAuctionID);
+            return new SimplePredicate(nameof(Raise.AuctionId), ValueComparingOperator.Equal, filter.RaiseForAuctionID);
         }
 
         private static SimplePredicate FilterAmount(RaiseFilterDto filter)

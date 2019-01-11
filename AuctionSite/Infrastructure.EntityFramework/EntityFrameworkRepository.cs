@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Threading.Tasks;
 using Infrastructure.EntityFramework.UnitOfWork;
 using Infrastructure.UnitOfWork;
@@ -33,8 +34,9 @@ namespace Infrastructure.EntityFramework
 
         public void Update(TEntity entity)
         {
-            var foundEntity = Context.Set<TEntity>().Find(entity.Id);
-            Context.Entry(foundEntity).CurrentValues.SetValues(entity);
+           Context.Database.Log = Console.WriteLine;
+           var foundEntity = Context.Set<TEntity>().Find(entity.Id);
+           Context.Entry(foundEntity).CurrentValues.SetValues(entity);
         }
 
         public async Task<TEntity> GetAsync(int id)

@@ -59,13 +59,14 @@ namespace PL.Controllers
            {
                Amount = dto.NewRaise, 
                DateTime = DateTime.Now,
-               RaiseForAuctionID = auctionId,
-               UserWhoRaisedID = HttpContext.User.Identity.GetUserId<int>()
+               AuctionId = auctionId,
+               UserId = HttpContext.User.Identity.GetUserId<int>()
             };
            
+            //await ModifyAuctionFacade.AddRaiseToAuctionAsync(raiseDto);
             await ModifyAuctionFacade.AddRaiseToAuctionAsync(raiseDto);
             
-            TempData["ErrorMessage"] = "Success";
+            TempData["SuccessMessage"] = "Success";
             return RedirectToAction("Auction", new {id = auctionId});
         }
         

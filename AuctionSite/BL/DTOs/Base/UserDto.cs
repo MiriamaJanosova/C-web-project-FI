@@ -69,10 +69,10 @@ namespace BL.DTOs.Base
 
         public override int GetHashCode()
         {
-            if (Id >= 0)
-            {
-                return Id.GetHashCode();
-            }
+           //if (Id >= 0)
+           //{
+           //    return Id.GetHashCode();
+           //}
             unchecked
             {
                 var hashCode = Id.GetHashCode();

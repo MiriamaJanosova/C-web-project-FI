@@ -7,19 +7,19 @@ namespace BL.DTOs.Base
     {
         public double Amount { get; set; }
 
-        public int UserWhoRaisedID { get; set; }
+        public int UserId { get; set; }
 
-        public UserDto UserWhoRaised { get; set; }
+        public UserDto User { get; set; }
 
-        public int RaiseForAuctionID { get; set; }
+        public int AuctionId { get; set; }
 
-        public AuctionDto RaiseForAuction{ get; set; }
+        public AuctionDto Auction{ get; set; }
 
         public DateTime DateTime { get; set; }
 
         public override string ToString()
         {
-            return $"{UserWhoRaised.UserName} is willing to pay {Amount} for auction {RaiseForAuctionID} {RaiseForAuction.Name}";
+            return $"{User.UserName} is willing to pay {Amount} for auction {AuctionId} {Auction.Name}";
         }
 
         protected bool Equals(RaiseDto other)
@@ -29,9 +29,9 @@ namespace BL.DTOs.Base
                 return true;
             }
             return Amount == other.Amount &&
-                UserWhoRaisedID == other.UserWhoRaisedID &&
-                UserWhoRaised.Equals(other.UserWhoRaised) &&
-                RaiseForAuction.Equals(other.RaiseForAuction) &&
+                UserId == other.UserId &&
+                User.Equals(other.User) &&
+                Auction.Equals(other.Auction) &&
                 DateTime.Equals(other.DateTime);
         }
 
@@ -55,8 +55,8 @@ namespace BL.DTOs.Base
             {
                 var hashCode = Id.GetHashCode();
                 hashCode = (hashCode * 397) ^ Amount.GetHashCode();
-                hashCode = (hashCode * 397) ^ UserWhoRaisedID.GetHashCode();
-                hashCode = (hashCode * 397) ^ RaiseForAuctionID.GetHashCode();
+                hashCode = (hashCode * 397) ^ UserId.GetHashCode();
+                hashCode = (hashCode * 397) ^ AuctionId.GetHashCode();
                 hashCode = (hashCode * 397) ^ DateTime.GetHashCode();
                 return hashCode;
             }

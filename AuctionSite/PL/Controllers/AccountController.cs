@@ -8,6 +8,7 @@ using BL.DTOs.Base;
 using BL.DTOs.Users;
 using BL.Facades;
 using BL.Identity;
+using Castle.Core.Internal;
 using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
 using Microsoft.Owin.Security;
@@ -35,13 +36,12 @@ namespace PL.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            // TODO
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(LoginUser dto)
+        public ActionResult Login(LoginUser dto, string returnUrl)
         {
             if (!ModelState.IsValid) return View();
             try
@@ -55,7 +55,11 @@ namespace PL.Controllers
                 return View();
             }
 
-            return RedirectToAction("Index", "Home");
+            if (returnUrl.IsNullOrEmpty())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return Redirect(returnUrl);
         }
 
         [HttpGet]
@@ -79,7 +83,7 @@ namespace PL.Controllers
                     Password = dto.Password
                 };
 
-                return Login(model);
+                return Login(model, "");
             }
             else
             {
