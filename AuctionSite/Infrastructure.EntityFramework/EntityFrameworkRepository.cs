@@ -15,7 +15,6 @@ namespace Infrastructure.EntityFramework
         public EntityFrameworkRepository(IUnitOfWorkProvider provider)
         {
             this.provider = provider;
-            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
         public void Create(TEntity entity)
