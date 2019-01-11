@@ -62,5 +62,15 @@ namespace BL.Facades
                 return true;
             }
         }
+        
+        public async Task<int> Create(CategoryDto dto)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                var item = categoryService.Create(categoryService.MapToBase(dto));
+                await uow.Commit();
+                return item.Id;
+            }
+        }
     }
 }

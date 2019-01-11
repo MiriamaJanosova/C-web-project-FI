@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,7 +54,7 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (await userService.GetAsync(auction.AuctionerID, false) == null)
+                if (await userService.GetAsync(auction.UserId, false) == null)
                 {
                     return 0;
                 }
@@ -129,7 +130,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<int> AddRaiseAsync(RaiseDto raise)
+        public async Task<int> AddRaiseToAuctionAsync(RaiseDto raise)
         {
             if (raise == null)
             {
@@ -137,8 +138,7 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-               
-                if (await auctionService.GetAsync(raise.RaiseForAuctionID, false) == null)
+                if ( await auctionService.GetAsync(raise.RaiseForAuctionID, false) == null)
                 {
                     return 0;
                 }
@@ -150,6 +150,18 @@ namespace BL.Facades
 
                 var res = raiseService.Create(raise);
                 await uow.Commit();
+                var auction = await auctionService.GetAsync(raise.RaiseForAuctionID, false);
+                auction.ActualPrice = raise.Amount;
+                await auctionService.Update(auction);
+                try
+                {
+                    await uow.Commit();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    Console.WriteLine(e);
+                    
+                }
                 return res.Id;
             }
         }

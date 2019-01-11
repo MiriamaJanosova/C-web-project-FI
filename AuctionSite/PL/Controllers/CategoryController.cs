@@ -56,5 +56,23 @@ namespace PL.Controllers
             return RedirectToAction("Index");
         }
         
+        [HttpPost]
+        public async Task<ActionResult> AddCategory(CategoryDto category)
+        {
+            if (await CategoryFacade.Create(category) == 0)
+            {
+                TempData["Error"] = "Can't add category";
+            }
+
+            return RedirectToAction("Index");
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult> AddCategory(int categoryId)
+        {
+            
+            return RedirectToAction("Index");
+        }
+        
     }
 }

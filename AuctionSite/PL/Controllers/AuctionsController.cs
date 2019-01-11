@@ -28,12 +28,13 @@ namespace PL.Controllers
 
         public async Task<ActionResult> Auction(int id)
         {
+            
             var dto = await AuctionFacade.GetAuctionById(id);
             if (dto == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "One man’s crappy software is another man’s full time job.");
             }
-
+            
             return View(dto);
         }
         
@@ -43,25 +44,27 @@ namespace PL.Controllers
         {
            var auctionDto = await AuctionFacade.GetAuctionById(auctionId);
 
-            if (auctionDto.AuctionerID == UserId)
+            if (auctionDto.UserId == UserId)
             {
                 TempData["ErrorMessage"] = "Can't bid to the own auction";
+                return RedirectToAction("Auction", new {id = auctionId});
             }
-            if (dto.NewRaise <= auctionDto.TestPrice)
-            {
-               TempData["ErrorMessage"] = "Raise have to be bigger than actual price";
-               return RedirectToAction("Auction", new {id = auctionId});
-            }
-            
-            var raiseDto = new RaiseDto
-            {
-                Amount = dto.NewRaise, 
-                DateTime = DateTime.Now,
-                RaiseForAuctionID = auctionId,
-                UserWhoRaisedID = HttpContext.User.Identity.GetUserId<int>()
+           if (dto.NewRaise <= auctionDto.ActualPrice)
+           {
+              TempData["ErrorMessage"] = "Raise have to be bigger than actual price";
+              return RedirectToAction("Auction", new {id = auctionId});
+           }
+           
+           var raiseDto = new RaiseDto
+           {
+               Amount = dto.NewRaise, 
+               DateTime = DateTime.Now,
+               RaiseForAuctionID = auctionId,
+               UserWhoRaisedID = HttpContext.User.Identity.GetUserId<int>()
             };
-
-            await ModifyAuctionFacade.AddRaiseAsync(raiseDto);
+           
+            await ModifyAuctionFacade.AddRaiseToAuctionAsync(raiseDto);
+            
             TempData["ErrorMessage"] = "Success";
             return RedirectToAction("Auction", new {id = auctionId});
         }
@@ -96,7 +99,8 @@ namespace PL.Controllers
                 dto.ImageBytes.Add(new ImageDto(await ImageToByteArray(file.InputStream)));
             }
             
-            dto.AuctionerID = User.Identity.GetUserId<int>();
+            dto.UserId = User.Identity.GetUserId<int>();
+            dto.ActualPrice = dto.StartPrice;
             var res = await ModifyAuctionFacade.AddAuctionAsync(dto);
             if (res == 0) // FAILED
             {

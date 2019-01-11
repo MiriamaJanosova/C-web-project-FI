@@ -1,12 +1,20 @@
 ﻿@using BL.DTOs.Base
+@using Castle.Core.Internal
+@using Microsoft.AspNet.Identity
 @model AuctionDto
 
 
 <h2>@Model.Name</h2>
 
-<div>
-    <span style="color: red"> @TempData["ErrorMessage"]</span>
-</div>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        @TempData["ErrorMessage"]
+    </div>
+}
+
 
 <div class="form-group">
     <label>Decription: </label>
@@ -18,7 +26,7 @@
 </div>
 <div class="form-group">
     <label>Price: </label>
-    <label>@Model.TestPrice</label>
+    <label>@Model.ActualPrice</label>
 </div>
 <div class="form-group">
     <label>Ended after: </label>
@@ -80,11 +88,10 @@
         </div>
     </div>
 </div>
->>>>>>> Stashed changes
 </div>
 
 
-@if (Request.IsAuthenticated)
+@if (Request.IsAuthenticated && User.Identity.GetUserId<int>() != @Model.UserId) 
 {
     using (Html.BeginForm("AddBid", "Auctions", new {auctionId = @Model.Id}, FormMethod.Post))
      {

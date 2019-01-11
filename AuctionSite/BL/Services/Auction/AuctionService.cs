@@ -84,7 +84,8 @@ namespace BL.Services.Auctions
                 throw new ArgumentException("Raise amount must be bigger than actual price");
             if (auction.StartDate.CompareTo(raiseDto.DateTime) > 0 || auction.EndDate.CompareTo(raiseDto.DateTime) <= 0)
                 throw new ArgumentException("you cannot raiseDto for this auction, it hasn't started yet or has already finished. ");
-
+            
+            
             auction.ActualPrice = raiseDto.Amount;
             var raise = Mapper.Map<Raise>(raiseDto);
             auction.RaisesForAuction.Add(raise);

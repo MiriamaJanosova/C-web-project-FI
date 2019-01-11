@@ -206,7 +206,7 @@ namespace WebAPI.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
-            var raiseId = await ModifyAuctionsFacade.AddRaiseAsync(raise);
+            var raiseId = await ModifyAuctionsFacade.AddRaiseToAuctionAsync(raise);
             if (raiseId == 0)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);

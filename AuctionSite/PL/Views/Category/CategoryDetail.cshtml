@@ -14,9 +14,9 @@
     </p>
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Description</label>
-        @Html.TextArea("Description", Model.Description,  new { @class = "form-control rounded-0", @id="exampleFormControlTextarea1", @rows="5" })
+        @Html.EditorFor(m => m.Description,  new { @class = "form-control rounded-0", @id="exampleFormControlTextarea1", @rows="5" })
         
-    </div
+    </div>
     
 
     @Html.HiddenFor(m => m.Id)

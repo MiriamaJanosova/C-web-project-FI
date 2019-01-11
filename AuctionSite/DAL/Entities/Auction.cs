@@ -27,18 +27,21 @@ namespace DAL.Entities
         [Required]
         public string Description { get; set; }
         
+        [Required, Range(0, double.MaxValue)]
+        public double StartPrice { get; set; }
+        
+        [Range(0, double.MaxValue)]
+        public double ActualPrice { get; set; }
+        
         [Required]
         public DateTime EndDate { get; set; }
 
-        [Required, Range(0, double.MaxValue)]
-        public double ActualPrice { get; set; }
-        
-        public User Auctioner { get; set; }
-        
         public virtual List<Image>  ImageBytes { get; set; }
         
-        [Required, ForeignKey("Auctioner")]
-        public int AuctionerID { get; set; }
+        [Required]
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
         
         public virtual List<Item> AuctionedItems { get; set; }
         
