@@ -49,6 +49,9 @@ namespace PL.Controllers
                 TempData["ErrorMessage"] = "Can't bid to the own auction";
                 return RedirectToAction("Auction", new {id = auctionId});
             }
+
+            dto.NewRaise = CurrencyController.CalcCurrencyAndGetSymbol(dto.NewRaise, true).Item1;
+            
            if (dto.NewRaise <= auctionDto.ActualPrice)
            {
               TempData["ErrorMessage"] = "Raise have to be bigger than actual price";
@@ -101,6 +104,7 @@ namespace PL.Controllers
             }
             
             dto.UserId = User.Identity.GetUserId<int>();
+            dto.StartPrice = CurrencyController.CalcCurrencyAndGetSymbol(dto.StartPrice, true).Item1;
             dto.ActualPrice = dto.StartPrice;
             var res = await ModifyAuctionFacade.AddAuctionAsync(dto);
             if (res == 0) // FAILED

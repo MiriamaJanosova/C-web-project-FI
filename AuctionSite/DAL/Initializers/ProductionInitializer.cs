@@ -8,7 +8,7 @@ using PasswordHasher = DAL.Helper.PasswordHasher;
 
 namespace DAL.Initializers
 {
-    public class ProductionInitializer : DropCreateDatabaseIfModelChanges<AuctionSiteDbContext>
+    public class ProductionInitializer : DropCreateDatabaseAlways<AuctionSiteDbContext>
     {
         
         protected override void Seed(AuctionSiteDbContext context)

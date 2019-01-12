@@ -260,8 +260,10 @@
     <Compile Include="Models\Auctions\CreateAuctionModel.cs" />
     <Compile Include="Models\Category\CategoryListModel.cs" />
     <Compile Include="Models\Category\CreateCategoryModel.cs" />
+    <Compile Include="Models\Currency\CurrencyListModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Layout\LayoutModel.cs" />
     <Compile Include="Models\Users\UserInfoModel.cs" />
     <Compile Include="Models\Users\UserListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -330,6 +332,8 @@
     <Content Include="Views\Account\UserInfo.cshtml" />
     <Content Include="Views\Category\CategoryDetail.cshtml" />
     <Content Include="Views\Category\CategoryList.cshtml" />
+    <Content Include="Views\Currency\Currency.cshtml" />
+    <Content Include="Views\Currency\CurrencyList.cshtml" />
     <Content Include="Views\Shared\PermisionDenied.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Web.config" />
@@ -372,6 +376,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Helper" />
     <Folder Include="Helpers" />
   </ItemGroup>
   <ItemGroup>

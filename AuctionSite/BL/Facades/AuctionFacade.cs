@@ -21,9 +21,9 @@ namespace BL.Facades
     {
         private readonly IAuctionService auctionService;
         private readonly IRaiseService raiseService;
-        private readonly IItemService itemService;
-        private readonly IItemCategoryService itemCategoryService;
-        private readonly ICategoryService categoryService;
+        //private readonly IItemService itemService;
+        //private readonly IItemCategoryService itemCategoryService;
+        //private readonly ICategoryService categoryService;
 
         public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService auctionService,
             IRaiseService raiseService)

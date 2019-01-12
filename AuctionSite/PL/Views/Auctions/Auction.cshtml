@@ -1,6 +1,7 @@
 ﻿@using BL.DTOs.Base
 @using Castle.Core.Internal
 @using Microsoft.AspNet.Identity
+@using PL.Controllers
 @model AuctionDto
 
 
@@ -35,7 +36,14 @@
 </div>
 <div class="form-group">
     <label>Price: </label>
-    <label>@Model.ActualPrice</label>
+    <label>@{
+        var (price, symbol) = CurrencyController.CalcCurrencyAndGetSymbol((decimal) Model.ActualPrice);
+        var concat = price + " " + symbol;
+        @concat;
+    }
+               
+           }
+    </label>
 </div>
 <div class="form-group">
     <label>Ended after: </label>

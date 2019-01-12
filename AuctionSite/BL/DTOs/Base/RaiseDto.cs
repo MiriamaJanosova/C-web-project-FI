@@ -5,7 +5,7 @@ namespace BL.DTOs.Base
 {
     public class RaiseDto : DtoBase
     {
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public int UserId { get; set; }
 

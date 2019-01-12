@@ -36,7 +36,7 @@ namespace BL.Config
             config.CreateMap<QueryResult<Review>, QueryResultDto<ReviewDto, ReviewFilterDto>>();
             config.CreateMap<QueryResult<User>, QueryResultDto<UserDto, UserFilterDto>>();
             config.CreateMap<QueryResult<Auction>, QueryResultDto<AuctionDto, AuctionFilterDto>>();
-
+            config.CreateMap<QueryResult<Currency>, QueryResultDto<CurrencyDto, CurrencyFilterDto>>();
             config.CreateMap<CreateUser, UserDto>().ReverseMap();
             config.CreateMap<CreateUser, User>();
             config.CreateMap<CreateItem, ItemDto>().ReverseMap();

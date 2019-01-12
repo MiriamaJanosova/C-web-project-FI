@@ -25,8 +25,8 @@ namespace DAL.Initializers
             {
 
                 new Currency{Code = "EUR", ExchangeRate = 1},
-                new Currency{Code = "CZK", ExchangeRate = 25.5},
-                new Currency{Code = "USD", ExchangeRate = 1.15}
+                new Currency{Code = "CZK", ExchangeRate = 25},
+                new Currency{Code = "USD", ExchangeRate = 5}
             };
 
             context.Currencies.AddRange(currencies);
@@ -87,7 +87,7 @@ namespace DAL.Initializers
             var auctions = new List<Auction>
             {
                 new Auction {StartDate = DateTime.Parse("2017-08-15"), EndDate = DateTime.Parse("2017-08-23"), ActualPrice = 400, UserId = 1, Name = "bla", Description = "blablass"},
-                new Auction {StartDate = DateTime.Parse("2017-10-28"), EndDate = DateTime.Parse("2017-11-03"), ActualPrice = 185.6, UserId = 1, Name = "bla2", Description = "blabla"}
+                new Auction {StartDate = DateTime.Parse("2017-10-28"), EndDate = DateTime.Parse("2017-11-03"), ActualPrice = 185.6m, UserId = 1, Name = "bla2", Description = "blabla"}
             };
 
             context.Auctions.AddRange(auctions);

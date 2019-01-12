@@ -46,6 +46,19 @@
                     <li>@Html.ActionLink("Users", "Index", "Users")</li>
                     
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                   
+                    @if (Session["currency"] == null)
+                    {
+                        <li>@Html.ActionLink("Usd", "Index", "Currency")</li>
+                    }
+                    else
+                    {
+                        var currency =  @Session["currency"];
+                        <li>@Html.ActionLink(@Session["currency"].ToString(), "Index", "Currency")</li>
+                    }
+                    
+                </ul>
                 @Html.Partial("_Login")
             </div>
             

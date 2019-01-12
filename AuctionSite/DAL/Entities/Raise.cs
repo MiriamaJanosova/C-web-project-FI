@@ -14,7 +14,7 @@ namespace DAL.Entities
         public int Id { get; set; }
         [NotMapped] public string TableName { get; } = "raises";
 
-        [Required] public double Amount { get; set; }
+        [Required] public decimal Amount { get; set; }
 
         public Auction Auction { get; set; }
 

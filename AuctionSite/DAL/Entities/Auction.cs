@@ -27,11 +27,11 @@ namespace DAL.Entities
         [Required]
         public string Description { get; set; }
         
-        [Required, Range(0, double.MaxValue)]
-        public double StartPrice { get; set; }
+        [Required, Range(0, (double)decimal.MaxValue)]
+        public decimal StartPrice { get; set; }
         
-        [Range(0, double.MaxValue)]
-        public double ActualPrice { get; set; }
+        [Range(0, (double)decimal.MaxValue)]
+        public decimal ActualPrice { get; set; }
         
         [Required]
         public DateTime EndDate { get; set; }

@@ -1,0 +1,85 @@
+@model PL.Models.Currency.CurrencyListModel
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        @TempData["Error"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        @TempData["Success"]
+    </div>
+}
+
+<div>
+    @if (Model.Currencies != null && Model.Currencies.Any())
+    {
+        <table style="width: 100%">
+            <thead>
+            <tr>
+                <th>Currency code</th>
+                <th>Currency symbol</th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>Exchange rate</th>
+                }
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            @foreach (var dto in Model.Currencies)
+            {
+                <tr>
+                    <td>@dto.Code</td>
+                    <td>@dto.Symbol</td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>@dto.ExchangeRate</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = dto.Id})
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { id = dto.Id})
+                        </td>  
+                    }
+                    <td>
+                        @Html.ActionLink("Choose", "Change", new { code = dto.Code })
+                    </td> 
+                </tr>
+            }
+            </tbody>
+        </table>
+        if(User.IsInRole("Admin"))
+        {
+            <div>
+                @Html.ActionLink("Update", "Update")
+            </div>
+        }
+       
+    }
+    else
+    { 
+        <div style="text-align: center">
+            <b>Nothing to show</b>
+        </div>
+        if (User.IsInRole("Admin"))
+        {
+            <div>
+                @Html.ActionLink("Create", "Create")
+            </div> 
+            <div>
+                @Html.ActionLink("Create default", "CreateAll")
+            </div> 
+        }
+    }
+   
+</div>

@@ -1,4 +1,5 @@
-﻿@model PL.Models.Auctions.CreateAuctionModel
+﻿@using PL.Controllers
+@model PL.Models.Auctions.CreateAuctionModel
 
 
 <h2>Create</h2>
@@ -35,6 +36,12 @@
             <span>Starting price:</span>
             <span>
                 @Html.TextBoxFor(m => m.Dto.StartPrice)
+            </span>
+            <span>
+                @{
+                    var symbol = CurrencyController.CalcCurrencyAndGetSymbol(0).Item2;
+                    @symbol;
+                }
             </span>
             <span>
                 @Html.ValidationMessageFor(m => m.Dto.StartPrice)

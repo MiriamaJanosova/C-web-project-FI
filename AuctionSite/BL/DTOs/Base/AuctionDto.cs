@@ -17,13 +17,13 @@ namespace BL.DTOs.Base
         
         public DateTime EndDate { get; set; }
         
-        public double ActualPrice { get; set; }
+        public decimal ActualPrice { get; set; }
         
         public int UserId { get; set; }
 
         public UserDto User { get; set; }
 
-        public double NewRaise { get; set; }
+        public decimal NewRaise { get; set; }
 
         public List<ImageDto> ImageBytes { get; set; }
         

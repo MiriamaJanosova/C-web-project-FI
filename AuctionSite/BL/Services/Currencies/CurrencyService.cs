@@ -22,7 +22,13 @@ namespace BL.Services.Currencies
         private readonly IRepository<Currency> currencyRepository;
         private readonly string BASE_URI = "http://free.currencyconverterapi.com";
         private readonly string API_VERSION = "v6";
-        private readonly string[] CURRENCIES = {"USD", "EUR", "CZK", "GBP"};
+        private readonly Tuple<string, string>[] CURRENCIES =
+        {
+            Tuple.Create("USD", "$"),
+            Tuple.Create("EUR", "€"),
+            Tuple.Create("CZK", "Kč"),
+            Tuple.Create("GBP", "£")
+        };
 
         public CurrencyService(IMapper mapper, IRepository<Currency> repository,
             QueryObjectBase<CurrencyDto, Currency, CurrencyFilterDto, IQuery<Currency>> query)
@@ -49,27 +55,36 @@ namespace BL.Services.Currencies
             {
                 var code = $"USD_{currency.Code}";
                 var newRate = FetchSerializedData(code);
+                if (newRate == 0.0m)
+                {
+                    continue;
+                }
                 currency.ExchangeRate = newRate;
                 var currencyBase = new Currency();
                 Repository.Update(ConvertFromTo(currency, currencyBase));
             }
 
-            return false;
+            return true;
         }
 
         public async Task<bool> CreateDefaultCurrencies()
         {
             var allCurrencies = await ListAllAsync();
-            if (allCurrencies.Items.IsNullOrEmpty())
+            if (allCurrencies.TotalItemsCount != 0)
             {
                 return false;
             }
 
-            foreach (var currencyCode in CURRENCIES)
+            foreach (var (currencyCode, currencySymbol) in CURRENCIES)
             {
                 var code = $"USD_{currencyCode}";
                 var newRate = FetchSerializedData(code);
-                Repository.Create(new Currency {Code = currencyCode, ExchangeRate = newRate});
+                Repository.Create(new Currency
+                {
+                    Code = currencyCode, 
+                    ExchangeRate = newRate, 
+                    Symbol = currencySymbol
+                });
             }
 
             return true;
@@ -87,7 +102,7 @@ namespace BL.Services.Currencies
             var webClient = new WebClient();
             string jsonData;
 
-            var conversionRate = 1.0m;
+            var conversionRate = 0.0m;
             try
             {
                 jsonData = webClient.DownloadString(url);
