@@ -425,7 +425,16 @@ namespace BL.Facades
             using (var uow = UnitOfWorkProvider.Create())
             {
                 await itemService.Update(dto);
-                await uow.Commit();
+                try
+                {
+                    await uow.Commit();
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
             }
         }
     }

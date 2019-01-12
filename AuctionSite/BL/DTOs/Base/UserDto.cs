@@ -12,18 +12,18 @@ namespace BL.DTOs.Base
 
         public string Email { get; set; }
         
+        
         public string PhoneNumber { get; set; }
-
-        public List<RaiseDto> UserRaisesForAuction { get; set; }
 
         public List<UserRoleDto> Roles { get; set; }
 
+        public List<RaiseDto> UserRaisesForAuction { get; set; }
+       
         public List<ItemDto> Inventory { get; set; }
-
-        public List<ReviewDto> Reviews { get; set; }
-
-        public List<AuctionDto> AuctionsCreated { get; set; }
         
+        public List<ReviewDto> Reviews { get; set; }
+       
+        public List<AuctionDto> AuctionsCreated { get; set; }
         public double ReviewAvg
         {
             

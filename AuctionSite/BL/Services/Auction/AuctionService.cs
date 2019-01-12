@@ -52,7 +52,7 @@ namespace BL.Services.Auctions
 
         protected override async Task<Auction> GetWithIncludesAsync(int entityId)
         {
-            return await Repository.GetAsync(entityId, nameof(AuctionDto.User));
+            return await Repository.GetAsync(entityId, nameof(Auction.User), nameof(Auction.RaisesForAuction));
             
         }
 

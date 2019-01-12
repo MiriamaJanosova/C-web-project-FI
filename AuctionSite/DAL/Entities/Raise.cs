@@ -16,11 +16,11 @@ namespace DAL.Entities
 
         [Required] public decimal Amount { get; set; }
 
-        public Auction Auction { get; set; }
+        public virtual Auction Auction { get; set; }
 
         [Required] public int AuctionId { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         [Required] public int UserId { get; set; }
 

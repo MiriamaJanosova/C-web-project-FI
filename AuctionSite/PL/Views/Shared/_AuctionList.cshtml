@@ -3,55 +3,97 @@
 @using PL.Controllers
 @model PL.Models.Auctions.AuctionListModel
 
-<div>
-    @if (Model.Auctions != null && Model.Auctions.Any())
-    {
-        <table style="width: 100%">
-            <thead>
-            <tr>
-                <th>Auction name</th>
-                <th>Items price</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
 
-            <tbody>
 
-            @foreach (var dto in Model.Auctions)
-            {
-                <tr>
-                    <td>@dto.Name</td>
-                    <td>
-                        @{    
-                            var (price, symbol) = CurrencyController.CalcCurrencyAndGetSymbol((decimal) dto.ActualPrice);
-                            var concat = price + " " + symbol;
-                            @concat;
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("Inspect", "Auction", new {controller = "Auctions", action = "Auction", id = dto.Id})
-                    </td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <td>
-                            @Html.ActionLink("Delete", "Delete", new { controller = "Auctions", auctionId = dto.Id})
-                        </td>  
-                    }
-                </tr>
-            }
-            </tbody>
-        </table>
-        
-        <div class="col-md-12">
-            @Html.PagedListPager(Model.Auctions, page => Url.Action("Index", new { controller = "Auctions", page}))
-        </div>
-    }
-    else
-    { 
-        <div style="text-align: center">
-            <b>Nothing to show</b>
-        </div>
-    }
+
+<div class="card">
+	<table class="table table-hover shopping-cart-wrap">
+		<thead class="text-muted">
+		<tr>
+			<th scope="col">Auction Name</th>
+			<th scope="col" width="120">Price</th>
+			<th scope="col" width="200" class="text-right">Actions</th>
+		</tr>
+		</thead>
+		<tbody>
+		@if (Model.Auctions != null && Model.Auctions.Any())
+		{
+			foreach (var dto in Model.Auctions)
+			{
+				<tr>
+					<td>
+						<figure class="media">
+							@if (dto.ImageBytes != null && dto.ImageBytes.Count > 0)
+							{
+								<div class="img-thumbnail">
+									@{
+										var base64 = Convert.ToBase64String(dto.ImageBytes.First().Bytes);
+										var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+										<img src="@imgSrc" class="img-thumbnail img-sm">
+									}
+								</div>
+							}
+
+							<figcaption class="media-body">
+								<h4 class="text-truncate">@dto.Name</h4>
+								@if (dto.AuctionedItems != null && dto.AuctionedItems.Count > 0)
+								{
+
+									<dl class="param param-inline small">
+										<dt>Items: </dt>
+										<dd>
+											@{
+												var concat = String.Empty;
+												foreach (var i in dto.AuctionedItems)
+												{
+
+													concat = concat + ", " + i.Name;
+												}
+												@concat
+											}
+										</dd>
+									</dl>
+
+								}
+
+
+							</figcaption>
+						</figure>
+					</td>
+					<td>
+						<div class="price-wrap">
+							<var class="price">
+								@{
+									var (price, symbol) = CurrencyController.CalcCurrencyAndGetSymbol((decimal) dto.ActualPrice);
+									var concate = decimal.Round(price, 1) + " " + symbol;
+									@concate
+									;
+								}
+							</var>
+						</div>
+					</td>
+					<td class="text-right">
+						@Html.ActionLink("Inspect", "Auction", new {controller = "Auctions", action = "Auction", id = dto.Id}, new {@class = "btn btn-primary"})
+						@if (User.IsInRole("Admin"))
+						{
+							@Html.ActionLink("Delete", "Delete", new {controller = "Auctions", auctionId = dto.Id}, new {@class = "btn btn-primary"})
+						}
+					</td>
+				</tr>
+
+			}
+			
+		}
+		</tbody>
+	</table>
 </div>
+@if (Model.Auctions != null)
+{
+	<div class="col-md-12">
+		@Html.PagedListPager(Model.Auctions, page => Url.Action("Index", new { controller = "Auctions", page}))
+	</div>
+}
+
+
 
 

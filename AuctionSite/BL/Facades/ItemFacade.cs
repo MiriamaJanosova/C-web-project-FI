@@ -115,6 +115,20 @@ namespace BL.Facades
                 return true;
             }
         }
+        
+        public async Task<bool> AssignItemToAuction(ItemDto item)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                if (await itemService.GetAsync(item.Id, false) == null)
+                {
+                    return false;
+                }
+                await itemService.AddItemToAuction(item);
+                await uow.Commit();
+                return true;
+            }
+        }
 
     }
 }

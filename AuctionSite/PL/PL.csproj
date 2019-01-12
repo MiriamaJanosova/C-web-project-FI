@@ -250,6 +250,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RaiseController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -264,6 +265,7 @@
     <Compile Include="Models\Home\IndexModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Layout\LayoutModel.cs" />
+    <Compile Include="Models\Raise\RaisesListViewModel.cs" />
     <Compile Include="Models\Users\UserInfoModel.cs" />
     <Compile Include="Models\Users\UserListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -334,6 +336,7 @@
     <Content Include="Views\Category\CategoryList.cshtml" />
     <Content Include="Views\Currency\Currency.cshtml" />
     <Content Include="Views\Currency\CurrencyList.cshtml" />
+    <Content Include="Views\Raise\RaiseList.cshtml" />
     <Content Include="Views\Shared\PermisionDenied.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Web.config" />

@@ -18,12 +18,14 @@ namespace PL.Controllers
     {
         public AuctionFacade AuctionFacade { get; set; }
         public ModifyAuctionsFacade ModifyAuctionFacade { get; set; }
+        
+        public ItemFacade ItemFacade { get; set; }
 
 
         public async Task<ActionResult> Index(int page = 1)
         {
             var all = await AuctionFacade.GetFilteredAuctionsAsync(new AuctionFilterDto { RequestedPageNumber = page, PageSize = 15 });
-            return View("AuctionList", new AuctionListModel(all.Items));
+            return View("AuctionList", new AuctionListModel(all.Items, page, 15, (int)all.TotalItemsCount));
         }
 
         public async Task<ActionResult> Auction(int id)
@@ -107,7 +109,7 @@ namespace PL.Controllers
             dto.StartPrice = CurrencyController.CalcCurrencyAndGetSymbol(dto.StartPrice, true).Item1;
             dto.ActualPrice = dto.StartPrice;
             var res = await ModifyAuctionFacade.AddAuctionAsync(dto);
-            if (res == 0) // FAILED
+            if (res == 0) 
             {
                 TempData["ErrorMessage"] = "Adding item failed";
                 return View();
@@ -123,7 +125,7 @@ namespace PL.Controllers
             {
                 var item = await ModifyAuctionFacade.GetItem(id);
                 item.AuctionID = auctionId;
-                await ModifyAuctionFacade.UpdateItem(item);
+                await ItemFacade.AssignItemToAuction(item);
             }
         }
         

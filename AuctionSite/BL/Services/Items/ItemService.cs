@@ -83,6 +83,13 @@ namespace BL.Services.Items
             return Repository.GetAsync(entityId);
         }
 
+        public async Task AddItemToAuction(ItemDto entityDto)
+        {
+            var entity = await Repository.GetAsync(entityDto.Id);
+            entity.AuctionID = entityDto.AuctionID;
+            Repository.Update(entity);
+        }
+
         public To ConverTo<From, To>(From source)
         {
             return Mapper.Map<From, To>(source);

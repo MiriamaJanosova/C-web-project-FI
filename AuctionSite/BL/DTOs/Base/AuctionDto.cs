@@ -16,9 +16,10 @@ namespace BL.DTOs.Base
         public DateTime StartDate { get; set; }
         
         public DateTime EndDate { get; set; }
-        
+
         public decimal ActualPrice { get; set; }
-        
+
+        public decimal StartPrice { get; set; }
         public int UserId { get; set; }
 
         public UserDto User { get; set; }

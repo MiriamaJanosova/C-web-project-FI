@@ -85,11 +85,12 @@ namespace PL.Controllers
 
                 return Login(model, "");
             }
-            else
-            {
-                TempData["Error"] = result.ToString();
-            }
 
+            foreach (var error in result.Errors)
+            {
+                TempData["Error"] += error;
+            }
+            
             return View();
         }
 

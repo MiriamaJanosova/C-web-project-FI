@@ -66,6 +66,6 @@ namespace Infrastructure.Query
             return this;
         }
 
-        public abstract Task<QueryResult<TEntity>> ExecuteAsync();
+        public abstract Task<QueryResult<TEntity>> ExecuteAsync(params string[] includes);
     }
 }

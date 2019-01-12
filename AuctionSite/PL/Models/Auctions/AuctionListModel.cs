@@ -7,11 +7,16 @@ namespace PL.Models.Auctions
 {
     public class AuctionListModel
     {
-        public IPagedList<AuctionDto> Auctions { get; set; }
+        public StaticPagedList<AuctionDto> Auctions { get; set; }
 
-        public AuctionListModel(IEnumerable<AuctionDto> auctions)
+        public AuctionListModel(IEnumerable<AuctionDto> auctions, int page, int size, int total)
         {
-            Auctions = auctions?.ToPagedList();
+            Auctions = new StaticPagedList<AuctionDto>(auctions, page, size, total);
+        }
+
+        public AuctionListModel()
+        {
+            
         }
     }
 }
