@@ -1,17 +1,16 @@
 ﻿@model PL.Models.Home.IndexModel
 
-<p>Index</p>
-<div>
-    <form method="post">
-        @Html.TextBoxFor(m =>m.Search)
-        <p style="color: red">
-            @Html.ValidationMessageFor(m => m.Search)
-        </p>
-        <img src="@TempData["img"]"/>
-        <div>
-            <button type="submit"> Submit this shit</button>
+   
+@using (Html.BeginForm("Search", "Auctions", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit" value="Submit">Search</button>
+                </span>
+                <input id="searchedText" type="text" name="searchedText" class="form-control" placeholder="Search for..." />
+            </div>
         </div>
-        
-    </form>
-    
-</div>
+    </div>
+}

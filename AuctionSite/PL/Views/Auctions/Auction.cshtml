@@ -43,8 +43,7 @@
     <label>Items: </label>
     @foreach (var i in Model.AuctionedItems)
     {
-       @Html.ActionLink(@i.Name, "ShowItems", new {auctionId = Model.Id})
-           
+       @Html.ActionLink(@i.Name, "ShowItems", new {auctionId = Model.Id})    
     }
 
 </div>

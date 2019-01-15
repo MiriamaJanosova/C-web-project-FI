@@ -68,7 +68,7 @@ namespace PL.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult> AddCategory(int categoryId)
+        public ActionResult AddCategory(int categoryId)
         {
             
             return RedirectToAction("Index");

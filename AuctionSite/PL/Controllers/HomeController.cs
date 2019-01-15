@@ -19,20 +19,8 @@ namespace PL.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(new IndexModel());
         }
 
-        [HttpPost]
-        public ActionResult Index(IndexModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                TempData["img"] = "/Content/img/troy.gif";
-                return View(model);
-            }
-
-            throw new NotImplementedException();
-            //return View();
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -17,6 +18,8 @@ namespace PL.Controllers
     public class AuctionsController : BaseController
     {
         private const string FilterSessionKey = "filter";
+        
+        private const string SearchSessionKey = "search";
         
         public const int PageSize = 15;
         public AuctionFacade AuctionFacade { get; set; }
@@ -36,6 +39,21 @@ namespace PL.Controllers
             filter.PageSize = PageSize;
             var all = await AuctionFacade.GetFilteredAuctionsAsync(filter);
             return View("AuctionList", new AuctionListModel(all.Items, page, PageSize, (int)all.TotalItemsCount));
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult> Search(string searchedText)
+        {
+            var filter = new AuctionFilterDto
+            {
+                ActualDateTime = DateTime.Now,
+                AuctionSearchedName = searchedText,
+                PageSize = PageSize,
+                RequestedPageNumber = 1
+            };
+            
+            var all = await AuctionFacade.GetFilteredAuctionsAsync(filter);
+            return View("AuctionList", new AuctionListModel(all.Items, 1, PageSize, (int)all.TotalItemsCount));
         }
        
         
