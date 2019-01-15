@@ -10,7 +10,7 @@
                                                          
 
 
-@using (Html.BeginForm("Create", "Auctions", FormMethod.Post, new
+@using (Html.BeginForm("Create", "Account", FormMethod.Post, new
 {enctype = "multipart/form-data"}))
 {
     <div>
@@ -84,17 +84,24 @@
         <div>
             <span>Items:</span>
             <span>
-                @foreach (var item in Model.AvailableItems)
+                @if (Model != null)
                 {
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"
-                                   name="SelectedItems"
-                                   value="@item.Id"/>
-                            @item.Name
-                        </label>
-                    </div>
+                    foreach (var item in Model.AvailableItems)
+                     {
+                         <div class="checkbox">
+                             <label>
+                                 <input type="checkbox"
+                                        name="SelectedItems"
+                                        value="@item.Id"/>
+                                 @item.Name
+                             </label>
+                         </div>
+                     }
                 }
+                
+            </span>
+            <span>
+                @Html.ValidationMessageFor(m => m.SelectedItems)
             </span>
         </div>
 

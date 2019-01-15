@@ -41,7 +41,12 @@
 </div>
 <div class="form-group">
     <label>Items: </label>
-    @Html.Partial("ItemList", @Model.AuctionedItems)
+    @foreach (var i in Model.AuctionedItems)
+    {
+       @Html.ActionLink(@i.Name, "ShowItems", new {auctionId = Model.Id})
+           
+    }
+
 </div>
 <div class="form-group">
     <label>Price: </label>

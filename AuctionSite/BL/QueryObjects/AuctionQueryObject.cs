@@ -59,8 +59,8 @@ namespace BL.QueryObjects
 
             return new CompositePredicate(new List<IPredicate>
             {
-                new SimplePredicate(nameof(Auction.StartDate), ValueComparingOperator.LessThanOrEqual, filter.ActualDateTime),
-                new SimplePredicate(nameof(Auction.StartDate), ValueComparingOperator.LessThanOrEqual, filter.ActualDateTime)
+                new SimplePredicate(nameof(Auction.EndDate), ValueComparingOperator.GreaterThan, filter.ActualDateTime),
+                new SimplePredicate(nameof(Auction.EndDate), ValueComparingOperator.GreaterThan, filter.ActualDateTime)
             });
 
         }

@@ -59,6 +59,17 @@ namespace BL.Facades
                 return await itemService.ListAllAsync();
             }
         }
+        
+        public async Task<IEnumerable<ItemDto>> GetItemsAssignedToAuction(int auctionId)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await itemService.ListFilteredItems(new ItemFilterDto
+                {
+                    AuctionID = auctionId
+                });
+            }
+        }
 
         public async Task<IEnumerable<ItemDto>> GetItemForCategories(List<ItemCategoryDto> itemCategories)
         {

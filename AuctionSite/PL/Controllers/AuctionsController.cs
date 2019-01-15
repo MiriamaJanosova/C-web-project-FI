@@ -16,6 +16,9 @@ namespace PL.Controllers
 {
     public class AuctionsController : BaseController
     {
+        private const string FilterSessionKey = "filter";
+        
+        public const int PageSize = 15;
         public AuctionFacade AuctionFacade { get; set; }
         public ModifyAuctionsFacade ModifyAuctionFacade { get; set; }
         
@@ -24,8 +27,34 @@ namespace PL.Controllers
 
         public async Task<ActionResult> Index(int page = 1)
         {
-            var all = await AuctionFacade.GetFilteredAuctionsAsync(new AuctionFilterDto { RequestedPageNumber = page, PageSize = 15 });
-            return View("AuctionList", new AuctionListModel(all.Items, page, 15, (int)all.TotalItemsCount));
+            var filter = Session[FilterSessionKey] as AuctionFilterDto ?? new AuctionFilterDto
+            {
+                ActualDateTime = DateTime.Now
+            };
+            
+            filter.RequestedPageNumber = page;
+            filter.PageSize = PageSize;
+            var all = await AuctionFacade.GetFilteredAuctionsAsync(filter);
+            return View("AuctionList", new AuctionListModel(all.Items, page, PageSize, (int)all.TotalItemsCount));
+        }
+       
+        
+        [HttpPost]
+        public async Task<ActionResult> Index(AuctionListModel model)
+        {
+            model.Filter.PageSize = PageSize;
+            model.Filter.RequestedPageNumber = 1;
+            model.Filter.ActualDateTime = model.Filter.IncludeEnded ? DateTime.MinValue : DateTime.Now;
+            
+            Session[FilterSessionKey] = model.Filter;
+            var all = await AuctionFacade.GetFilteredAuctionsAsync(model.Filter);
+            return View("AuctionList", new AuctionListModel(all.Items, 1, PageSize, (int)all.TotalItemsCount));
+        }
+        
+        public async Task<ActionResult> ShowItems(int auctionId)
+        {
+            var items = await ItemFacade.GetItemsAssignedToAuction(auctionId);
+            return View("ItemList", items);
         }
 
         public async Task<ActionResult> Auction(int id)
@@ -38,6 +67,12 @@ namespace PL.Controllers
             }
             
             return View(dto);
+        }
+
+        public ActionResult ClearFilter()
+        {
+            Session[FilterSessionKey] = null;
+            return RedirectToAction("Index");
         }
         
         [HttpPost]
@@ -75,66 +110,6 @@ namespace PL.Controllers
             return RedirectToAction("Auction", new {id = auctionId});
         }
         
-       
-        [HttpGet]
-        [Authorize]
-        public async Task<ActionResult> Create()
-        {
-            var avail = await ModifyAuctionFacade.GetAvailableItemsOfUser(UserId);
-            return View(new CreateAuctionModel
-            {
-                AvailableItems = avail.ToList()
-            });
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<ActionResult> Create(CreateAuctionModel model)
-        {
-            if (!ModelState.IsValid)
-                return View();
-
-            var dto = model.Dto;
-
-            foreach (var file in dto.Upload)
-            {
-                if (file?.InputStream == null)
-                {
-                    continue;
-                }   
-                dto.ImageBytes.Add(new ImageDto(await ImageToByteArray(file.InputStream)));
-            }
-            
-            dto.UserId = User.Identity.GetUserId<int>();
-            dto.StartPrice = CurrencyController.CalcCurrencyAndGetSymbol(dto.StartPrice, true).Item1;
-            dto.ActualPrice = dto.StartPrice;
-            var res = await ModifyAuctionFacade.AddAuctionAsync(dto);
-            if (res == 0) 
-            {
-                TempData["ErrorMessage"] = "Adding item failed";
-                return View();
-            }
-
-            await AssignAuctionToItems(res, model.SelectedItems);
-            return RedirectToAction("MyAuctions", "Account");
-        }
-
-        private async Task AssignAuctionToItems(int auctionId, IList<int> itemIds)
-        {
-            foreach (var id in itemIds)
-            {
-                var item = await ModifyAuctionFacade.GetItem(id);
-                item.AuctionID = auctionId;
-                await ItemFacade.AssignItemToAuction(item);
-            }
-        }
-        
-        private static async Task<byte[]> ImageToByteArray(Stream input)
-        {
-            var ms = new MemoryStream();
-            await input.CopyToAsync(ms);
-            return ms.ToArray();
-        }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]

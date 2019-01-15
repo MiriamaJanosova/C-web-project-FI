@@ -32,7 +32,7 @@ namespace BL.DTOs.Base
 
         public List<ItemDto> AuctionedItems { get; set; }
 
-        public List<RaiseDto> RaisesForAuction { get; set; }
+        public IList<RaiseDto> RaisesForAuction { get; set; }
         
         public override string ToString()
         {
