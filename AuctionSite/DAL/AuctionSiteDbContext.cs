@@ -23,12 +23,10 @@ namespace DAL
         public DbSet<Image> Images { get; set; }
 
         public static string ConnectionString { get; } =
-            //"Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User Id=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
-            "Data source=(localdb)\\mssqllocaldb;Database=MySite;Trusted_Connection=True;MultipleActiveResultSets=true";
+            "Server=tcp:pv179db.database.windows.net,1433;Initial Catalog=AuctionSite;Persist Security Info=False;User Id=marekch;Password=pv179DB21071996;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;";
         public AuctionSiteDbContext() 
             : base(ConnectionString)
         {
-            //Database.SetInitializer(new AuctionSiteDbInitializer());
             Database.SetInitializer(new ProductionInitializer());
             Database.CommandTimeout = 300;
         }
@@ -37,17 +35,11 @@ namespace DAL
             base(connection, true)
         {
             Database.CreateIfNotExists();
-            
-            
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
-            //modelBuilder.Entity<Auction>()
-            //    .HasMany(t => t.AuctionedItems)
-            //    .WithOptional(a => a.Auction)
-            //    .WillCascadeOnDelete(false);
             modelBuilder.Entity<User>()
                 .HasMany(t => t.UserRaisesForAuction)
                 .WithRequired(a => a.User)
@@ -58,8 +50,6 @@ namespace DAL
                 
             modelBuilder.Entity<Login>().HasKey(p => p.UserId);
 
-            
-            //this is instead of DbSet<User>
             modelBuilder.Entity<User>()
                 .ToTable("Users");
 
@@ -71,8 +61,6 @@ namespace DAL
 
             modelBuilder.Entity<Login>()
                 .ToTable("Logins");
-            //modelBuilder.Entity<User>()
-            //    .HasRequired(a => a.Email);
         }
 
 

@@ -15,8 +15,8 @@
                         StartDate = c.DateTime(nullable: false),
                         Name = c.String(nullable: false),
                         Description = c.String(nullable: false),
-                        StartPrice = c.Double(nullable: false),
-                        ActualPrice = c.Double(nullable: false),
+                        StartPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ActualPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         EndDate = c.DateTime(nullable: false),
                         UserId = c.Int(nullable: false),
                     })
@@ -151,7 +151,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Amount = c.Double(nullable: false),
+                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
                         AuctionId = c.Int(nullable: false),
                         UserId = c.Int(nullable: false),
                         DateTime = c.DateTime(nullable: false),
@@ -179,8 +179,9 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Code = c.String(maxLength: 5),
-                        ExchangeRate = c.Double(nullable: false),
+                        Code = c.String(nullable: false, maxLength: 5),
+                        ExchangeRate = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Symbol = c.String(nullable: false, maxLength: 5),
                     })
                 .PrimaryKey(t => t.Id);
             
