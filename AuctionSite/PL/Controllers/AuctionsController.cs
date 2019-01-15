@@ -16,14 +16,45 @@ namespace PL.Controllers
 {
     public class AuctionsController : BaseController
     {
+        private const string FilterSessionKey = "filter";
+        
+        public const int PageSize = 15;
         public AuctionFacade AuctionFacade { get; set; }
         public ModifyAuctionsFacade ModifyAuctionFacade { get; set; }
+        
+        public ItemFacade ItemFacade { get; set; }
 
 
         public async Task<ActionResult> Index(int page = 1)
         {
-            var all = await AuctionFacade.GetFilteredAuctionsAsync(new AuctionFilterDto { RequestedPageNumber = page, PageSize = 15 });
-            return View("AuctionList", new AuctionListModel(all.Items));
+            var filter = Session[FilterSessionKey] as AuctionFilterDto ?? new AuctionFilterDto
+            {
+                ActualDateTime = DateTime.Now
+            };
+            
+            filter.RequestedPageNumber = page;
+            filter.PageSize = PageSize;
+            var all = await AuctionFacade.GetFilteredAuctionsAsync(filter);
+            return View("AuctionList", new AuctionListModel(all.Items, page, PageSize, (int)all.TotalItemsCount));
+        }
+       
+        
+        [HttpPost]
+        public async Task<ActionResult> Index(AuctionListModel model)
+        {
+            model.Filter.PageSize = PageSize;
+            model.Filter.RequestedPageNumber = 1;
+            model.Filter.ActualDateTime = model.Filter.IncludeEnded ? DateTime.MinValue : DateTime.Now;
+            
+            Session[FilterSessionKey] = model.Filter;
+            var all = await AuctionFacade.GetFilteredAuctionsAsync(model.Filter);
+            return View("AuctionList", new AuctionListModel(all.Items, 1, PageSize, (int)all.TotalItemsCount));
+        }
+        
+        public async Task<ActionResult> ShowItems(int auctionId)
+        {
+            var items = await ItemFacade.GetItemsAssignedToAuction(auctionId);
+            return View("ItemList", items);
         }
 
         public async Task<ActionResult> Auction(int id)
@@ -37,6 +68,12 @@ namespace PL.Controllers
             
             return View(dto);
         }
+
+        public ActionResult ClearFilter()
+        {
+            Session[FilterSessionKey] = null;
+            return RedirectToAction("Index");
+        }
         
         [HttpPost]
         [Authorize]
@@ -49,6 +86,9 @@ namespace PL.Controllers
                 TempData["ErrorMessage"] = "Can't bid to the own auction";
                 return RedirectToAction("Auction", new {id = auctionId});
             }
+
+            dto.NewRaise = CurrencyController.CalcCurrencyAndGetSymbol(dto.NewRaise, true).Item1;
+            
            if (dto.NewRaise <= auctionDto.ActualPrice)
            {
               TempData["ErrorMessage"] = "Raise have to be bigger than actual price";
@@ -59,75 +99,17 @@ namespace PL.Controllers
            {
                Amount = dto.NewRaise, 
                DateTime = DateTime.Now,
-               RaiseForAuctionID = auctionId,
-               UserWhoRaisedID = HttpContext.User.Identity.GetUserId<int>()
+               AuctionId = auctionId,
+               UserId = HttpContext.User.Identity.GetUserId<int>()
             };
            
+            //await ModifyAuctionFacade.AddRaiseToAuctionAsync(raiseDto);
             await ModifyAuctionFacade.AddRaiseToAuctionAsync(raiseDto);
             
-            TempData["ErrorMessage"] = "Success";
+            TempData["SuccessMessage"] = "Success";
             return RedirectToAction("Auction", new {id = auctionId});
         }
         
-       
-        [HttpGet]
-        [Authorize]
-        public async Task<ActionResult> Create()
-        {
-            var avail = await ModifyAuctionFacade.GetAvailableItemsOfUser(UserId);
-            return View(new CreateAuctionModel
-            {
-                AvailableItems = avail.ToList()
-            });
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<ActionResult> Create(CreateAuctionModel model)
-        {
-            if (!ModelState.IsValid)
-                return View();
-
-            var dto = model.Dto;
-
-            foreach (var file in dto.Upload)
-            {
-                if (file?.InputStream == null)
-                {
-                    continue;
-                }   
-                dto.ImageBytes.Add(new ImageDto(await ImageToByteArray(file.InputStream)));
-            }
-            
-            dto.UserId = User.Identity.GetUserId<int>();
-            dto.ActualPrice = dto.StartPrice;
-            var res = await ModifyAuctionFacade.AddAuctionAsync(dto);
-            if (res == 0) // FAILED
-            {
-                TempData["ErrorMessage"] = "Adding item failed";
-                return View();
-            }
-
-            await AssignAuctionToItems(res, model.SelectedItems);
-            return RedirectToAction("MyAuctions", "Account");
-        }
-
-        private async Task AssignAuctionToItems(int auctionId, IList<int> itemIds)
-        {
-            foreach (var id in itemIds)
-            {
-                var item = await ModifyAuctionFacade.GetItem(id);
-                item.AuctionID = auctionId;
-                await ModifyAuctionFacade.UpdateItem(item);
-            }
-        }
-        
-        private static async Task<byte[]> ImageToByteArray(Stream input)
-        {
-            var ms = new MemoryStream();
-            await input.CopyToAsync(ms);
-            return ms.ToArray();
-        }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]

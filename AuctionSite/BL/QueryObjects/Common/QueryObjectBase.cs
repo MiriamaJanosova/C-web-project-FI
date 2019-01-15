@@ -35,7 +35,7 @@ namespace BL.QueryObjects.Common
             {
                 query = query.Page(filter.RequestedPageNumber.Value, filter.PageSize);
             }
-            var queryResult = await query.ExecuteAsync();
+            var queryResult = await query.ExecuteAsync(filter.Includes);
 
             var queryResultDto = mapper.Map<QueryResultDto<TDto, TFilter>>(queryResult);
             queryResultDto.Filter = filter;

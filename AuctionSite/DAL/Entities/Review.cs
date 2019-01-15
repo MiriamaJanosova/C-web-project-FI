@@ -21,7 +21,7 @@ namespace DAL.Entities
         
         public string Description { get; set; }
         
-        public User ReviewedUser { get; set; }
+        public virtual User ReviewedUser { get; set; }
         
         [Required]
         public int ReviewedUserID { get; set; }

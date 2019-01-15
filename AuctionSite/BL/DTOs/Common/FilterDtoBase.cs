@@ -9,5 +9,7 @@ namespace BL.DTOs.Common
         public string SortCriteria { get; set; }
         
         public bool SortAscending { get; set; }
+        
+        public string[] Includes { get; set; }
     }
 }

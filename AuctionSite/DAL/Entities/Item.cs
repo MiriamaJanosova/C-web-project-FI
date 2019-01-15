@@ -23,12 +23,12 @@ namespace DAL.Entities
         
         public virtual List<ItemCategory> HasCategories { get; set; }
         
-        public User Owner { get; set; }
+        public virtual User Owner { get; set; }
         
         [Required]
         public int OwnerID { get; set; }
         
-        public Auction Auction { get; set; }
+        public virtual Auction Auction { get; set; }
         
         public int? AuctionID { get; set; }
         

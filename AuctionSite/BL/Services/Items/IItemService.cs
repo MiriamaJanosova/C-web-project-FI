@@ -44,6 +44,8 @@ namespace BL.Services.Items
         /// <param name="entityId">Id of the entity to delete</param>
         void Delete(int entityId);
 
+        Task AddItemToAuction(ItemDto entityDto);
+
         Task<ItemDto> AddItemCategory(Category category, int itemId);
 
         Task<IEnumerable<ItemDto>> GetItemsByCategoriesAsync(List<ItemCategoryDto> category);

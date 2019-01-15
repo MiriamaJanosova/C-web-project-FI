@@ -91,9 +91,21 @@
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
     <Compile Include="Initializers\ProductionInitializer.cs" />
-    <Compile Include="Migrations\201901111634474_Inint.cs" />
-    <Compile Include="Migrations\201901111634474_Inint.Designer.cs">
-      <DependentUpon>201901111634474_Inint.cs</DependentUpon>
+    <Compile Include="Migrations\201901112209491_Init.cs" />
+    <Compile Include="Migrations\201901112209491_Init.Designer.cs">
+      <DependentUpon>201901112209491_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901121240117_idk.cs" />
+    <Compile Include="Migrations\201901121240117_idk.Designer.cs">
+      <DependentUpon>201901121240117_idk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901121423471_currency_symbol.cs" />
+    <Compile Include="Migrations\201901121423471_currency_symbol.Designer.cs">
+      <DependentUpon>201901121423471_currency_symbol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901121458488_decimal.cs" />
+    <Compile Include="Migrations\201901121458488_decimal.Designer.cs">
+      <DependentUpon>201901121458488_decimal.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,8 +125,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901111634474_Inint.resx">
-      <DependentUpon>201901111634474_Inint.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901112209491_Init.resx">
+      <DependentUpon>201901112209491_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121240117_idk.resx">
+      <DependentUpon>201901121240117_idk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121423471_currency_symbol.resx">
+      <DependentUpon>201901121423471_currency_symbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121458488_decimal.resx">
+      <DependentUpon>201901121458488_decimal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

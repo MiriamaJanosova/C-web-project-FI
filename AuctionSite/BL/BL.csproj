@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DAL\DAL.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
@@ -24,8 +25,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>bin\Debug\net461\DAL.dll</HintPath>
-      </Reference>
+      <Reference Include="System.Web.Extensions" />
     </ItemGroup>
 </Project>

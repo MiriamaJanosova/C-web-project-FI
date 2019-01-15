@@ -21,7 +21,7 @@ namespace DAL.Entities
         [Required]
         public int ItemID { get; set; }
         
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
         
         [Required]
         public int CategoryID { get; set; }

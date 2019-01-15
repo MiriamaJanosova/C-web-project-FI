@@ -12,7 +12,6 @@ namespace PL.Controllers
 {
     public class UsersController : BaseController
     {
-
         public UserFacade UserFacade { get; set; }
         
         public async Task<ActionResult> Index()

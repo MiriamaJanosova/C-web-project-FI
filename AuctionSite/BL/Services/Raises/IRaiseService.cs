@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.QueryObjects.Common;
 using BL.Services.Common;
-using DAL.Entities;
 
 namespace BL.Services.Raises
 {
@@ -28,7 +24,7 @@ namespace BL.Services.Raises
         /// Creates new entity
         /// </summary>
         /// <param name="entityDto">entity details</param>
-        Raise Create(RaiseDto entityDto);
+        DAL.Entities.Raise Create(RaiseDto entityDto);
 
         /// <summary>
         /// Updates entity

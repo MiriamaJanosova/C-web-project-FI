@@ -1,0 +1,38 @@
+@using X.PagedList.Mvc
+@model PL.Models.Raise.RaisesListViewModel
+
+@if (Model.Raises.Any())
+{
+    <table style="width: 100%" title="Items">
+        <thead>
+        <tr>
+            <th>Auction</th>
+            <th>Amount</th>
+            <th>User</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Raises)
+        {
+            <tr>
+                <td>@item.Auction.Name</td>
+                <td>@item.Amount</td>
+                <td>@item.User.UserName.Substring(0, 2)
+                @for (int i = 0; i < item.User.UserName.Length - 2; ++i)
+                {
+                    const string r = "*";
+                    @r
+                }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div class="col-md-12">
+        @Html.PagedListPager(Model.Raises, page => Url.Action("Index", new { controller = "Raise", page}))
+    </div>
+}
+else
+{
+    <label>None</label>
+}

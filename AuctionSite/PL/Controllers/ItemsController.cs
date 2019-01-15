@@ -9,6 +9,7 @@ using BL.DTOs.Filter;
 using BL.DTOs.Item;
 using BL.Facades;
 using Castle.Core.Internal;
+using DAL.Entities;
 using Microsoft.ApplicationInsights.Web;
 using Microsoft.AspNet.Identity;
 using PL.Controllers.Common;
@@ -27,11 +28,11 @@ namespace PL.Controllers
             CategoryFacade = categoryFacade;
         }
 
-        // GET: Items
         public ActionResult Index()
         {
             return View();
         }
+        
 
         [HttpGet]
         [Authorize]

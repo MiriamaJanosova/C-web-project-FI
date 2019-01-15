@@ -1,6 +1,5 @@
 using System;
 using System.IO.Compression;
-using System.Web.UI.WebControls;
 using AutoMapper;
 using BL.DTOs;
 using BL.DTOs.Auction;
@@ -37,7 +36,8 @@ namespace BL.Config
             config.CreateMap<QueryResult<Review>, QueryResultDto<ReviewDto, ReviewFilterDto>>();
             config.CreateMap<QueryResult<User>, QueryResultDto<UserDto, UserFilterDto>>();
             config.CreateMap<QueryResult<Auction>, QueryResultDto<AuctionDto, AuctionFilterDto>>();
-
+            config.CreateMap<QueryResult<Currency>, QueryResultDto<CurrencyDto, CurrencyFilterDto>>();
+            config.CreateMap<QueryResult<Raise>, QueryResultDto<RaiseDto, RaiseFilterDto>>();
             config.CreateMap<CreateUser, UserDto>().ReverseMap();
             config.CreateMap<CreateUser, User>();
             config.CreateMap<CreateItem, ItemDto>().ReverseMap();
@@ -49,7 +49,6 @@ namespace BL.Config
         public static void Initialize()
         {
             Mapper.Initialize(config => ConfigureMapping(config));
-            
         }
     }
 }

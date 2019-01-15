@@ -1,4 +1,5 @@
-﻿@model PL.Models.Auctions.CreateAuctionModel
+﻿@using PL.Controllers
+@model PL.Models.Auctions.CreateAuctionModel
 
 
 <h2>Create</h2>
@@ -9,7 +10,7 @@
                                                          
 
 
-@using (Html.BeginForm("Create", "Auctions", FormMethod.Post, new
+@using (Html.BeginForm("Create", "Account", FormMethod.Post, new
 {enctype = "multipart/form-data"}))
 {
     <div>
@@ -35,6 +36,12 @@
             <span>Starting price:</span>
             <span>
                 @Html.TextBoxFor(m => m.Dto.StartPrice)
+            </span>
+            <span>
+                @{
+                    var symbol = CurrencyController.CalcCurrencyAndGetSymbol(0).Item2;
+                    @symbol;
+                }
             </span>
             <span>
                 @Html.ValidationMessageFor(m => m.Dto.StartPrice)
@@ -77,17 +84,24 @@
         <div>
             <span>Items:</span>
             <span>
-                @foreach (var item in Model.AvailableItems)
+                @if (Model != null)
                 {
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"
-                                   name="SelectedItems"
-                                   value="@item.Id"/>
-                            @item.Name
-                        </label>
-                    </div>
+                    foreach (var item in Model.AvailableItems)
+                     {
+                         <div class="checkbox">
+                             <label>
+                                 <input type="checkbox"
+                                        name="SelectedItems"
+                                        value="@item.Id"/>
+                                 @item.Name
+                             </label>
+                         </div>
+                     }
                 }
+                
+            </span>
+            <span>
+                @Html.ValidationMessageFor(m => m.SelectedItems)
             </span>
         </div>
 

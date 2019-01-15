@@ -16,14 +16,15 @@ namespace BL.DTOs.Base
         public DateTime StartDate { get; set; }
         
         public DateTime EndDate { get; set; }
-        
-        public double ActualPrice { get; set; }
-        
+
+        public decimal ActualPrice { get; set; }
+
+        public decimal StartPrice { get; set; }
         public int UserId { get; set; }
 
-        public UserDto Auctioner { get; set; }
+        public UserDto User { get; set; }
 
-        public double NewRaise { get; set; }
+        public decimal NewRaise { get; set; }
 
         public List<ImageDto> ImageBytes { get; set; }
         
@@ -31,7 +32,7 @@ namespace BL.DTOs.Base
 
         public List<ItemDto> AuctionedItems { get; set; }
 
-        public List<RaiseDto> RaisesForAuction { get; set; }
+        public IList<RaiseDto> RaisesForAuction { get; set; }
         
         public override string ToString()
         {
@@ -53,8 +54,7 @@ namespace BL.DTOs.Base
             {
                 return true;
             }
-            return obj.GetType() == this.GetType() &&
-                Equals((AuctionDto) obj);
+            return obj.GetType() == this.GetType() && ((AuctionDto)obj).GetHashCode() == this.GetHashCode();
         }
 
         public override int GetHashCode()

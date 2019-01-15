@@ -7,13 +7,13 @@ namespace DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Inint : IMigrationMetadata
+    public sealed partial class _decimal : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Inint));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_decimal));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901111634474_Inint"; }
+            get { return "201901121458488_decimal"; }
         }
         
         string IMigrationMetadata.Source

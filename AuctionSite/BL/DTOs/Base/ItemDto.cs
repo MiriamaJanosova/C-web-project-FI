@@ -10,14 +10,14 @@ namespace BL.DTOs.Base
         public string Description { get; set; }
         
         public List<ItemCategoryDto> HasCategories { get; set; }
-
+        
         public UserDto Owner { get; set; }
-
+        
         public int OwnerID { get; set; }
-
+        
+        public AuctionDto Auction { get; set; }
+        
         public int? AuctionID { get; set; }
-
-        public AuctionDto InAuction { get; set; }
 
         public override string ToString()
         {

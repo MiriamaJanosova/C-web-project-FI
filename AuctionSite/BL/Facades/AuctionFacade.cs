@@ -21,9 +21,9 @@ namespace BL.Facades
     {
         private readonly IAuctionService auctionService;
         private readonly IRaiseService raiseService;
-        private readonly IItemService itemService;
-        private readonly IItemCategoryService itemCategoryService;
-        private readonly ICategoryService categoryService;
+        //private readonly IItemService itemService;
+        //private readonly IItemCategoryService itemCategoryService;
+        //private readonly ICategoryService categoryService;
 
         public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService auctionService,
             IRaiseService raiseService)
@@ -136,9 +136,11 @@ namespace BL.Facades
 
         public async Task<bool> RaiseForAuction(RaiseDto raise)
         {
-            using (UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
-                return await auctionService.RaiseForAuction(raise);
+                await auctionService.RaiseForAuction(raise);
+                await uow.Commit();
+                return true;
             }
         }
 

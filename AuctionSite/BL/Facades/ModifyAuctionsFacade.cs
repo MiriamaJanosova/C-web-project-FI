@@ -138,30 +138,19 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if ( await auctionService.GetAsync(raise.RaiseForAuctionID, false) == null)
+                if ( await auctionService.GetAsync(raise.AuctionId, false) == null)
                 {
                     return 0;
                 }
 
-                if (await userService.GetAsync(raise.UserWhoRaisedID, false) == null)
+                if (await userService.GetAsync(raise.UserId, false) == null)
                 {
                     return 0;
                 }
 
                 var res = raiseService.Create(raise);
+                await auctionService.RaiseForAuction(raise);
                 await uow.Commit();
-                var auction = await auctionService.GetAsync(raise.RaiseForAuctionID, false);
-                auction.ActualPrice = raise.Amount;
-                await auctionService.Update(auction);
-                try
-                {
-                    await uow.Commit();
-                }
-                catch (DbEntityValidationException e)
-                {
-                    Console.WriteLine(e);
-                    
-                }
                 return res.Id;
             }
         }
@@ -436,7 +425,16 @@ namespace BL.Facades
             using (var uow = UnitOfWorkProvider.Create())
             {
                 await itemService.Update(dto);
-                await uow.Commit();
+                try
+                {
+                    await uow.Commit();
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
             }
         }
     }
