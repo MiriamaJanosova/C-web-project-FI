@@ -33,3 +33,5 @@
 	<li> Hodnotenie jednotlivých predávajúcich, zoradenie predávajúcich podľa týchto hodnotení</li>
 	<li> Možnosť zobrazovať aktuálne ceny v rôznych menách, kurzy by sa mohli updatnuť samé skrz API nejakej inej stránky</li>
 </ol>
+
+<h4>Hlavní branch je marek-branch</h4>
