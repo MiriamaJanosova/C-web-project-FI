@@ -195,6 +195,17 @@
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
+=======
+    <Reference Include="X.PagedList, Version=7.6.0.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8">
+      <HintPath>..\packages\X.PagedList.7.6.0\lib\net461\X.PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="X.PagedList.Mvc, Version=7.6.0.0, Culture=neutral, PublicKeyToken=c6e0b5b21f916f4f">
+      <HintPath>..\packages\X.PagedList.Mvc.7.6.0\lib\net461\X.PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+>>>>>>> origin/marek-branch
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Owin.Security.Cookies">
@@ -242,19 +253,30 @@
     <Compile Include="Controllers\AuctionsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\Common\BaseController.cs" />
+    <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RaiseController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Auctions\AuctionListModel.cs" />
     <Compile Include="Models\Auctions\MyAuctionsModel.cs" />
     <Compile Include="Models\Auctions\CreateAuctionModel.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\Category\CreateCategoryModel.cs" />
+=======
+    <Compile Include="Models\Category\CategoryListModel.cs" />
+    <Compile Include="Models\Category\CreateCategoryModel.cs" />
+    <Compile Include="Models\Currency\CurrencyListModel.cs" />
+>>>>>>> origin/marek-branch
     <Compile Include="Models\Home\IndexModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Layout\LayoutModel.cs" />
+    <Compile Include="Models\Raise\RaisesListViewModel.cs" />
     <Compile Include="Models\Users\UserInfoModel.cs" />
     <Compile Include="Models\Users\UserListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -319,7 +341,15 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\ItemList.cshtml" />
     <Content Include="Views\Account\UserInfo.cshtml" />
+    <Content Include="Views\Auctions\ItemList.cshtml" />
+    <Content Include="Views\Category\CategoryDetail.cshtml" />
+    <Content Include="Views\Category\CategoryList.cshtml" />
+    <Content Include="Views\Currency\Currency.cshtml" />
+    <Content Include="Views\Currency\CurrencyList.cshtml" />
+    <Content Include="Views\Raise\RaiseList.cshtml" />
     <Content Include="Views\Shared\PermisionDenied.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Web.config" />
@@ -340,7 +370,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Auctions\Auction.cshtml" />
     <Content Include="Views\Auctions\AuctionList.cshtml" />
-    <Content Include="Views\Auctions\ItemList.cshtml" />
     <Content Include="Views\Review\User.cshtml" />
     <Content Include="Views\Users\UserList.cshtml" />
     <Content Include="Views\Account\MyAuctions.cshtml" />
@@ -359,10 +388,21 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+<<<<<<< HEAD
     <Content Include="Views\Category\Index.cshtml" />
+=======
+    <Content Include="Views\Account\MyAuctions.cshtml" />
+    <Content Include="Views\Items\Create.cshtml" />
+    <Content Include="Views\Account\MyItems.cshtml" />
+    <Content Include="Views\Shared\_AuctionList.cshtml" />
+    <Content Include="Views\Review\Detail.cshtml" />
+    <Content Include="Views\Auctions\_AssignItems.cshtml" />
+>>>>>>> origin/marek-branch
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Helper" />
+    <Folder Include="Helpers" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

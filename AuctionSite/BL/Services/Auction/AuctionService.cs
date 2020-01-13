@@ -6,6 +6,7 @@ using AutoMapper;
 using BL.DTOs.Base;
 using BL.DTOs.Filter;
 using BL.QueryObjects.Common;
+using BL.Services.Auctions;
 using DAL.Entities;
 using Infrastructure;
 using Infrastructure.Query;
@@ -51,7 +52,8 @@ namespace BL.Services.Auctions
 
         protected override async Task<Auction> GetWithIncludesAsync(int entityId)
         {
-            return await Repository.GetAsync(entityId);
+            return await Repository.GetAsync(entityId, nameof(Auction.User), nameof(Auction.RaisesForAuction));
+            
         }
 
         public async Task<QueryResultDto<AuctionDto, AuctionFilterDto>> GetAuctionsWithPriceRange(int minPrice,
@@ -75,20 +77,18 @@ namespace BL.Services.Auctions
         {
             if (raiseDto == null) return false;
 
-            var user = await userRepository.GetAsync(raiseDto.UserWhoRaisedID);
+            var user = await userRepository.GetAsync(raiseDto.UserId);
             if (user == null)
                 return false;
 
-            var auction = await Repository.GetAsync(raiseDto.RaiseForAuctionID);
+            var auction = await Repository.GetAsync(raiseDto.AuctionId);
             if (auction.ActualPrice >= raiseDto.Amount)
                 throw new ArgumentException("Raise amount must be bigger than actual price");
             if (auction.StartDate.CompareTo(raiseDto.DateTime) > 0 || auction.EndDate.CompareTo(raiseDto.DateTime) <= 0)
                 throw new ArgumentException("you cannot raiseDto for this auction, it hasn't started yet or has already finished. ");
-
+            
+            
             auction.ActualPrice = raiseDto.Amount;
-            var raise = Mapper.Map<Raise>(raiseDto);
-            auction.RaisesForAuction.Add(raise);
-
             Repository.Update(auction);
             return true;
         }

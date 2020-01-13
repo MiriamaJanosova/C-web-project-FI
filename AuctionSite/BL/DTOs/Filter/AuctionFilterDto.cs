@@ -13,6 +13,8 @@ namespace BL.DTOs.Filter
 
         public DateTime ActualDateTime { get; set; } = DateTime.MaxValue;
 
+        public bool IncludeEnded { get; set; } = false;
+
         public int AuctionerID { get; set; }
 
     }

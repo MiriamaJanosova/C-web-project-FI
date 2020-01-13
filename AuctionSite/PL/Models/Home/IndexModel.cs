@@ -11,6 +11,7 @@ namespace PL.Models.Home
 
         [Required(ErrorMessage = "Required")]
         [StringLength(10, ErrorMessage = "Too short")]
-        public string Search { get; set; }
+        public string Text { get; set; }
+
     }
 }

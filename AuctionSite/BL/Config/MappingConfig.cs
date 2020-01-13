@@ -18,11 +18,12 @@ namespace BL.Config
         public static void ConfigureMapping(IMapperConfigurationExpression config)
         {
             config.CreateMap<Auction, AuctionDto>().ReverseMap();
+            config.CreateMap<Image, ImageDto>().ReverseMap();
             config.CreateMap<Category, CategoryDto>().ReverseMap();
             config.CreateMap<Currency, CurrencyDto>().ReverseMap();
             config.CreateMap<EmailTemplate, EmailTemplateDto>().ReverseMap();
             config.CreateMap<ItemCategory, ItemCategoryDto>().ReverseMap();
-            config.CreateMap<Item, ItemDto>().ReverseMap();
+            config.CreateMap<ItemDto, Item>().ReverseMap();
             config.CreateMap<RaiseDto, Raise>().ReverseMap();
             config.CreateMap<Review, ReviewDto>().ReverseMap();
             config.CreateMap<Role, RoleDto>().ReverseMap();
@@ -35,7 +36,8 @@ namespace BL.Config
             config.CreateMap<QueryResult<Review>, QueryResultDto<ReviewDto, ReviewFilterDto>>();
             config.CreateMap<QueryResult<User>, QueryResultDto<UserDto, UserFilterDto>>();
             config.CreateMap<QueryResult<Auction>, QueryResultDto<AuctionDto, AuctionFilterDto>>();
-
+            config.CreateMap<QueryResult<Currency>, QueryResultDto<CurrencyDto, CurrencyFilterDto>>();
+            config.CreateMap<QueryResult<Raise>, QueryResultDto<RaiseDto, RaiseFilterDto>>();
             config.CreateMap<CreateUser, UserDto>().ReverseMap();
             config.CreateMap<CreateUser, User>();
             config.CreateMap<CreateItem, ItemDto>().ReverseMap();
@@ -47,7 +49,6 @@ namespace BL.Config
         public static void Initialize()
         {
             Mapper.Initialize(config => ConfigureMapping(config));
-            
         }
     }
 }

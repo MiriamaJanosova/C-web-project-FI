@@ -54,9 +54,16 @@ namespace BL.DTOs.Base
             {
                 var hashCode = Id.GetHashCode();
                 hashCode = (hashCode * 397) ^ ItemID.GetHashCode();
-                hashCode = (hashCode * 397) ^ Item.GetHashCode();
                 hashCode = (hashCode * 397) ^ CategoryID.GetHashCode();
-                hashCode = (hashCode * 397) ^ Category.GetHashCode();
+                if (Item != null)
+                {
+                    hashCode = (hashCode * 397) ^ Item.GetHashCode();
+                }
+                
+                if (Category != null)
+                {
+                    hashCode = (hashCode * 397) ^ Category.GetHashCode();
+                }
                 return hashCode;
             }
         }

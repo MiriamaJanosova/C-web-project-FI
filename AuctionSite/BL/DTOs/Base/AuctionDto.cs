@@ -16,39 +16,27 @@ namespace BL.DTOs.Base
         public DateTime StartDate { get; set; }
         
         public DateTime EndDate { get; set; }
-        
-        public double ActualPrice { get; set; }
-        
-        public int AuctionerID { get; set; }
 
-        public UserDto Auctioner { get; set; }
-        
-        public double NewRaise { get; set; }
-        
-        public byte[] ImageBytes { get; set; }
+        public decimal ActualPrice { get; set; }
+
+        public decimal StartPrice { get; set; }
+        public int UserId { get; set; }
+
+        public UserDto User { get; set; }
+
+        public decimal NewRaise { get; set; }
+
+        public List<ImageDto> ImageBytes { get; set; }
         
         public Image Image { get; set; }
 
         public List<ItemDto> AuctionedItems { get; set; }
 
-        public List<RaiseDto> RaisesForAuction { get; set; }
+        public IList<RaiseDto> RaisesForAuction { get; set; }
         
-        public double TestPrice 
-        {
-            get
-            {
-                if (RaisesForAuction == null || RaisesForAuction.Count == 0)
-                {
-                    return ActualPrice;
-                }
-                return RaisesForAuction.Max(x => x.Amount);
-            }
-        
-        }
-
         public override string ToString()
         {
-            return $"Auction set up by {AuctionerID} at: {StartDate}";
+            return $"Auction set up by {UserId} at: {StartDate}";
         }
 
         protected bool Equals(AuctionDto other)
@@ -66,8 +54,7 @@ namespace BL.DTOs.Base
             {
                 return true;
             }
-            return obj.GetType() == this.GetType() &&
-                Equals((AuctionDto) obj);
+            return obj.GetType() == this.GetType() && ((AuctionDto)obj).GetHashCode() == this.GetHashCode();
         }
 
         public override int GetHashCode()
@@ -81,7 +68,7 @@ namespace BL.DTOs.Base
                 var hashCode = Id.GetHashCode();
                 hashCode = (hashCode * 397) ^ StartDate.GetHashCode();
                 hashCode = (hashCode * 397) ^ EndDate.GetHashCode();
-                hashCode = (hashCode * 397) ^ AuctionerID.GetHashCode();
+                hashCode = (hashCode * 397) ^ UserId.GetHashCode();
                 hashCode = (hashCode * 397) ^ Description.GetHashCode();
                 hashCode = (hashCode * 397) ^ Name.GetHashCode();
                 hashCode = (hashCode * 397) ^ Convert.ToInt32(ActualPrice);

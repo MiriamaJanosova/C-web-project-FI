@@ -24,4 +24,10 @@
       <Folder Include="Logger\" />
     </ItemGroup>
 
+<<<<<<< HEAD
+=======
+    <ItemGroup>
+      <Reference Include="System.Web.Extensions" />
+    </ItemGroup>
+>>>>>>> origin/marek-branch
 </Project>

@@ -20,7 +20,7 @@ namespace BL.DTOs.Auction
 
         [Required]
         [MaxLength(8000)]
-        [DataType(DataType.Text)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Required]
@@ -32,17 +32,17 @@ namespace BL.DTOs.Auction
         public DateTime EndDate { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
-        // TODO custom validation for numbers
-        public double ActualPrice { get; set; }
-        
-        public byte[] ImageBytes { get; set; }
-        
-        public HttpPostedFileBase Upload { get; set; }
+        [Range(0, (double)decimal.MaxValue, ErrorMessage = "Please enter valid start price")]
+        public decimal StartPrice { get; set; }
 
-        public int AuctionerID { get; set; }
+        public decimal ActualPrice { get; set; }
+        public IList<ImageDto> ImageBytes { get; set; } = new List<ImageDto>();
+        
+        public IList<HttpPostedFileBase> Upload { get; set; }
 
-        public UserDto Auctioner { get; set; }
+        public int UserId { get; set; }
+
+        public UserDto User { get; set; }
 
         public List<ItemDto> AuctionedItems { get; set; } = new List<ItemDto>();
         

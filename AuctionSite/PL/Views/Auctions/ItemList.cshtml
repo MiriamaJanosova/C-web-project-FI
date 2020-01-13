@@ -1,40 +1,53 @@
-﻿@model IEnumerable<BL.DTOs.Base.ItemDto>
+@model IEnumerable<BL.DTOs.Base.ItemDto>
 
-@if (Model.Any())
-{
-    <table style="width: 100%" title="Items">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Is Auctioned?</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td>
-                    @if (item.AuctionID.HasValue)
-                    {
-                        <span>
-                            @Html.ActionLink("Yes", "Auction", "Auctions", new {id = item.AuctionID.Value}, new { id = item.AuctionID.Value })
-                        </span>
-                    }
-                    else
-                    {
-                        <span>No</span>
-                    }
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-}
-else
-{
-    <label>None</label>
-}
-
+<div class="card">
+	<table class="table table-hover shopping-cart-wrap" id="auctionList">
+		<thead class="text-muted">
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col" width="120">Description</th>
+			<th scope="col" width="120">Categories</th>
+			<th scope="col" width="120">Owner</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+		@if (Model.Any())
+		{
+			foreach (var dto in Model)
+			{
+				<tr>
+					<td>
+						<div>
+							@dto.Name
+						</div>
+					</td>
+					<td>
+						@dto.Description
+					</td>
+					<td>
+						@for (var i = 0; i < dto.HasCategories.Count; ++i) 
+						{
+							if (i < dto.HasCategories.Count - 1)
+							{
+								<span>@dto.HasCategories[i].Category.CategoryType, </span>
+							}
+							else
+							{
+								<span>@dto.HasCategories[i].Category.CategoryType</span>
+							}
+						}
+					</td>
+					<td>
+						@dto.Owner.UserName
+					</td>
+				</tr>
+			}
+		}
+		else
+		{
+			<span>There is nothing</span>
+		}
+		</tbody>
+	</table>
+</div>

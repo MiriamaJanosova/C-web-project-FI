@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -12,7 +14,6 @@ using Infrastructure.EntityFramework;
 using Infrastructure.EntityFramework.UnitOfWork;
 using Infrastructure.Query;
 using Infrastructure.UnitOfWork;
-using NMemory.Linq;
 using Component = Castle.MicroKernel.Registration.Component;
 
 namespace EFTests.Config
@@ -20,7 +21,38 @@ namespace EFTests.Config
     public class EFTestsInstaller : IWindsorInstaller
     {
         private const string TestDbConnection = "InMemoryDb";
-        
+
+        #region UsersConfig
+
+        public static User User1 { get; } = new User
+        {
+            UserName = "Pepa Stok",
+            Email = "pepastok@fernet.com"
+        };
+
+        public static User User2 { get; } = new User
+        {
+            UserName = "Bořetěch idk",
+            Email = "boretechuv@email.cz"
+        };
+
+        #endregion
+
+        #region ItemsConfig
+
+        public static Item ItemUser1 = new Item()
+        {
+            Name = "Fernet Štok",
+            Description = "pouze otevreno, ochutnano, zavreno"
+        };
+
+        public static Item ItemUser2 = new Item()
+        {
+            Name = "Becherovka",
+            Description = "Trochu upito, ale jinak je v pohode"
+        };
+
+        #endregion
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
@@ -46,50 +78,91 @@ namespace EFTests.Config
             {
                 dbCxt.Users.Remove(dbCxtUser);
             }
+
+            
+            dbCxt.Items.RemoveRange(dbCxt.Items);
+            dbCxt.Categories.RemoveRange(dbCxt.Categories);
+            dbCxt.ItemCategories.RemoveRange(dbCxt.ItemCategories);
             dbCxt.EmailTemplates.RemoveRange(dbCxt.EmailTemplates);
+            
             dbCxt.SaveChanges();
 
+            #region Categories
+            var alcohol = new Category
+            {
+                CategoryType = "Alcohol",
+                Description = "Vse, co obsahuje znamky alkoholu"
+            };
+
+            
             var randomHouseStuff = new Category
             {
-                CategoryType = ItemCategoryType.RandomHouseStuff,
+                CategoryType = "RandomHouseStuff",
                 Description = "veci z baraku"
             };
-                
-            var randomStuffs = new ItemCategory
+
+            dbCxt.Categories.AddOrUpdate(alcohol);
+            dbCxt.Categories.AddOrUpdate(randomHouseStuff);
+            
+            #endregion
+            
+            #region Users
+
+            dbCxt.Users.AddOrUpdate(User1);
+            dbCxt.Users.AddOrUpdate(User2);
+            
+            #endregion
+
+            dbCxt.SaveChanges();
+            
+            #region Items
+
+
+            ItemUser1.Owner = User1;
+            ItemUser1.OwnerID = User1.Id;
+            ItemUser2.Owner = User2;
+            ItemUser2.OwnerID = User2.Id;
+            
+            dbCxt.Items.AddOrUpdate(ItemUser1);
+            dbCxt.Items.AddOrUpdate(ItemUser2);
+            #endregion
+
+            dbCxt.SaveChanges();
+
+            #region Categories
+
+            ItemUser1.HasCategories = new List<ItemCategory>
             {
-                Category = randomHouseStuff,
+                new ItemCategory
+                {
+                    Category = alcohol,
+                    CategoryID = alcohol.Id,
+                    Item = ItemUser1,
+                    ItemID = ItemUser1.Id
+                }
             };
             
-            var user1 = new User
+            ItemUser2.HasCategories = new List<ItemCategory>
             {
-                UserName = "Pepa Stok",
-                Email = "pepastok@fernet.com"
-            };
-
-            var user2 = new User
-            {
-                UserName = "Bořetěch idk",
-                Email = "boretechuv@email.cz"
-            };
-
-            dbCxt.Categories.Add(randomHouseStuff);
-            dbCxt.ItemCategories.Add(randomStuffs);
-
-            var itemUser1 = new Item()
-            {
-                Name = "Fernet Štok",
-                Description = "pouze otevreno, ochutnano, zavreno",
-                HasCategories = new List<ItemCategory>
+                new ItemCategory
                 {
-                    randomStuffs 
-                    
-                },
-                Owner = user1,
-                OwnerID = user1.Id
-                    
+                    Category = alcohol,
+                    CategoryID = alcohol.Id,
+                    Item = ItemUser2,
+                    ItemID = ItemUser2.Id
+                }, new ItemCategory
+                {
+                    Category = randomHouseStuff,
+                    CategoryID = randomHouseStuff.Id,
+                    Item = ItemUser2,
+                    ItemID = ItemUser2.Id
+                }
             };
 
-            return null;
+            #endregion
+            
+            dbCxt.SaveChanges();
+            return dbCxt;
         }
     }
 }

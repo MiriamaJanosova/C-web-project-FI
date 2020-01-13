@@ -1,0 +1,32 @@
+@model PL.Models.Category.CategoryListModel
+
+<h2>List of categories</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Items count</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    @foreach (var category in Model.Categories)
+    {
+        <tr>
+            <td>@category.CategoryType</td>
+            <td>@category.Description</td>
+            <td>@category.ItemsWithCategory.Count</td>
+            <td>
+                @Html.ActionLink("Edit", "EditCategory", "Category", new {categoryId = category.Id}, null)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteCategory", "Category", new {categoryId = category.Id}, null)
+
+            </td>
+        </tr>
+    }
+    </tbody>
+    @Html.ActionLink("Add", "AddCategory", "Category");
+</table>

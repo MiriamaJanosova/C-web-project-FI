@@ -12,22 +12,18 @@ namespace DAL.Entities
     public class Raise : IEntity
     {
         public int Id { get; set; }
-
         [NotMapped] public string TableName { get; } = "raises";
 
-        [Required]
-        public double Amount { get; set; }
-        
-        public Auction RaiseForAuction { get; set; }
-        
-        [Required]
-        public int RaiseForAuctionID { get; set; }
-        
-        public User UserWhoRaised { get; set; }
-        
-        [Required]
-        public int UserWhoRaisedID { get; set; }
-        
+        [Required] public decimal Amount { get; set; }
+
+        public virtual Auction Auction { get; set; }
+
+        [Required] public int AuctionId { get; set; }
+
+        public virtual User User { get; set; }
+
+        [Required] public int UserId { get; set; }
+
         public DateTime DateTime { get; set; }
     }
 }

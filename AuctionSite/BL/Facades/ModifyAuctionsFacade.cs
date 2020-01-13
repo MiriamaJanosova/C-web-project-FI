@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,7 +54,7 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (await userService.GetAsync(auction.AuctionerID, false) == null)
+                if (await userService.GetAsync(auction.UserId, false) == null)
                 {
                     return 0;
                 }
@@ -129,7 +130,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<int> AddRaiseAsync(RaiseDto raise)
+        public async Task<int> AddRaiseToAuctionAsync(RaiseDto raise)
         {
             if (raise == null)
             {
@@ -137,18 +138,18 @@ namespace BL.Facades
             }
             using (var uow = UnitOfWorkProvider.Create())
             {
-               
-                if (await auctionService.GetAsync(raise.RaiseForAuctionID, false) == null)
+                if ( await auctionService.GetAsync(raise.AuctionId, false) == null)
                 {
                     return 0;
                 }
 
-                if (await userService.GetAsync(raise.UserWhoRaisedID, false) == null)
+                if (await userService.GetAsync(raise.UserId, false) == null)
                 {
                     return 0;
                 }
 
                 var res = raiseService.Create(raise);
+                await auctionService.RaiseForAuction(raise);
                 await uow.Commit();
                 return res.Id;
             }
@@ -424,7 +425,16 @@ namespace BL.Facades
             using (var uow = UnitOfWorkProvider.Create())
             {
                 await itemService.Update(dto);
-                await uow.Commit();
+                try
+                {
+                    await uow.Commit();
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
             }
         }
     }

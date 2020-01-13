@@ -12,13 +12,8 @@ namespace DAL.Entities
 {
     public class Role : IdentityRole<int, UserRole>, IEntity
     {
-
         [NotMapped] 
         public string TableName { get; } = "roles";
-
-        //[Required]
-        //public UserRoleType RoleType { get; set; }
-        
-        //public virtual List<UserRole> UsersOfRole { get; set; }
+       
     }
 }

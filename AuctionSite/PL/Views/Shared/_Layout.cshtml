@@ -9,8 +9,64 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+        .hide-bullets {
+            list-style:none;
+            margin-left: -40px;
+            margin-top:20px;
+        }
 
+        .thumbnail {
+            padding: 0;
+        }
+
+        .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+            width: 100%;
+        }
+        
+        .param {
+            margin-bottom: 7px;
+            line-height: 1.4;
+        }
+        .param-inline dt {
+            display: inline-block;
+        }
+        .param dt {
+            margin: 0;
+            margin-right: 7px;
+            font-weight: 600;
+        }
+        .param-inline dd {
+            vertical-align: baseline;
+            display: inline-block;
+        }
+
+        .param dd {
+            margin: 0;
+            vertical-align: baseline;
+        } 
+
+        .shopping-cart-wrap .price {
+            color: #007bff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 5px;
+            display: block;
+        }
+        var {
+            font-style: normal;
+        }
+
+        .media img {
+            margin-right: 1rem;
+        }
+        .img-sm {
+            width: 90px;
+            max-height: 75px;
+            object-fit: cover;
+        }
+    </style>
   
     
 </head>
@@ -32,6 +88,19 @@
                     <li>@Html.ActionLink("Users", "Index", "Users")</li>
                     
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                   
+                    @if (Session["currency"] == null)
+                    {
+                        <li>@Html.ActionLink("Usd", "Index", "Currency")</li>
+                    }
+                    else
+                    {
+                        var currency =  @Session["currency"];
+                        <li>@Html.ActionLink(@Session["currency"].ToString(), "Index", "Currency")</li>
+                    }
+                    
+                </ul>
                 @Html.Partial("_Login")
             </div>
             
@@ -41,7 +110,7 @@
     @RenderBody()
     <hr />
     <footer>
-        <p>&copy; @DateTime.Now.Year – Moje aplikace ASP.NET</p>
+        <p>&copy; @DateTime.Now.Year – Auction site</p>
     </footer>
 </div>
 @Scripts.Render("~/bundles/bootstrap")

@@ -26,10 +26,16 @@ namespace Infrastructure.EntityFramework
         /// </summary>
         public EntityFrameworkQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
-        public override async Task<QueryResult<TEntity>> ExecuteAsync()
+        public override async Task<QueryResult<TEntity>> ExecuteAsync(params string[] includes)
         {
             IQueryable<TEntity> queryable = Context.Set<TEntity>();
-
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    queryable.Include(include);
+                }
+            }
             if (string.IsNullOrWhiteSpace(SortAccordingTo) && DesiredPage.HasValue)
             {
                 // Sorting must always take place when paging is required

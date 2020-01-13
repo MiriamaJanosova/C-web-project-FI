@@ -77,6 +77,7 @@
     <Compile Include="Entities\Claim.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\EmailTemplate.cs" />
+    <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemCategory.cs" />
     <Compile Include="Entities\ItemCategoryType.cs" />
@@ -87,10 +88,18 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\UserRoleType.cs" />
+    <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Initializers\AuctionSiteDbInitializer.cs" />
+<<<<<<< HEAD
     <Compile Include="Migrations\201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.cs" />
     <Compile Include="Migrations\201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.Designer.cs">
       <DependentUpon>201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.cs</DependentUpon>
+=======
+    <Compile Include="Initializers\ProductionInitializer.cs" />
+    <Compile Include="Migrations\201901152138098_Init.cs" />
+    <Compile Include="Migrations\201901152138098_Init.Designer.cs">
+      <DependentUpon>201901152138098_Init.cs</DependentUpon>
+>>>>>>> origin/marek-branch
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,8 +119,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.resx">
       <DependentUpon>201812101622508_DontTouchThisMotherfuckerORIWillFindYouAndKillYou.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Migrations\201901152138098_Init.resx">
+      <DependentUpon>201901152138098_Init.cs</DependentUpon>
+>>>>>>> origin/marek-branch
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

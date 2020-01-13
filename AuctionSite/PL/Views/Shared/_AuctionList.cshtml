@@ -1,40 +1,163 @@
 ﻿@using BL.DTOs.Base
-@model IEnumerable<AuctionDto>
+@using X.PagedList.Mvc
+@using PL.Controllers
+@using X.PagedList.Mvc.Common
+@model PL.Models.Auctions.AuctionListModel
 
-<div>
-    @if (Model.Any())
-    {
-        <table style="width: 100%">
-            <thead>
-            <tr>
-                <th>Auction name</th>
-                <th>Items price</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
 
-            <tbody>
+@if (!Model.IsPrivate)
+{
+	<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#filter">Show filter</button>
+	{
+		using (Html.BeginForm("Index", "Auctions", FormMethod.Post, new { @id = "filter", @class="collapse" }))
+		{
+			<div class="form-group col-md-12">
+				@Html.LabelFor(model => model.Filter.AuctionSearchedName, "Auction Name", new { @class = "control-label col-md-4" })
+				<div class="col-md-8">
+					@Html.EditorFor(model => model.Filter.AuctionSearchedName, new { htmlAttributes = new { @class = "form-control" } })
+				</div>
+			</div>
+		
+			<div class="form-group col-md-12">
+				@Html.LabelFor(model => model.Filter.SortCriteria, "Sort by:", new {@class = "control-label col-md-4"})
+				<div class="col-md-8">
+					@Html.DropDownListFor(model => model.Filter.SortCriteria, Model.AllSortCriteria, "Select...", new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.Filter.SortCriteria, "", new {@class = "text-danger"})
+				</div>
+			</div>
+		
+			<div class="form-group col-md-12">
+				@Html.LabelFor(model => model.Filter.SortAscending, "Ascending", new {@class = "control-label col-md-4"})
+				<div class="col-md-5 col-md-offset-3">
+					@Html.CheckBoxFor(model => model.Filter.SortAscending, new {htmlAttributes = new {@class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.Filter.SortAscending, "", new {@class = "text-danger"})
+				</div>
+			</div>
+			
+			<div class="form-group col-md-12">
+				@Html.LabelFor(model => model.Filter.IncludeEnded, "Include ended", new {@class = "control-label col-md-4"})
+				<div class="col-md-5 col-md-offset-3">
+					@Html.CheckBoxFor(model => model.Filter.IncludeEnded, new {htmlAttributes = new {@class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.Filter.IncludeEnded, "", new {@class = "text-danger"})
+				</div>
+			</div>
+		
+		
+			<div class="row">           
+				<div>
+					<input type="button" class="btn btn-danger  col-md-offset-1 col-md-4" value="Clear" onclick="location.href = '@Url.Action("ClearFilter", "Auctions")'"/>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-success col-md-offset-1 col-md-5" id="btnSubmit" type="submit">Filter </button>
+				</div>
+			</div>
+		}
+	}
+	
+}
 
-            @foreach (var dto in Model)
-            {
-                <tr>
-                    <td>@dto.Name</td>
-                    <td>@dto.TestPrice</td>
-                    <td>
-                        @Html.ActionLink("Inspect", "Auction", new {controller = "Auctions", action = "Auction", id = dto.Id})
-                        <!---- Html.ActionLink("Delete", "Delete", "Auctions", new {id = dto.Id}) ---->
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
-    }
-    else
-    { 
-        <div style="text-align: center">
-            <b>Nothing to show</b>
-        </div>
-    }
+
+<div class="card">
+	<table class="table table-hover shopping-cart-wrap" id="auctionList">
+		<thead class="text-muted">
+		<tr>
+			<th scope="col">Auction Name</th>
+			<th scope="col" width="120">Price</th>
+			<th scope="col" width="120">End date</th>
+			<th scope="col" width="200" class="text-right">Actions</th>
+		</tr>
+		</thead>
+		<tbody>
+		@if (Model.Auctions != null && Model.Auctions.Any())
+		{
+			foreach (var dto in Model.Auctions)
+			{
+				<tr>
+					<td>
+						<figure class="media">
+							@if (dto.ImageBytes != null && dto.ImageBytes.Count > 0)
+							{
+								<div class="img-thumbnail">
+									@{
+										var base64 = Convert.ToBase64String(dto.ImageBytes.First().Bytes);
+										var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+										<img src="@imgSrc" class="img-thumbnail img-sm">
+									}
+								</div>
+							}
+
+							<figcaption class="media-body">
+								<h4 class="text-truncate">@dto.Name</h4>
+								@if (dto.AuctionedItems != null && dto.AuctionedItems.Count > 0)
+								{
+
+									<dl class="param param-inline small">
+										<dt>Items: </dt>
+										<dd>
+											@{
+												var concat = string.Empty;
+												for (var i = 0; i < dto.AuctionedItems.Count; ++i)
+												{
+													if (i < dto.AuctionedItems.Count - 1)
+													{
+														concat = concat + dto.AuctionedItems[i].Name + ", ";
+													}
+													else
+													{
+														concat = concat + dto.AuctionedItems[i].Name;
+													}
+													
+												}
+												@concat
+											}
+										</dd>
+									</dl>
+
+								}
+
+
+							</figcaption>
+						</figure>
+					</td>
+					<td>
+						<div class="price-wrap">
+							<var class="price">
+								@{
+									var (price, symbol) = CurrencyController.CalcCurrencyAndGetSymbol((decimal) dto.ActualPrice);
+									var concate = decimal.Round(price, 1) + " " + symbol;
+									@concate
+									;
+								}
+							</var>
+						</div>
+					</td>
+					<td>
+						@dto.EndDate.ToLongDateString()
+					</td>
+					<td class="text-right">
+						@Html.ActionLink("Inspect", "Auction", new {controller = "Auctions", action = "Auction", id = dto.Id}, new {@class = "btn btn-primary"})
+						@if (User.IsInRole("Admin"))
+						{
+							@Html.ActionLink("Delete", "Delete", new {controller = "Auctions", auctionId = dto.Id}, new {@class = "btn btn-primary"})
+						}
+					</td>
+				</tr>
+
+			}
+			
+		}
+		</tbody>
+	</table>
 </div>
+
+@if (Model.Auctions != null && Model.Auctions.TotalItemCount > Model.Auctions.PageSize && !Model.IsPrivate)
+{
+	<div class="col-md-12">
+		@Html.PagedListPager(Model.Auctions, page => Url.Action("Index", new { controller = "Auctions", page}), PagedListRenderOptionsBase.OnlyShowFivePagesAtATime)
+		
+	</div>
+}
+
+
 
 

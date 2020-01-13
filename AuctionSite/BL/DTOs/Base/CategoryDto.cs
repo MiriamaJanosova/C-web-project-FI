@@ -8,7 +8,7 @@ namespace BL.DTOs.Base
     {        
         public string Description { get; set; }
 
-        public ItemCategoryType CategoryType { get; set; }
+        public string CategoryType { get; set; }
 
         public List<ItemCategoryDto> ItemsWithCategory { get; set; }
 

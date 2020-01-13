@@ -59,8 +59,8 @@ namespace BL.QueryObjects
 
             return new CompositePredicate(new List<IPredicate>
             {
-                new SimplePredicate(nameof(Auction.StartDate), ValueComparingOperator.LessThanOrEqual, filter.ActualDateTime),
-                new SimplePredicate(nameof(Auction.StartDate), ValueComparingOperator.LessThanOrEqual, filter.ActualDateTime)
+                new SimplePredicate(nameof(Auction.EndDate), ValueComparingOperator.GreaterThan, filter.ActualDateTime),
+                new SimplePredicate(nameof(Auction.EndDate), ValueComparingOperator.GreaterThan, filter.ActualDateTime)
             });
 
         }
@@ -68,7 +68,7 @@ namespace BL.QueryObjects
         private static IPredicate FilterAuctioner(AuctionFilterDto filter)
         {
             return filter.AuctionerID == 0 ? null
-                : new SimplePredicate(nameof(Auction.AuctionerID), ValueComparingOperator.Equal, filter.AuctionerID);
+                : new SimplePredicate(nameof(Auction.UserId), ValueComparingOperator.Equal, filter.AuctionerID);
         }
 
         private static IPredicate FilterAuctionPrices(AuctionFilterDto filter)

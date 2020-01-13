@@ -16,7 +16,11 @@ namespace BL.DTOs.Item
 
         public int OwnerID { get; set; }
 
+<<<<<<< HEAD
         public List<CategoryDto> HasCategories { get; set; }
+=======
+        public List<ItemCategoryDto> HasCategories { get; set; }
+>>>>>>> origin/marek-branch
 
         // TODO more fields 
     }

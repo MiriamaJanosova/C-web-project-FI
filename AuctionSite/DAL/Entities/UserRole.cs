@@ -10,10 +10,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Entities
 {
-    public class UserRole : IdentityUserRole<int>, IEntity
+    public class UserRole : IdentityUserRole<int>
     {
-        [NotMapped]
-        public string TableName { get; } = "user_roles";
-        public int Id { get; set; }
+        public virtual User User { get; set; }
+        
+        public virtual Role Role { get; set; }
     }
 }

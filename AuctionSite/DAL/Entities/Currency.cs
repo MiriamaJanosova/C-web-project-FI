@@ -16,9 +16,15 @@ namespace DAL.Entities
         [NotMapped] 
         public string TableName { get; } = "currencies";
 
+        [Required]
         [MaxLength(5)]
         public string Code  { get; set; }
         
-        public double ExchangeRate { get; set; }
+        [Required]
+        public decimal ExchangeRate { get; set; }
+        
+        [Required]
+        [MaxLength(5)]
+        public string Symbol { get; set; }
     }
 }

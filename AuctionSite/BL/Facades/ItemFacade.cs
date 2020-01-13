@@ -59,6 +59,17 @@ namespace BL.Facades
                 return await itemService.ListAllAsync();
             }
         }
+        
+        public async Task<IEnumerable<ItemDto>> GetItemsAssignedToAuction(int auctionId)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await itemService.ListFilteredItems(new ItemFilterDto
+                {
+                    AuctionID = auctionId
+                });
+            }
+        }
 
         public async Task<IEnumerable<ItemDto>> GetItemForCategories(List<ItemCategoryDto> itemCategories)
         {
@@ -99,6 +110,34 @@ namespace BL.Facades
                 var item = itemService.Create(itemService.MapToBase(dto));
                 await uow.Commit();
                 return item.Id;
+            }
+        }
+        
+        public async Task<bool> EditItem(ItemDto item)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                if (await itemService.GetAsync(item.Id, false) == null)
+                {
+                    return false;
+                }
+                await itemService.Update(item);
+                await uow.Commit();
+                return true;
+            }
+        }
+        
+        public async Task<bool> AssignItemToAuction(ItemDto item)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                if (await itemService.GetAsync(item.Id, false) == null)
+                {
+                    return false;
+                }
+                await itemService.AddItemToAuction(item);
+                await uow.Commit();
+                return true;
             }
         }
 

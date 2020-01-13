@@ -23,6 +23,6 @@ namespace Infrastructure.Query
         /// <summary>
         /// Executes the query and returns the results.
         /// </summary>
-        Task<QueryResult<TEntity>> ExecuteAsync();
+        Task<QueryResult<TEntity>> ExecuteAsync(params string[] includes);
     }
 }

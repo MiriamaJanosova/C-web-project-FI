@@ -1,14 +1,31 @@
-﻿@model PL.Models.Auctions.MyAuctionsModel
+﻿@using X.PagedList.Mvc
+@using X.PagedList.Mvc.Common
+@model PL.Models.Auctions.MyAuctionsModel
 
 <h2>MyAuctions</h2>
 
-@Html.ActionLink("Create new auction", "Create", "Auctions")
+@Html.ActionLink("Create new auction", "Create")
 
 <div>
     <h3>Ongoing auctions</h3>
     @Html.Partial("_AuctionList", Model.Ongoing)
+    @if (Model.Ongoing.Auctions != null)
+    {
+        <div class="col-md-12">
+            @Html.PagedListPager(Model.Ongoing.Auctions, page => Url.Action("MyAuctions", new { controller = "Account", pageOn = page, pageEn = Model.PageEn }), PagedListRenderOptionsBase.OnlyShowFivePagesAtATime)
+		
+        </div>
+    }
 </div>
 <div>
     <h3>Ended auctions</h3>
     @Html.Partial("_AuctionList", Model.Ended)
+    @if (Model.Ended.Auctions != null)
+    {
+        <div class="col-md-12">
+            @Html.PagedListPager(Model.Ended.Auctions, page => Url.Action("MyAuctions", new { controller = "Account", pageOn = Model.PageOn, pageEn = page }), PagedListRenderOptionsBase.OnlyShowFivePagesAtATime)
+		
+        </div>
+    }
+    
 </div>
